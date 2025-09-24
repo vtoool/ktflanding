@@ -3,24 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FlowPulse – Supercharge Your Chrome Workflows</title>
-  <meta name="description" content="FlowPulse is the Chrome extension built for SaaS teams. Automate workflows, monitor customer signals, and respond instantly without leaving your browser.">
+  <title>Flight Snap – Instant GDS itineraries in one click</title>
+  <meta name="description" content="Flight Snap converts Kayak and Matrix ITA flight searches into clean GDS-format *I itineraries instantly, saving travel agents minutes on every quote.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container nav-bar">
-      <a class="logo" href="#top">FlowPulse</a>
+      <a class="logo" href="#top">Flight Snap</a>
       <nav class="primary-nav">
+        <a href="#how-it-works">How it works</a>
         <a href="#features">Features</a>
-        <a href="#automation">Automation</a>
         <a href="#pricing">Pricing</a>
-        <a href="#faq">FAQ</a>
+        <a href="#testimonials">Customers</a>
       </nav>
-      <a class="btn btn-outline" href="#pricing">Install Extension</a>
+      <div class="nav-actions">
+        <a class="btn btn-outline" href="#pricing">Try free</a>
+        <a class="btn btn-primary" href="#pricing">Upgrade to Pro</a>
+      </div>
     </div>
   </header>
 
@@ -28,67 +31,82 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow">Chrome Extension for SaaS Operators</span>
-          <h1>Turn every tab into a revenue command center.</h1>
-          <p>FlowPulse listens across your stack, surfaces critical customer signals, and launches instant playbooks right where you work — inside Chrome. Close tickets faster, rescue churn risks, and convert prospects without switching tabs.</p>
+          <span class="eyebrow">Chrome extension for premium travel desks</span>
+          <h1>Itineraries in one snap.</h1>
+          <p>Flight Snap transforms Kayak and Matrix ITA search results into flawless *I GDS itineraries the moment you click. No more manual retyping, copy-paste errors, or lost minutes—just ready-to-quote options built for business-class workflows.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#pricing">Add to Chrome</a>
-            <a class="btn btn-secondary" href="#demo">View Live Demo</a>
+            <a class="btn btn-primary" href="#pricing">Try free for 7 days</a>
+            <a class="btn btn-ghost" href="#pricing">Upgrade to Pro ($29/mo)</a>
           </div>
-          <div class="hero-stats">
-            <div class="stat-card">
-              <span class="stat-value">7x</span>
-              <span class="stat-label">Faster customer responses</span>
+          <div class="hero-metrics">
+            <div class="metric">
+              <span class="metric-value">5x</span>
+              <span class="metric-label">faster itinerary delivery</span>
             </div>
-            <div class="stat-card">
-              <span class="stat-value">42%</span>
-              <span class="stat-label">More saved renewals</span>
+            <div class="metric">
+              <span class="metric-value">0</span>
+              <span class="metric-label">manual entry mistakes</span>
             </div>
-            <div class="stat-card">
-              <span class="stat-value">2.1M</span>
-              <span class="stat-label">Signals analyzed weekly</span>
+            <div class="metric">
+              <span class="metric-value">2,400+</span>
+              <span class="metric-label">premium itineraries generated</span>
             </div>
           </div>
         </div>
         <div class="hero-visual">
-          <div class="browser-frame">
-            <div class="browser-tabs">
-              <span class="tab active">Inbox • FlowPulse</span>
-              <span class="tab">Churn Alerts</span>
-              <span class="tab">Playbooks</span>
+          <div class="mockup-window">
+            <div class="mockup-toolbar">
+              <span>Kayak → Flight Snap</span>
+              <span class="toolbar-status">Connected</span>
             </div>
-            <div class="browser-body">
-              <div class="card highlight">
-                <div class="card-badge">Live Signal</div>
-                <h3>Account health drop detected</h3>
-                <p>Net usage dipped 33% for Aurora Cloud. Auto-launch the renewal rescue sequence?</p>
-                <div class="card-actions">
-                  <button class="btn btn-primary">Trigger Playbook</button>
-                  <button class="btn btn-link">View Timeline</button>
+            <div class="mockup-body">
+              <div class="mockup-column">
+                <div class="search-card">
+                  <div class="search-header">
+                    <span class="badge badge-kayak">Kayak Search</span>
+                    <span class="search-time">13 options found</span>
+                  </div>
+                  <ul class="search-list">
+                    <li>
+                      <strong>Chisinau → New York</strong>
+                      <span>Business | 2 stops | 14h 25m</span>
+                    </li>
+                    <li>
+                      <strong>Departure</strong>
+                      <span>F9 217 · KIV 07:05 → FRA 08:20</span>
+                    </li>
+                    <li>
+                      <strong>Return</strong>
+                      <span>UA 884 · EWR 19:35 → KIV 15:10+1</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
-              <div class="card">
-                <h4>Recommended Actions</h4>
-                <ul class="card-list">
-                  <li>
-                    <span class="avatar">AI</span>
-                    Send AI-personalized check-in email in 2 minutes.
-                  </li>
-                  <li>
-                    <span class="avatar">CS</span>
-                    Book 15-min sync when CSM is next in-app.
-                  </li>
-                  <li>
-                    <span class="avatar">Ops</span>
-                    Auto-create Salesforce opportunity if intent score &gt; 80.
-                  </li>
-                </ul>
+              <div class="mockup-column">
+                <div class="extension-card">
+                  <div class="extension-header">
+                    <span class="badge badge-extension">Flight Snap</span>
+                    <span class="copy-pill">Copy *I</span>
+                  </div>
+                  <pre class="gds-output">*I UA884Y25MAY EWRSK1230  1935 1510+1 26MAY  TH UA 7   0  E
+*I LH987C25MAY KIVFR1230  0705 0820   25MAY  WE LH 7   0  C
+*I LH400C25MAY FRAFRA     1015 1245   25MAY  WE LH 0   0  C</pre>
+                  <ul class="extension-list">
+                    <li>Auto-formatted for Amadeus, Sabre, Galileo</li>
+                    <li>Includes booking class, elapsed time, and day indicators</li>
+                    <li>One-click paste directly into your PNR</li>
+                  </ul>
+                </div>
+                <div class="mini-card">
+                  <div class="mini-title">Bonus tools</div>
+                  <p><strong>Name generator:</strong> MALAI/MARIA MRS</p>
+                  <p><strong>Availability command:</strong> AN20MAYKIVFRA/A</p>
+                </div>
               </div>
             </div>
           </div>
-          <div class="floating-metric">
-            <span class="metric-label">Weekly Wins</span>
-            <span class="metric-value">58 saved accounts</span>
+          <div class="floating-badge">
+            <span>Trusted by travel desks in Moldova, Romania, and beyond</span>
           </div>
         </div>
       </div>
@@ -96,13 +114,71 @@
 
     <section class="social-proof">
       <div class="container">
-        <p class="social-proof-title">Teams shipping faster with FlowPulse</p>
+        <p class="social-proof-title">Built for teams that serve premium travellers</p>
         <div class="logo-row">
-          <span>NovaStack</span>
-          <span>Brightwave</span>
-          <span>SignalNorth</span>
-          <span>Orbitly</span>
-          <span>Hyperlane</span>
+          <span>AeroMoldova Concierge</span>
+          <span>SkyBridge Travel</span>
+          <span>LuxJet Partners</span>
+          <span>BlueDanube Air Desk</span>
+          <span>Atlas Corporate</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="time-savings section" id="time">
+      <div class="container time-grid">
+        <div class="section-header">
+          <span class="eyebrow">Why Flight Snap</span>
+          <h2>Minutes saved on every quote means more time for clients.</h2>
+          <p>Agents report reclaiming 1–5 minutes for each flight option prepared. Multiply that by dozens of itineraries a day and the time savings stack up fast.</p>
+        </div>
+        <div class="comparison">
+          <article class="comparison-card">
+            <h3>Before Flight Snap</h3>
+            <ul>
+              <li>Manual retyping from web search into the GDS</li>
+              <li>Checking booking classes line by line</li>
+              <li>Risk of typos, mis-ordered segments, or missed stops</li>
+              <li>Availability commands stored in personal notes</li>
+            </ul>
+            <div class="time-tag">4–7 minutes per option</div>
+          </article>
+          <article class="comparison-card highlight">
+            <h3>After Flight Snap</h3>
+            <ul>
+              <li>One click converts Kayak + ITA results into *I format</li>
+              <li>Instant random GDS names for test PNRs</li>
+              <li>Pre-built availability searches for fast repricing</li>
+              <li>Copy, paste, and move on to servicing the traveller</li>
+            </ul>
+            <div class="time-tag">30–60 seconds per option</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works section">
+      <div class="container">
+        <div class="section-header center">
+          <span class="eyebrow">How it works</span>
+          <h2>From search to booked PNR in three simple steps.</h2>
+        </div>
+        <div class="steps-grid">
+          <article class="step-card">
+            <span class="step-number">1</span>
+            <h3>Search your preferred site</h3>
+            <p>Open Kayak or Matrix ITA, run your usual multi-city or complex business-class search, and highlight the itinerary you need.</p>
+          </article>
+          <article class="step-card">
+            <span class="step-number">2</span>
+            <h3>Click “Snap It”</h3>
+            <p>The Flight Snap button appears right beside the results. Click once to capture every segment, fare class, and timing detail automatically.</p>
+          </article>
+          <article class="step-card">
+            <span class="step-number">3</span>
+            <h3>Paste into your GDS</h3>
+            <p>Paste the generated *I itinerary straight into Amadeus, Sabre, or Galileo. Add the suggested availability command for instant verification.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -110,209 +186,148 @@
     <section id="features" class="features section">
       <div class="container">
         <div class="section-header">
-          <span class="eyebrow">Features</span>
-          <h2>Everything you need to stay ahead of every customer moment.</h2>
-          <p>FlowPulse connects to your SaaS tools in seconds, watching usage trends, billing signals, support tickets, and intent cues to keep your team proactive.</p>
+          <span class="eyebrow">Features &amp; benefits</span>
+          <h2>Everything a modern corporate travel desk expects.</h2>
+          <p>Designed with input from agencies serving business and first-class passengers across Europe.</p>
         </div>
         <div class="feature-grid">
           <article class="feature-card">
-            <span class="feature-icon">⚡</span>
-            <h3>Instant signal intelligence</h3>
-            <p>Detect risks and upsell opportunities the moment they emerge. FlowPulse applies machine learning to highlight the signals that truly matter.</p>
+            <div class="feature-icon" aria-hidden="true">⚡</div>
+            <h3>Instant *I conversion</h3>
+            <p>Get perfectly formatted itineraries ready for your PNR with fare basis, segment status, and elapsed times.</p>
           </article>
           <article class="feature-card">
-            <span class="feature-icon">🤖</span>
-            <h3>Automated playbooks</h3>
-            <p>Launch workflows triggered by customer behavior, no coding required. Combine actions across HubSpot, Intercom, Slack, and Salesforce.</p>
+            <div class="feature-icon" aria-hidden="true">🧠</div>
+            <h3>Error-proof pricing checks</h3>
+            <p>Availability commands and booking codes are surfaced with each option so you can confirm inventory in seconds.</p>
           </article>
           <article class="feature-card">
-            <span class="feature-icon">🔔</span>
-            <h3>Chrome-native alerts</h3>
-            <p>Receive contextual nudges exactly where you work. Snooze, assign, and complete tasks without ever leaving the active tab.</p>
+            <div class="feature-icon" aria-hidden="true">🤝</div>
+            <h3>Business/first focus</h3>
+            <p>Supports complex itineraries, mixed cabins, and negotiated fare notes tailored to premium travellers.</p>
           </article>
           <article class="feature-card">
-            <span class="feature-icon">📊</span>
-            <h3>Customer health dashboards</h3>
-            <p>Visualize adoption, sentiment, and revenue impact with dashboards that update in real time based on the signals FlowPulse collects.</p>
+            <div class="feature-icon" aria-hidden="true">🌍</div>
+            <h3>Made for global teams</h3>
+            <p>English and Romanian-localized interface, timezone-aware timestamps, and support for Moldovan BSP nuances.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🔁</div>
+            <h3>Unlimited itineraries</h3>
+            <p>Generate as many combinations as your clients require, with history tracking for quick re-quote.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🔐</div>
+            <h3>Secure &amp; compliant</h3>
+            <p>Data is processed locally in your browser—no passenger data stored or transmitted.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="automation" class="automation section">
-      <div class="container automation-grid">
-        <div class="automation-copy">
-          <span class="eyebrow">Automation Engine</span>
-          <h2>Orchestrate multi-step workflows in minutes.</h2>
-          <p>Use FlowPulse’s drag-and-drop builder to design reactive journeys that execute flawlessly. Sync conversations, tasks, and customer intel with every system in your go-to-market stack.</p>
-          <ul class="automation-list">
-            <li><strong>Unified triggers:</strong> Launch sequences from product usage, NPS scores, billing anomalies, or competitor mentions.</li>
-            <li><strong>AI copilot:</strong> Generate tailored messaging and playbooks with your tone of voice baked in.</li>
-            <li><strong>Team alignment:</strong> Notify the right teammate in Slack, escalate to leadership, and track follow-through automatically.</li>
+    <section class="in-action section" id="demo">
+      <div class="container in-action-grid">
+        <div class="action-copy">
+          <span class="eyebrow">See it in action</span>
+          <h2>Designed to live where your team already works.</h2>
+          <p>Flight Snap floats beside your favourite flight search engines. Highlight, click, and your clipboard is filled with perfectly aligned itinerary data, ready for any GDS window.</p>
+          <ul class="action-list">
+            <li><strong>Smart detection</strong> of Kayak, Matrix ITA, and other fare aggregators.</li>
+            <li><strong>One-click copy</strong> of *I itinerary, availability command, and customer-ready summary.</li>
+            <li><strong>Team sharing</strong> of saved itineraries via secure cloud sync on Pro &amp; Agency plans.</li>
           </ul>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#demo">Build a workflow</a>
-            <a class="btn btn-secondary" href="#pricing">See pricing</a>
+        </div>
+        <div class="action-mockups">
+          <div class="action-card">
+            <div class="action-header">
+              <span class="badge badge-extension">Flight Snap overlay</span>
+              <span class="copy-pill">Copy name</span>
+            </div>
+            <p class="action-body">Suggested passenger: <strong>IVANOV/ANDREI MR</strong><br>Format: NM1IVANOV/ANDREI MR</p>
           </div>
-        </div>
-        <div class="automation-visual">
-          <div class="workflow-card">
-            <div class="workflow-header">
-              <span class="workflow-status">Live</span>
-              Renewal Rescue Workflow
+          <div class="action-card">
+            <div class="action-header">
+              <span class="badge badge-kayak">Availability</span>
+              <span class="copy-pill">Copy command</span>
             </div>
-            <ol class="workflow-steps">
-              <li>
-                <span class="step-badge">1</span>
-                Triggered when usage drops below 70% for 3 days
-              </li>
-              <li>
-                <span class="step-badge">2</span>
-                Post personalized message in #success-war-room
-              </li>
-              <li>
-                <span class="step-badge">3</span>
-                Create high-priority task in Salesforce for account owner
-              </li>
-              <li>
-                <span class="step-badge">4</span>
-                Launch AI-generated check-in email with smart scheduling
-              </li>
-            </ol>
+            <p class="action-body">AN15JUNCHISINAU/BUCHAREST/A<br><span>Return: AN22JUNBUHCHISINAU/A</span></p>
           </div>
-          <div class="glow"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="metrics section" id="demo">
-      <div class="container metrics-grid">
-        <div class="metric-card">
-          <h3>Speed to signal</h3>
-          <p>FlowPulse processes millions of events per hour with <strong>&lt; 2s</strong> alert latency, so you can act before customers even think to reach out.</p>
-        </div>
-        <div class="metric-card">
-          <h3>Extension-first experience</h3>
-          <p>Install once and your entire go-to-market stack is available within the extension. No new tabs, no heavy dashboards, just the insights you need.</p>
-        </div>
-        <div class="metric-card">
-          <h3>Enterprise grade security</h3>
-          <p>SSO, audit logs, granular permissions, and SOC 2 Type II compliance make FlowPulse safe for even the most regulated teams.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="testimonials section">
-      <div class="container">
-        <div class="section-header">
-          <span class="eyebrow">Loved by operators</span>
-          <h2>FlowPulse keeps our teams in rhythm.</h2>
-        </div>
-        <div class="testimonial-grid">
-          <article class="testimonial-card">
-            <p>“Within a week our response time dropped by 60%. FlowPulse is the connective tissue between our product signals and revenue motion.”</p>
-            <div class="testimonial-meta">
-              <span class="avatar">JL</span>
-              <div>
-                <strong>Jasmine Lee</strong>
-                <span>VP Customer Success, Orbitly</span>
-              </div>
-            </div>
-          </article>
-          <article class="testimonial-card">
-            <p>“It’s like having a command center baked into Chrome. Our reps live in it and the automated playbooks are closing deals for us while we sleep.”</p>
-            <div class="testimonial-meta">
-              <span class="avatar">MR</span>
-              <div>
-                <strong>Marcus Reed</strong>
-                <span>Head of Revenue Ops, Brightwave</span>
-              </div>
-            </div>
-          </article>
-          <article class="testimonial-card">
-            <p>“Security reviews were a breeze and the admin controls are top tier. FlowPulse keeps governance tight and teams empowered.”</p>
-            <div class="testimonial-meta">
-              <span class="avatar">ST</span>
-              <div>
-                <strong>Sofia Tran</strong>
-                <span>Director of IT, NovaStack</span>
-              </div>
-            </div>
-          </article>
         </div>
       </div>
     </section>
 
     <section id="pricing" class="pricing section">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header center">
           <span class="eyebrow">Pricing</span>
-          <h2>Plans designed for velocity at every stage.</h2>
-          <p>Install FlowPulse free, upgrade when you’re ready to automate every customer touchpoint.</p>
+          <h2>Simple plans built for agencies of every size.</h2>
         </div>
         <div class="pricing-grid">
           <article class="pricing-card">
-            <div class="pricing-label">Starter</div>
-            <h3 class="pricing-price">$0<span>/month</span></h3>
+            <div class="pricing-label">Free Trial</div>
+            <h3 class="pricing-price">$0<span>/7 days</span></h3>
             <ul>
-              <li>2 team seats</li>
-              <li>Chrome extension with core alerts</li>
-              <li>Connect Slack + HubSpot</li>
-              <li>Standard security</li>
+              <li>Full feature access</li>
+              <li>Unlimited itineraries</li>
+              <li>Clipboard copy for *I format</li>
+              <li>Email support within 24 hours</li>
             </ul>
-            <a class="btn btn-secondary" href="#">Get Started</a>
+            <a class="btn btn-secondary" href="#">Start free trial</a>
           </article>
           <article class="pricing-card featured">
-            <div class="pricing-label">Growth</div>
-            <h3 class="pricing-price">$49<span>/seat</span></h3>
-            <p class="pricing-tag">Most popular</p>
+            <div class="pricing-label">Pro</div>
+            <h3 class="pricing-price">$29<span>/month</span></h3>
+            <p class="pricing-tag">Best for solo agents</p>
             <ul>
-              <li>Unlimited seats</li>
-              <li>All integrations + Salesforce</li>
-              <li>Advanced automation builder</li>
-              <li>AI copilot + sentiment detection</li>
+              <li>Unlimited itineraries &amp; saved history</li>
+              <li>Business/first class optimizations</li>
+              <li>Random name generator + availability macros</li>
+              <li>Priority email &amp; chat support</li>
             </ul>
-            <a class="btn btn-primary" href="#">Start free trial</a>
+            <a class="btn btn-primary" href="#">Upgrade to Pro</a>
           </article>
           <article class="pricing-card">
-            <div class="pricing-label">Scale</div>
-            <h3 class="pricing-price">Let’s talk</h3>
+            <div class="pricing-label">Agency</div>
+            <h3 class="pricing-price">$79<span>/month</span></h3>
             <ul>
-              <li>Dedicated success engineer</li>
-              <li>SOC 2 Type II + SSO</li>
-              <li>Custom data retention</li>
-              <li>Priority roadmap access</li>
+              <li>Up to 10 seats included</li>
+              <li>Centralized billing &amp; admin controls</li>
+              <li>Shared availability templates</li>
+              <li>Dedicated onboarding specialist</li>
             </ul>
-            <a class="btn btn-secondary" href="#">Book a call</a>
+            <a class="btn btn-secondary" href="#">Talk to sales</a>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="faq" class="faq section">
-      <div class="container faq-grid">
-        <div>
-          <div class="section-header">
-            <span class="eyebrow">FAQ</span>
-            <h2>Everything you’re wondering about FlowPulse.</h2>
-          </div>
+    <section id="testimonials" class="testimonials section">
+      <div class="container">
+        <div class="section-header center">
+          <span class="eyebrow">Loved by travel pros</span>
+          <h2>Agents trust Flight Snap to deliver for premium travellers.</h2>
         </div>
-        <div class="accordion">
-          <article class="faq-item">
-            <h3>How long does setup take?</h3>
-            <p>Install from the Chrome Web Store, authenticate with your SaaS tools, and FlowPulse starts monitoring signals in under 10 minutes.</p>
+        <div class="testimonial-grid">
+          <article class="testimonial-card">
+            <p>“We serve Moldova’s busiest executives. Flight Snap keeps our PNRs clean and lets the team focus on client care, not typing.”</p>
+            <div class="testimonial-meta">
+              <span class="name">Irina Cojocaru</span>
+              <span class="role">Managing Partner, AeroMoldova Concierge</span>
+            </div>
           </article>
-          <article class="faq-item">
-            <h3>Does FlowPulse work with my existing CRM?</h3>
-            <p>Yes. We offer native integrations with Salesforce, HubSpot, Pipedrive, and a webhook builder for everything else.</p>
+          <article class="testimonial-card">
+            <p>“Complex itineraries that used to take five minutes are now pasted into Amadeus in under a minute. Accuracy has gone way up.”</p>
+            <div class="testimonial-meta">
+              <span class="name">Daniel Popescu</span>
+              <span class="role">Lead Agent, BlueDanube Air Desk</span>
+            </div>
           </article>
-          <article class="faq-item">
-            <h3>How secure is the extension?</h3>
-            <p>FlowPulse is SOC 2 Type II compliant, supports SSO (Okta, Google, Azure AD), and encrypts data in transit and at rest.</p>
-          </article>
-          <article class="faq-item">
-            <h3>Can I try FlowPulse before committing?</h3>
-            <p>Absolutely. Start with the Starter plan for free or trial Growth for 14 days with full automation features.</p>
+          <article class="testimonial-card">
+            <p>“Our Bucharest team loves the name generator and availability macros. It’s the small touches that help us respond faster than competitors.”</p>
+            <div class="testimonial-meta">
+              <span class="name">Ana Pavel</span>
+              <span class="role">Head of Corporate Travel, SkyBridge</span>
+            </div>
           </article>
         </div>
       </div>
@@ -321,13 +336,13 @@
     <section class="cta section">
       <div class="container cta-card">
         <div>
-          <span class="eyebrow">Ready when you are</span>
-          <h2>Install FlowPulse and never miss another revenue moment.</h2>
-          <p>Join high-performing customer and revenue teams who rely on FlowPulse to orchestrate the perfect response in real time.</p>
+          <span class="eyebrow">Ready to move faster?</span>
+          <h2>Join travel desks who build flawless itineraries in seconds.</h2>
+          <p>Install Flight Snap today, try it free for seven days, and experience the difference in your next quote cycle.</p>
         </div>
         <div class="cta-actions">
-          <a class="btn btn-primary" href="#pricing">Add to Chrome</a>
-          <a class="btn btn-secondary" href="mailto:hello@flowpulse.com">Talk to sales</a>
+          <a class="btn btn-primary" href="#">Add to Chrome</a>
+          <a class="btn btn-ghost" href="mailto:hello@flightsnap.io">Talk to sales</a>
         </div>
       </div>
     </section>
@@ -336,32 +351,35 @@
   <footer class="site-footer">
     <div class="container footer-grid">
       <div>
-        <a class="logo" href="#top">FlowPulse</a>
-        <p>Designed for SaaS teams who move fast, stay close to customers, and thrive on signal-driven automation.</p>
+        <a class="logo" href="#top">Flight Snap</a>
+        <p>Built by travel automation specialists to make premium GDS workflows faster, safer, and more profitable.</p>
       </div>
       <div class="footer-links">
         <div>
           <h4>Product</h4>
+          <a href="#how-it-works">How it works</a>
           <a href="#features">Features</a>
-          <a href="#automation">Automation</a>
           <a href="#pricing">Pricing</a>
         </div>
         <div>
           <h4>Company</h4>
-          <a href="#">About</a>
-          <a href="#">Security</a>
-          <a href="#">Changelog</a>
+          <a href="#testimonials">Customers</a>
+          <a href="mailto:hello@flightsnap.io">Contact</a>
+          <a href="#">Support</a>
         </div>
         <div>
           <h4>Resources</h4>
-          <a href="#faq">FAQ</a>
-          <a href="#">Docs</a>
-          <a href="#">Community</a>
+          <a href="#demo">Live demo</a>
+          <a href="#time">Case study</a>
+          <a href="#">Updates</a>
         </div>
       </div>
       <div class="footer-meta">
-        <a href="mailto:hello@flowpulse.com" class="footer-contact">hello@flowpulse.com</a>
-        <p class="copyright">&copy; <span id="year">2024</span> FlowPulse Labs. All rights reserved.</p>
+        <div class="policy-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+        <p class="copyright">&copy; <span id="year">2024</span> Flight Snap. All rights reserved.</p>
       </div>
     </div>
   </footer>
