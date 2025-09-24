@@ -543,6 +543,42 @@ main {
   font-size: 0.95rem;
 }
 
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  align-items: start;
+}
+
+.settings-copy h2 {
+  margin-bottom: 1rem;
+}
+
+.settings-copy p {
+  color: var(--color-text-muted);
+}
+
+.settings-cards {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.settings-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 1.6rem;
+  box-shadow: var(--shadow-soft);
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.settings-card h3 {
+  color: var(--color-text);
+  font-size: 1.15rem;
+  margin-bottom: 0.6rem;
+}
+
 .in-action-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -587,6 +623,28 @@ main {
 
 .action-body span {
   color: var(--color-text-muted);
+}
+
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.scenario-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: 1.8rem;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: var(--shadow-soft);
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.scenario-card h3 {
+  color: var(--color-text);
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
 }
 
 .pricing-grid {
