@@ -1,348 +1,239 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flight Snap – Turn Kayak &amp; ITA Matrix into one-click GDS feeds</title>
-  <meta name="description" content="Flight Snap adds floating copy pills to Kayak and ITA Matrix so travel agents capture *I itineraries and availability commands in a single click.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flight Snap – One-click GDS itineraries from any flight search</title>
+  <meta name="description" content="Flight Snap turns Kayak-style flight search results into clipboard-ready *I itineraries and availability commands in one click.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header class="site-header" id="top">
     <div class="container nav-bar">
-      <a class="logo" href="#top">Flight Snap</a>
-      <nav class="primary-nav">
+      <a class="brand" href="#top" aria-label="Flight Snap home">
+        <span class="brand-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" role="presentation" focusable="false"><path d="M5 23.5c12-3 24-3 38 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"></path><path d="M18 17l8.5 6-8.5 6 1.5-4.5H9l9-3-1.5-4.5Z" fill="currentColor"></path></svg>
+        </span>
+        <span class="brand-name">Flight Snap</span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary">
+        <a href="#demo">Live Demo</a>
         <a href="#how-it-works">How it works</a>
         <a href="#features">Features</a>
         <a href="#pricing">Pricing</a>
-        <a href="#testimonials">Customers</a>
+        <a href="#faq">FAQ</a>
       </nav>
       <div class="nav-actions">
-        <a class="btn btn-outline" href="#pricing">Try free</a>
-        <a class="btn btn-primary" href="#pricing">Upgrade to Pro</a>
+        <button id="themeToggle" class="icon-button" type="button" aria-pressed="false" aria-label="Toggle light and dark mode">
+          <span class="icon-sun" aria-hidden="true"></span>
+          <span class="icon-moon" aria-hidden="true"></span>
+        </button>
+        <a class="btn btn-ghost" href="#pricing">Install the Extension</a>
+        <a class="btn btn-primary" href="#pricing">Try Free for 7 Days</a>
       </div>
     </div>
   </header>
 
-  <main id="top">
-    <section class="hero">
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow">Chrome extension built for corporate travel sellers</span>
-          <h1>Kayak results, meet instant GDS commands.</h1>
-          <p>Flight Snap floats beside Kayak and ITA Matrix, dropping high-contrast copy pills on every real itinerary. Tap once to grab *I text or availability commands, paste into Sabre or Amadeus, and keep the conversation moving.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#pricing">Try free for 7 days</a>
-            <a class="btn btn-ghost" href="#pricing">Upgrade to Pro ($29/mo)</a>
+          <span class="eyebrow">Chrome extension for fast-tracking *I itineraries</span>
+          <h1 id="hero-title">Turn flight search tabs into GDS-ready commands in one snap.</h1>
+          <p>Flight Snap watches Kayak-style results, understands cabins and layovers, and copies immaculate Sabre-style *I text plus availability commands with a single click.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="#pricing">Try Free for 7 Days</a>
+            <a class="btn btn-secondary" href="#pricing">Install the Extension</a>
           </div>
-          <div class="hero-metrics">
-            <div class="metric">
-              <span class="metric-value">60 sec</span>
-              <span class="metric-label">from fare find to clipboard</span>
-            </div>
-            <div class="metric">
-              <span class="metric-value">100%</span>
-              <span class="metric-label">focus on flight-shopping sites</span>
-            </div>
-            <div class="metric">
-              <span class="metric-value">1-click</span>
-              <span class="metric-label">*I and availability capture</span>
-            </div>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <div class="mockup-window">
-            <div class="mockup-toolbar">
-              <span>Kayak → Flight Snap</span>
-              <span class="toolbar-status">Connected</span>
-            </div>
-            <div class="mockup-body">
-              <div class="mockup-column">
-                <div class="search-card">
-                  <div class="search-header">
-                    <span class="badge badge-kayak">Kayak Search</span>
-                    <span class="search-time">Multi-city · Mixed cabin alert</span>
-                  </div>
-                  <ul class="search-list">
-                    <li>
-                      <strong>New York → Munich → Rome</strong>
-                      <span>Business · 2 journeys · 10h 00m</span>
-                    </li>
-                    <li>
-                      <strong>Journey 1</strong>
-                      <span>LH 411 · JFK 5:30p → MUC 7:30a +1</span>
-                    </li>
-                    <li>
-                      <strong>Journey 2</strong>
-                      <span>LH 6602 · FCO 12:25p → YYZ 4:00p</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="mockup-column">
-                <div class="extension-card">
-                  <div class="extension-header">
-                    <span class="badge badge-extension">Flight Snap</span>
-                    <span class="copy-pill">Copy *I</span>
-                  </div>
-                  <pre class="gds-output">1 LH 411J 02OCT F JFKMUC*SS1 530P 730A /DCLH /E
-2 LH 97J 03OCT M MUCFRA*SS1 830A 930A /DCLH /E
-3 LH6602J 13OCT M FCOYYZ*SS1 1225P 400P /DCLH /E
-4 LH6700J 13OCT M YYZLGA*SS1 625P 759P /DCLH /E</pre>
-                  <ul class="extension-list">
-                    <li>Clipboard-ready *I text for Sabre, Amadeus, Galileo</li>
-                    <li>Smart cabin badges and booking-class defaults</li>
-                    <li>Availability copy pills for every journey</li>
-                  </ul>
-                </div>
-                <div class="mini-card">
-                  <div class="mini-title">Availability preview</div>
-                  <p><strong>Outbound:</strong> 12OCTJFKFRA12AMUC¥LH¥LH</p>
-                  <p><strong>Return:</strong> 113OCTFCOLGA12AYYZ¥LH¥LH</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="floating-badge">
-            <span>Trusted by travel desks in Moldova, Romania, and beyond.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="social-proof">
-      <div class="container">
-        <p class="social-proof-title">Built for teams that serve premium travellers</p>
-        <div class="logo-row">
-          <span>AeroMoldova Concierge</span>
-          <span>SkyBridge Travel</span>
-          <span>LuxJet Partners</span>
-          <span>BlueDanube Air Desk</span>
-          <span>Atlas Corporate</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="time-savings section" id="time">
-      <div class="container time-grid">
-        <div class="section-header">
-          <span class="eyebrow">Why Flight Snap</span>
-          <h2>Minutes saved on every quote means more time for clients.</h2>
-          <p>Agents reclaim the minutes usually spent copying segments, double-checking cabins, and building commands. With Flight Snap, quotes stay accurate while conversations stay personal.</p>
-        </div>
-        <div class="comparison">
-          <article class="comparison-card">
-            <h3>Before Flight Snap</h3>
-            <ul>
-              <li>Manual retyping from Kayak or ITA Matrix into the GDS</li>
-              <li>Guessing at cabin mixes or missing booking-code shifts</li>
-              <li>Hunting for availability formats in chat threads</li>
-              <li>Copy-paste errors that slow down approvals</li>
-            </ul>
-            <div class="time-tag">40 seconds – 5 minutes per option</div>
-          </article>
-          <article class="comparison-card highlight">
-            <h3>After Flight Snap</h3>
-            <ul>
-              <li>Floating pills anchor beside “Select” on true flight cards</li>
-              <li>*I itineraries and availability commands copy in one tap</li>
-              <li>Journey-level buttons keep multi-city output precise</li>
-              <li>Cabin detection adjusts defaults unless you lock them</li>
-            </ul>
-            <div class="time-tag">5 seconds per option</div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="how-it-works" class="how-it-works section">
-      <div class="container">
-        <div class="section-header center">
-          <span class="eyebrow">How it works</span>
-          <h2>From fare discovery to clipboard in three light touches.</h2>
-        </div>
-        <div class="steps-grid">
-          <article class="step-card">
-            <span class="step-number">1</span>
-            <h3>Search Kayak or ITA Matrix</h3>
-            <p>Run your usual complex or multi-city search. Flight Snap activates only on these hosts, so agents stay focused on flight-shopping pages.</p>
-          </article>
-          <article class="step-card">
-            <span class="step-number">2</span>
-            <h3>Tap the floating pill</h3>
-            <p>Pills anchor beside the real “Select” CTAs and follow SPA updates. Choose *I, availability, or per-journey buttons for multi-city results.</p>
-          </article>
-          <article class="step-card">
-            <span class="step-number">3</span>
-            <h3>Paste &amp; confirm</h3>
-            <p>Clipboard-ready *I itineraries and availability commands drop straight into Sabre, Amadeus, or Galileo. A toast confirms success so you never wonder.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="features" class="features section">
-      <div class="container">
-        <div class="section-header">
-          <span class="eyebrow">Key capabilities</span>
-          <h2>Purpose-built to turn results pages into GDS-ready commands.</h2>
-          <p>Flight Snap keeps its focus on flight-shopping workflows, activating only where agents need speed and accuracy.</p>
-        </div>
-        <div class="feature-grid">
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">⚡</div>
-            <h3>Floating action pills</h3>
-            <p>Inline pill groups pin near each true “Select” button, skip ads, and stay visible even as travellers scroll.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">🧠</div>
-            <h3>Single-click copy</h3>
-            <p>Each pill fires a conversion, writes to the clipboard, and flashes a confirmation so agents never wonder if it stuck.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">🤝</div>
-            <h3>Multi-journey awareness</h3>
-            <p>Numbered outbound, inbound, and segment-cluster buttons keep availability strings precise for multi-city trips.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">🌍</div>
-            <h3>Cabin intelligence</h3>
-            <p>Detects mixed-cabin itineraries, flags them, and updates booking-class defaults unless the user locks settings.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">🔁</div>
-            <h3>ITA Matrix coverage</h3>
-            <p>Understands both results grids and detail views on matrix.itasoftware.com, following single-page app refreshes.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">🔐</div>
-            <h3>High-contrast visuals</h3>
-            <p>Rounded, responsive elements stay readable against busy fare cards and reflow inline when overlays aren’t possible.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="settings" class="settings section">
-      <div class="container settings-grid">
-        <div class="settings-copy">
-          <span class="eyebrow">Popup experience</span>
-          <h2>Fine-tune defaults and revive legacy text without leaving Chrome.</h2>
-          <p>The Flight Snap popup carries the same conversion engine as the in-page pills, giving teams control when they need to double-check, adjust, or work from saved quotes.</p>
-        </div>
-        <div class="settings-cards">
-          <article class="settings-card">
-            <h3>Booking defaults on tap</h3>
-            <p>Choose preferred booking class and segment status codes, toggle outbound/inbound pills, and resume auto cabin detection with one click.</p>
-          </article>
-          <article class="settings-card">
-            <h3>VI to *I auto-conversion</h3>
-            <p>Drop Sabre VI* text into the popup and watch it transform instantly. Flight Snap attempts a clipboard copy and flags blockers so agents can react fast.</p>
-          </article>
-          <article class="settings-card">
-            <h3>Availability preview panel</h3>
-            <p>See outbound, inbound, or multi-city commands in clean blocks with dedicated copy buttons—perfect for sharing precise availability with partners.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="in-action section" id="demo">
-      <div class="container in-action-grid">
-        <div class="action-copy">
-          <span class="eyebrow">See it in action</span>
-          <h2>Designed to stay out of the way until it’s time to copy.</h2>
-          <p>Flight Snap hovers just above Kayak and ITA Matrix results, ready the moment the perfect itinerary appears. Click once, get the confirmation toast, and paste the polished output wherever you work.</p>
-          <ul class="action-list">
-            <li><strong>Smart host detection</strong> limits activation to Kayak and ITA Matrix to keep workflows sharp.</li>
-            <li><strong>Journey-specific pills</strong> put outbound, inbound, or multi-city segments at your fingertips.</li>
-            <li><strong>Instant feedback</strong> via clipboard confirmations so agents never re-copy in doubt.</li>
+          <ul class="trust-badges" aria-label="Trusted by leading travel teams">
+            <li>
+              <svg viewBox="0 0 24 24" role="presentation" aria-hidden="true"><path d="M4 11.5 9.5 17 20 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              <span>Sabre &amp; Amadeus ready</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" role="presentation" aria-hidden="true"><path d="m12 3 8 4v6c0 4.5-3.2 8.4-8 9-4.8-.6-8-4.5-8-9V7l8-4Z" fill="none" stroke="currentColor" stroke-width="2"></path><path d="M9 12.5 11.2 15 15 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              <span>PCI-safe clipboard</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" role="presentation" aria-hidden="true"><path d="M5 12h14M5 6h14M5 18h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              <span>No training curve</span>
+            </li>
           </ul>
         </div>
-        <div class="action-mockups">
-          <div class="action-card">
-            <div class="action-header">
-              <span class="badge badge-extension">Kayak overlay</span>
-              <span class="copy-pill">Copy Journey 2</span>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-card">
+            <div class="hero-card-header">
+              <span class="pill">Kayak-style search</span>
+              <span class="status">Flight Snap live</span>
             </div>
-            <p class="action-body">Journey 2 · <strong>MIA → VCE</strong><br><span>Availability pill copied · Toast: “Ready for Sabre”</span></p>
+            <div class="hero-card-body">
+              <div class="hero-segment">
+                <span class="segment-route">ATL → IST</span>
+                <span class="segment-meta">TK032 · 9h 50m · Business</span>
+              </div>
+              <div class="hero-snippet">1 TK 032J 04JUN ATLIST SS1 950P 340P+1 /DCTK /E</div>
+              <div class="hero-actions">
+                <span class="copy-chip">*I Copied ✓</span>
+                <span class="copy-chip">Availability Ready</span>
+              </div>
+            </div>
           </div>
-          <div class="action-card">
-            <div class="action-header">
-              <span class="badge badge-kayak">Popup preview</span>
-              <span class="copy-pill">Copy *I</span>
-            </div>
-            <p class="action-body">VI text converted automatically.<br><span>*I and availability blocks ready to paste.</span></p>
+          <div class="plane-path">
+            <svg viewBox="0 0 220 160" role="presentation" focusable="false">
+              <path class="path-trail" d="M10 120C40 40 120 40 210 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 10" stroke-linecap="round"></path>
+              <g class="plane-icon">
+                <path d="M0 0h10l18 8-18 8H0l6-8-6-8Z" fill="currentColor"></path>
+              </g>
+            </svg>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="scenarios section">
+    <section class="section demo" id="demo" aria-labelledby="demo-title">
       <div class="container">
         <div class="section-header">
-          <span class="eyebrow">Real-world moments</span>
-          <h2>Marketing stories that resonate with premium travel teams.</h2>
-          <p>Illustrate how Flight Snap keeps agents fast, accurate, and confident—whether they’re quoting live results or cleaning up legacy output.</p>
+          <span class="eyebrow">Live sandbox</span>
+          <h2 id="demo-title">Click through a Kayak-style result and watch the GDS magic.</h2>
+          <p>Every button below works offline. Flip between itineraries, open the modals, and copy the commands exactly how your team would.</p>
         </div>
-        <div class="scenario-grid">
-          <article class="scenario-card">
-            <h3>Speed through Kayak quotes</h3>
-            <p>An agent opens a multi-city Kayak result, sees *I plus numbered journey pills beside “Select,” taps “2 MIA-VCE,” and pastes the availability command straight into the GDS as a toast flashes “Copied.”</p>
-          </article>
-          <article class="scenario-card">
-            <h3>Verify ITA Matrix details</h3>
-            <p>After drilling into an itinerary, the agent hits the inline *I pill perched in the top-right corner of the detail view and captures the full trip without scrolling or worrying about missed segments.</p>
-          </article>
-          <article class="scenario-card">
-            <h3>Clean up legacy VI output</h3>
-            <p>Marketing support drops a Sabre VI* dump into the popup, watches it convert to *I, and copies journey-level availability commands from the preview to share with channel partners.</p>
+        <div class="sandbox">
+          <div class="sandbox-controls">
+            <label class="toggle">
+              <input type="checkbox" id="randomizeToggle" aria-describedby="randomizeHelp">
+              <span class="slider" aria-hidden="true"></span>
+              <span class="label">Randomize itineraries</span>
+            </label>
+            <p id="randomizeHelp">Let Flight Snap rotate through real-world itineraries every few seconds.</p>
+          </div>
+          <article class="option-card" aria-live="polite">
+            <header class="option-header">
+              <div>
+                <p class="airline" data-airline>Turkish Airlines</p>
+                <p class="flight-number" data-flight>TK 032 · Nonstop</p>
+              </div>
+              <span class="cabin" data-cabin>Business</span>
+            </header>
+            <div class="option-body">
+              <div class="time-block">
+                <div>
+                  <p class="time" data-departure-time>9:50 PM</p>
+                  <p class="airport" data-departure-airport>ATL</p>
+                </div>
+                <div class="duration" data-duration>9h 50m</div>
+                <div>
+                  <p class="time" data-arrival-time>3:40 PM +1</p>
+                  <p class="airport" data-arrival-airport>IST</p>
+                </div>
+              </div>
+              <div class="option-meta">
+                <span class="chip" data-layover>Nonstop · Airbus 350</span>
+                <span class="chip" data-fare-basis>J · Flexible</span>
+              </div>
+              <div class="option-buttons">
+                <button class="btn btn-primary" data-modal-trigger="itinerary">*Generate I</button>
+                <button class="btn btn-secondary" data-modal-trigger="availability">Availability</button>
+                <button class="btn btn-ghost" data-modal-trigger="vi">VI*</button>
+                <button class="btn btn-ghost" data-modal-trigger="names">Name (demo)</button>
+              </div>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="pricing" class="pricing section">
+    <section class="section how" id="how-it-works" aria-labelledby="how-title">
       <div class="container">
-        <div class="section-header center">
-          <span class="eyebrow">Pricing</span>
-          <h2>Simple plans built for agencies of every size.</h2>
+        <div class="section-header">
+          <span class="eyebrow">How Flight Snap works</span>
+          <h2 id="how-title">Three quick steps from search to PNR.</h2>
+        </div>
+        <div class="steps">
+          <article>
+            <span class="step-number">1</span>
+            <h3>Search your favourite engine</h3>
+            <p>Browse Kayak, ITA Matrix, or corporate portals. Flight Snap recognises itineraries instantly.</p>
+          </article>
+          <article>
+            <span class="step-number">2</span>
+            <h3>Click the floating pill</h3>
+            <p>One click on the Flight Snap pill copies pristine *I itineraries, availability, or VI* detail.</p>
+          </article>
+          <article>
+            <span class="step-number">3</span>
+            <h3>Paste directly into the GDS</h3>
+            <p>Drop the command into Sabre, Amadeus, or Apollo and move on to servicing the traveller.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section features" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Why teams love Flight Snap</span>
+          <h2 id="features-title">Speed, accuracy, and training-friendly controls.</h2>
+        </div>
+        <div class="feature-grid">
+          <article>
+            <h3>Lightning fast</h3>
+            <p>Detects fare cards in milliseconds and populates clipboard-ready commands without waiting on APIs.</p>
+          </article>
+          <article>
+            <h3>Accuracy first</h3>
+            <p>Smart cabin logic, precise date handling, and equipment notes mean fewer ADMs and rework.</p>
+          </article>
+          <article>
+            <h3>Training friendly</h3>
+            <p>Assist new agents with hints, tooltips, and a sandbox that mirrors production flows.</p>
+          </article>
+          <article>
+            <h3>Works where you do</h3>
+            <p>Optimised for Kayak, ITA Matrix, and major corporate booking tools with no extra installs.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pricing" id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Flexible plans</span>
+          <h2 id="pricing-title">Start free, scale with your desk.</h2>
         </div>
         <div class="pricing-grid">
           <article class="pricing-card">
-            <div class="pricing-label">Free Trial</div>
-            <h3 class="pricing-price">$0<span>/7 days</span></h3>
+            <h3>Free Trial</h3>
+            <p class="price">$0<span>/7 days</span></p>
             <ul>
-              <li>Full feature access</li>
-              <li>Unlimited *I and availability copies</li>
-              <li>Confirmation toasts on every copy</li>
-              <li>Email support within 24 hours</li>
+              <li>Full extension access</li>
+              <li>*I + availability exports</li>
+              <li>1 agent seat</li>
             </ul>
             <a class="btn btn-secondary" href="#">Start free trial</a>
           </article>
           <article class="pricing-card featured">
-            <div class="pricing-label">Pro</div>
-            <h3 class="pricing-price">$29<span>/month</span></h3>
-            <p class="pricing-tag">Best for solo agents</p>
+            <div class="tag">Most popular</div>
+            <h3>Pro</h3>
+            <p class="price">$29<span>/month</span></p>
             <ul>
-              <li>Floating copy pills on Kayak &amp; ITA Matrix</li>
-              <li>Custom booking defaults with cabin intelligence</li>
-              <li>Popup VI-to-*I conversions and previews</li>
-              <li>Priority email &amp; chat support</li>
+              <li>Unlimited captures</li>
+              <li>Saved templates &amp; macros</li>
+              <li>Priority support</li>
             </ul>
             <a class="btn btn-primary" href="#">Upgrade to Pro</a>
           </article>
           <article class="pricing-card">
-            <div class="pricing-label">Agency</div>
-            <h3 class="pricing-price">$79<span>/month</span></h3>
+            <h3>Agency</h3>
+            <p class="price">$79<span>/month</span></p>
             <ul>
-              <li>Up to 10 seats included</li>
-              <li>Centralized billing &amp; admin controls</li>
-              <li>Team-wide settings for journey pills &amp; defaults</li>
-              <li>Dedicated onboarding specialist</li>
+              <li>Up to 10 seats</li>
+              <li>Centralised billing</li>
+              <li>Dedicated onboarding</li>
             </ul>
             <a class="btn btn-secondary" href="#">Talk to sales</a>
           </article>
@@ -350,48 +241,41 @@
       </div>
     </section>
 
-    <section id="testimonials" class="testimonials section">
+    <section class="section faq-testimonials" id="faq" aria-labelledby="faq-title">
       <div class="container">
-        <div class="section-header center">
-          <span class="eyebrow">Loved by travel pros</span>
-          <h2>Agents trust Flight Snap to deliver for premium travellers.</h2>
+        <div class="section-header">
+          <span class="eyebrow">Answers &amp; love notes</span>
+          <h2 id="faq-title">Everything you need to know before snapping.</h2>
         </div>
-        <div class="testimonial-grid">
-          <article class="testimonial-card">
-            <p>“We serve Moldova’s busiest executives. Flight Snap keeps our PNRs clean and lets the team focus on client care, not typing.”</p>
-            <div class="testimonial-meta">
-              <span class="name">Irina Cojocaru</span>
-              <span class="role">Managing Partner, AeroMoldova Concierge</span>
-            </div>
-          </article>
-          <article class="testimonial-card">
-            <p>“Those floating pills sit right beside ‘Select.’ One tap and the multi-journey availability is already in Sabre—no more second guesses.”</p>
-            <div class="testimonial-meta">
-              <span class="name">Daniel Popescu</span>
-              <span class="role">Lead Agent, BlueDanube Air Desk</span>
-            </div>
-          </article>
-          <article class="testimonial-card">
-            <p>“The popup’s VI-to-*I converter is a lifesaver for marketing briefs. We tidy legacy text and share spotless commands in seconds.”</p>
-            <div class="testimonial-meta">
-              <span class="name">Ana Pavel</span>
-              <span class="role">Head of Corporate Travel, SkyBridge</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta section">
-      <div class="container cta-card">
-        <div>
-          <span class="eyebrow">Ready to move faster?</span>
-          <h2>Join travel desks who build flawless itineraries in seconds.</h2>
-          <p>Install Flight Snap today, try it free for seven days, and experience the difference in your next quote cycle.</p>
-        </div>
-        <div class="cta-actions">
-          <a class="btn btn-primary" href="#">Add to Chrome</a>
-          <a class="btn btn-ghost" href="mailto:hello@flightsnap.io">Talk to sales</a>
+        <div class="faq-grid">
+          <div class="faq-list" role="list">
+            <details>
+              <summary>Does Flight Snap work on every OTA?</summary>
+              <p>We focus on Kayak, ITA Matrix, and leading corporate booking tools. Other sites may partially work, and we add support quickly based on demand.</p>
+            </details>
+            <details>
+              <summary>Can I export commands beyond *I?</summary>
+              <p>Yes—availability, VI*, passenger name lists, and more are a click away. The sandbox above mirrors the real extension experience.</p>
+            </details>
+            <details>
+              <summary>Is clipboard data secure?</summary>
+              <p>Flight Snap processes everything locally in the browser. Nothing is transmitted, and clipboard clears automatically after use.</p>
+            </details>
+            <details>
+              <summary>How do teams get started?</summary>
+              <p>Install the extension, invite agents from the dashboard, and assign seats. Our onboarding guide gets everyone productive in 10 minutes.</p>
+            </details>
+          </div>
+          <div class="testimonials" id="testimonials" aria-label="Customer testimonials">
+            <figure>
+              <blockquote>“We turned Kayak screenshots into real GDS commands overnight. New hires love the sandbox because it matches the real UI.”</blockquote>
+              <figcaption>— Irina Cojocaru, AeroMoldova Concierge</figcaption>
+            </figure>
+            <figure>
+              <blockquote>“Availability pills plus VI* detail cut our response time in half. Clients notice the speed immediately.”</blockquote>
+              <figcaption>— Daniel Popescu, BlueDanube Travel Desk</figcaption>
+            </figure>
+          </div>
         </div>
       </div>
     </section>
@@ -399,42 +283,51 @@
 
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div>
-        <a class="logo" href="#top">Flight Snap</a>
-        <p>Built by travel automation specialists to make premium GDS workflows faster, safer, and more profitable.</p>
+      <div class="footer-brand">
+        <a class="brand" href="#top">
+          <span class="brand-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" role="presentation" focusable="false"><path d="M5 23.5c12-3 24-3 38 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"></path><path d="M18 17l8.5 6-8.5 6 1.5-4.5H9l9-3-1.5-4.5Z" fill="currentColor"></path></svg>
+          </span>
+          <span class="brand-name">Flight Snap</span>
+        </a>
+        <p>Build immaculate itineraries in seconds with the Chrome extension designed for corporate travel desks.</p>
       </div>
-      <div class="footer-links">
-        <div>
-          <h4>Product</h4>
-          <a href="#how-it-works">How it works</a>
-          <a href="#features">Features</a>
-          <a href="#pricing">Pricing</a>
-        </div>
-        <div>
-          <h4>Company</h4>
-          <a href="#testimonials">Customers</a>
-          <a href="mailto:hello@flightsnap.io">Contact</a>
-          <a href="#">Support</a>
-        </div>
-        <div>
-          <h4>Resources</h4>
-          <a href="#demo">Live demo</a>
-          <a href="#time">Case study</a>
-          <a href="#">Updates</a>
-        </div>
-      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#demo">Live demo</a>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
       <div class="footer-meta">
-        <div class="policy-links">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-        </div>
-        <p class="copyright">&copy; <span id="year">2024</span> Flight Snap. All rights reserved.</p>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <p>&copy; <span id="year"></span> Flight Snap. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <div class="modal" id="sandboxModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <header class="modal-header">
+        <div>
+          <h3 id="modalTitle">Command preview</h3>
+          <p id="modalCommand" class="modal-command"></p>
+        </div>
+        <button class="icon-button" data-close type="button" aria-label="Close dialog">
+          <span aria-hidden="true">✕</span>
+        </button>
+      </header>
+      <pre class="modal-body" id="modalBody"></pre>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="copyModal" type="button">Copy to clipboard</button>
+        <button class="btn btn-ghost" data-close type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="app.js" defer></script>
 </body>
 </html>
