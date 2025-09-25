@@ -20,7 +20,7 @@
         </span>
         <span class="brand-name">Flight Snap</span>
       </a>
-      <nav class="primary-nav" aria-label="Primary">
+      <nav class="primary-nav" aria-label="Primary" id="primaryNav">
         <a href="#demo">Live Demo</a>
         <a href="#how-it-works">How it works</a>
         <a href="#features">Features</a>
@@ -28,6 +28,10 @@
         <a href="#faq">FAQ</a>
       </nav>
       <div class="nav-actions">
+        <button id="menuToggle" class="icon-button menu-toggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation menu">
+          <span class="menu-icon" aria-hidden="true"></span>
+          <span class="sr-only">Toggle navigation</span>
+        </button>
         <button id="themeToggle" class="icon-button" type="button" aria-pressed="false" aria-label="Toggle light and dark mode">
           <span class="icon-sun" aria-hidden="true"></span>
           <span class="icon-moon" aria-hidden="true"></span>
@@ -36,6 +40,7 @@
         <a class="btn btn-primary" href="#pricing">Try Free for 7 Days</a>
       </div>
     </div>
+    <div class="nav-backdrop" data-nav-backdrop aria-hidden="true"></div>
   </header>
 
   <main id="main">
