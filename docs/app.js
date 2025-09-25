@@ -1,6 +1,9 @@
 const root = document.documentElement;
 const themeToggle = document.getElementById('themeToggle');
 const storedTheme = localStorage.getItem('flight-snap-theme');
+const menuToggle = document.getElementById('menuToggle');
+const primaryNav = document.getElementById('primaryNav');
+const navBackdrop = document.querySelector('[data-nav-backdrop]');
 
 if (storedTheme) {
   root.setAttribute('data-theme', storedTheme);
@@ -13,6 +16,59 @@ themeToggle?.addEventListener('click', () => {
   localStorage.setItem('flight-snap-theme', next);
   themeToggle.setAttribute('aria-pressed', next === 'dark');
 });
+
+const closeNav = () => {
+  if (!menuToggle || !primaryNav) return;
+  menuToggle.classList.remove('is-active');
+  menuToggle.setAttribute('aria-expanded', 'false');
+  primaryNav.classList.remove('is-open');
+  navBackdrop?.classList.remove('is-active');
+  document.body.classList.remove('nav-open');
+};
+
+const openNav = () => {
+  if (!menuToggle || !primaryNav) return;
+  menuToggle.classList.add('is-active');
+  menuToggle.setAttribute('aria-expanded', 'true');
+  primaryNav.classList.add('is-open');
+  navBackdrop?.classList.add('is-active');
+  document.body.classList.add('nav-open');
+};
+
+menuToggle?.addEventListener('click', () => {
+  if (!primaryNav) return;
+  const shouldOpen = !primaryNav.classList.contains('is-open');
+  if (shouldOpen) {
+    openNav();
+  } else {
+    closeNav();
+  }
+});
+
+navBackdrop?.addEventListener('click', closeNav);
+
+primaryNav?.querySelectorAll('a').forEach((link) => {
+  link.addEventListener('click', closeNav);
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && primaryNav?.classList.contains('is-open')) {
+    closeNav();
+  }
+});
+
+const desktopQuery = window.matchMedia('(min-width: 901px)');
+const handleDesktopChange = (event) => {
+  if (event.matches) {
+    closeNav();
+  }
+};
+
+if (desktopQuery.addEventListener) {
+  desktopQuery.addEventListener('change', handleDesktopChange);
+} else if (desktopQuery.addListener) {
+  desktopQuery.addListener(handleDesktopChange);
+}
 
 const year = document.getElementById('year');
 if (year) {
