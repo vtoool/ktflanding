@@ -378,3 +378,16 @@ window.addEventListener('blur', () => {
     stopRandomize();
   }
 });
+
+const proCheckoutButton = document.getElementById('proPlanCheckout');
+const paddleItems = [{ priceId: 'pri_test_replace_with_your_price_id', quantity: 1 }];
+
+proCheckoutButton?.addEventListener('click', () => {
+  if (typeof Paddle === 'undefined' || !Paddle?.Checkout?.open) {
+    console.warn('Paddle checkout is not available.');
+    showToast('Checkout unavailable. Please try again.');
+    return;
+  }
+
+  Paddle.Checkout.open({ items: paddleItems });
+});
