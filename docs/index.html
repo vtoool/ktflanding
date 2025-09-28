@@ -9,6 +9,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <script>
+    Paddle.Environment.set('sandbox');
+    Paddle.Initialize({
+      token: 'test_xxx_replace_with_your_client_side_token',
+      eventCallback: (event) => console.log('[Paddle]', event)
+    });
+  </script>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -215,7 +223,7 @@
               <li>Saved templates &amp; macros</li>
               <li>Priority support</li>
             </ul>
-            <a class="btn btn-primary" href="#">Upgrade to Pro</a>
+            <button class="btn btn-primary" type="button" id="proPlanCheckout">Upgrade to Pro</button>
           </article>
           <article class="pricing-card">
             <h3>Agency</h3>
