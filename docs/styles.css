@@ -223,6 +223,21 @@ button,
   transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition);
 }
 
+.btn.is-disabled,
+.btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: auto;
+}
+
+.btn.is-disabled:hover,
+.btn.is-disabled:focus,
+.btn[aria-disabled="true"]:hover,
+.btn[aria-disabled="true"]:focus {
+  transform: none;
+  box-shadow: none;
+}
+
 .btn-primary {
   background: linear-gradient(135deg, var(--color-accent), var(--color-accent-strong));
   color: #fff;
@@ -260,6 +275,13 @@ button,
 .btn-ghost:focus {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
+}
+
+.checkout-helper {
+  margin-top: 0.75rem;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 
 .icon-button {

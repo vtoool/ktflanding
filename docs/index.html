@@ -9,14 +9,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
   <script>
-    Paddle.Environment.set('sandbox');
-    Paddle.Initialize({
+    window.flightSnapPaddleConfig = {
+      environment: 'sandbox',
       token: 'test_xxx_replace_with_your_client_side_token',
-      eventCallback: (event) => console.log('[Paddle]', event)
-    });
+      priceId: 'pri_test_replace_with_your_price_id'
+    };
   </script>
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js" defer></script>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -224,6 +224,9 @@
               <li>Priority support</li>
             </ul>
             <button class="btn btn-primary" type="button" id="proPlanCheckout">Upgrade to Pro</button>
+            <p class="checkout-helper" id="checkoutHelper" hidden>
+              Add your Paddle token and price ID to enable checkout or reach out to support for onboarding.
+            </p>
           </article>
           <article class="pricing-card">
             <h3>Agency</h3>
