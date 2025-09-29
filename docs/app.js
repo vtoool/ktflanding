@@ -382,17 +382,47 @@ window.addEventListener('blur', () => {
 const proCheckoutButton = document.getElementById('proPlanCheckout');
 const checkoutHelper = document.getElementById('checkoutHelper');
 const paddleConfig = window.flightSnapPaddleConfig ?? {};
+const paddleStatus = window.flightSnapPaddleStatus ?? {};
 const isConfiguredValue = (value) =>
   typeof value === 'string' && value.trim().length > 0 && !value.includes('replace_with');
 
 const paddleConfigured = isConfiguredValue(paddleConfig.token) && isConfiguredValue(paddleConfig.priceId);
 let paddleReady = false;
 
+const disableCheckout = (message) => {
+  if (proCheckoutButton) {
+    proCheckoutButton.classList.add('is-disabled');
+    proCheckoutButton.setAttribute('aria-disabled', 'true');
+    proCheckoutButton.dataset.disabledMessage = message;
+  }
+
+  if (checkoutHelper) {
+    checkoutHelper.textContent = message;
+    checkoutHelper.removeAttribute('hidden');
+  }
+};
+
+const enableCheckout = () => {
+  if (proCheckoutButton) {
+    proCheckoutButton.classList.remove('is-disabled');
+    proCheckoutButton.removeAttribute('aria-disabled');
+    delete proCheckoutButton.dataset.disabledMessage;
+  }
+
+  checkoutHelper?.setAttribute('hidden', '');
+};
+
 const initializePaddle = () => {
   if (!paddleConfigured) return;
 
+  if (paddleStatus.loadError) {
+    disableCheckout('Checkout is unavailable right now. Please contact support.');
+    return;
+  }
+
   if (typeof Paddle === 'undefined' || typeof Paddle.Initialize !== 'function') {
     console.warn('Paddle checkout library not available.');
+    disableCheckout('Checkout unavailable. Please try again later.');
     return;
   }
 
@@ -409,9 +439,12 @@ const initializePaddle = () => {
 
     paddleReady = true;
     window.flightSnapPaddleReady = true;
+    enableCheckout();
   } catch (error) {
     console.error('Failed to initialize Paddle checkout.', error);
-    showToast('Checkout unavailable. Please try again later.');
+    const message = 'Checkout unavailable. Please try again later.';
+    disableCheckout(message);
+    showToast(message);
   }
 };
 
@@ -425,17 +458,32 @@ if (paddleConfigured) {
   const paddleItems = [{ priceId: paddleConfig.priceId, quantity: 1 }];
 
   proCheckoutButton?.addEventListener('click', (event) => {
-    if (!paddleReady) {
+    if (proCheckoutButton.classList.contains('is-disabled')) {
       event.preventDefault();
-      initializePaddle();
-      showToast('Checkout is starting up. Please try again in a moment.');
+      const message = proCheckoutButton.dataset.disabledMessage;
+      if (message) {
+        showToast(message);
+      }
       return;
+    }
+
+    if (!paddleReady) {
+      initializePaddle();
+      if (!paddleReady) {
+        event.preventDefault();
+        const message =
+          proCheckoutButton.dataset.disabledMessage || 'Checkout is starting up. Please try again in a moment.';
+        showToast(message);
+        return;
+      }
     }
 
     if (typeof Paddle === 'undefined' || !Paddle?.Checkout?.open) {
       event.preventDefault();
       console.warn('Paddle checkout is not available.');
-      showToast('Checkout unavailable. Please try again.');
+      const message = 'Checkout unavailable. Please try again later.';
+      disableCheckout(message);
+      showToast(message);
       return;
     }
 
@@ -443,18 +491,13 @@ if (paddleConfigured) {
       Paddle.Checkout.open({ items: paddleItems });
     } catch (error) {
       console.error('Failed to open Paddle checkout.', error);
-      showToast('Checkout unavailable. Please try again.');
+      const message = 'Checkout unavailable. Please try again later.';
+      disableCheckout(message);
+      showToast(message);
     }
   });
 
   checkoutHelper?.setAttribute('hidden', '');
 } else {
-  proCheckoutButton?.classList.add('is-disabled');
-  proCheckoutButton?.setAttribute('aria-disabled', 'true');
-  checkoutHelper?.removeAttribute('hidden');
-
-  proCheckoutButton?.addEventListener('click', (event) => {
-    event.preventDefault();
-    showToast('Add your Paddle token and price ID to enable checkout.');
-  });
+  disableCheckout('Add your Paddle token and price ID to enable checkout.');
 }
