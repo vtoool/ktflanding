@@ -9,16 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script>
-    window.flightSnapPaddleStatus = { loadError: false };
-    window.flightSnapPaddleConfig = {
-      environment: 'sandbox',
-      token: 'test_9f821587e5b06e1e5a233ef426e',
-      priceId: 'pri_01k6b13zc4vvnh1j7as2ng0834',
-      productId: 'pro_01k6b12q9gf1xvbhxftcggrae4'
-    };
-  </script>
-  <script src="https://cdn.paddle.com/paddle/v2/paddle.js" defer onerror="window.flightSnapPaddleStatus.loadError = true"></script>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -225,10 +215,7 @@
               <li>Saved templates &amp; macros</li>
               <li>Priority support</li>
             </ul>
-            <button class="btn btn-primary" type="button" id="proPlanCheckout">Upgrade to Pro</button>
-            <p class="checkout-helper" id="checkoutHelper" hidden>
-              Add your Paddle token and price ID to enable checkout or reach out to support for onboarding.
-            </p>
+            <button class="btn btn-primary" type="button" id="proPlanCheckout" data-paddle="overlay">Upgrade to Pro</button>
           </article>
           <article class="pricing-card">
             <h3>Agency</h3>
@@ -240,6 +227,10 @@
             </ul>
             <a class="btn btn-secondary" href="#">Talk to sales</a>
           </article>
+        </div>
+        <div class="inline-checkout-demo">
+          <div id="inline-checkout" style="max-width:560px;margin:24px auto;"></div>
+          <button class="btn" id="show-inline" type="button">Show Inline Checkout</button>
         </div>
       </div>
     </section>
@@ -327,6 +318,58 @@
   </div>
 
   <div class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Paddle v2 -->
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <script>
+    const paddleToken = 'test_9f821587e5b06e1e5a233ef426e';
+    const paddlePriceId = 'pri_01k6b13zc4vvnh1j7as2ng0834';
+
+    if (!window.Paddle) {
+      console.error('[Paddle] Library failed to load. Overlay and inline checkout are unavailable.');
+    } else {
+      Paddle.Environment.set('sandbox');
+      Paddle.Initialize({
+        token: paddleToken,
+        eventCallback: (event) => {
+          console.log('[Paddle event]', event?.type ?? 'unknown', event);
+          if (event?.type === 'checkout.error') {
+            console.error('[Paddle] Checkout error encountered. Last checkout items:', window.lastPaddleItems);
+          }
+        }
+      });
+
+      console.log('Paddle', Paddle);
+
+      window.lastPaddleItems = [];
+
+      const overlayItems = [{ priceId: paddlePriceId, quantity: 1 }];
+      document.querySelectorAll("[data-paddle='overlay']").forEach((btn) => {
+        btn.addEventListener('click', (event) => {
+          event.preventDefault();
+          window.lastPaddleItems = overlayItems;
+          Paddle.Checkout.open({ items: overlayItems });
+        });
+      });
+
+      const inlineItems = [{ priceId: paddlePriceId, quantity: 1 }];
+      const inlineButton = document.getElementById('show-inline');
+      if (inlineButton) {
+        inlineButton.addEventListener('click', () => {
+          window.lastPaddleItems = inlineItems;
+          Paddle.Checkout.open({
+            items: inlineItems,
+            settings: {
+              displayMode: 'inline',
+              frameTarget: 'inline-checkout',
+              frameInitialHeight: '520',
+              theme: 'light'
+            }
+          });
+        });
+      }
+    }
+  </script>
 
   <script src="app.js" defer></script>
 </body>
