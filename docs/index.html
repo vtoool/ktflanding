@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script>
+    window.flightSnapPaddleStatus = { loadError: false };
     window.flightSnapPaddleConfig = {
       environment: 'sandbox',
       token: 'test_9f821587e5b06e1e5a233ef426e',
@@ -17,7 +18,7 @@
       productId: 'pro_01k6b12q9gf1xvbhxftcggrae4'
     };
   </script>
-  <script src="https://cdn.paddle.com/paddle/v2/paddle.js" defer></script>
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js" defer onerror="window.flightSnapPaddleStatus.loadError = true"></script>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
