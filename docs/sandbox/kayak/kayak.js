@@ -6,6 +6,8 @@ if (!root) {
   throw new Error('Kayak sandbox root not found');
 }
 
+document.getElementById('kayak-sandbox')?.classList.add('compact');
+
 const trackEvent = (typeof window !== 'undefined' && window.analytics && typeof window.analytics.trackEvent === 'function')
   ? window.analytics.trackEvent.bind(window.analytics)
   : () => {};
