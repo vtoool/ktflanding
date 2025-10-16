@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy · Kayak to *I</title>
+  <meta name="description" content="Privacy policy for the Kayak to *I extension landing page.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="legal">
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header" data-site-header>
+    <div class="container header-bar">
+      <a class="brand" href="index.html" aria-label="Kayak to *I home">
+        <img src="assets/logo.svg" alt="Kayak to *I" width="152" height="40">
+      </a>
+    </div>
+  </header>
+  <main class="legal-content" id="content">
+    <div class="container">
+      <article>
+        <h1>Privacy Policy</h1>
+        <p>Effective date: 1 July 2024</p>
+        <p>This site introduces Kayak to *I, a Chrome extension published by the KTF team. We keep this document concise so travel teams can review our approach quickly.</p>
+        <h2>What we collect</h2>
+        <ul>
+          <li><strong>Site analytics.</strong> We use Plausible by default. It records page views and anonymous events such as extension installs, Pro interest, and demo usage. IP addresses are never stored and no cookies are set.</li>
+          <li><strong>Attribution parameters.</strong> When you visit with <code>?utm_source</code>, <code>?utm_campaign</code>, or <code>?ref</code>, we store those values locally in your browser so they can be attached to analytics events.</li>
+          <li><strong>Support contact.</strong> If you email <a href="mailto:{{SUPPORT_EMAIL}}">{{SUPPORT_EMAIL}}</a>, we receive the contents of your message for troubleshooting.</li>
+        </ul>
+        <h2>What we do not collect</h2>
+        <p>We do not collect personal identifiers, booking data, or clipboard contents. The live demo runs entirely in your browser without network calls.</p>
+        <h2>How to opt out</h2>
+        <p>To disable analytics, open <code>analytics.js</code> and set <code>ANALYTICS_PROVIDER</code> to <code>'none'</code>. You may also host the site without Plausible or GA4 scripts.</p>
+        <h2>Data retention</h2>
+        <p>We retain aggregated analytics for 13 months to understand adoption trends. Support emails are kept for one year unless you request deletion sooner.</p>
+        <h2>Contact</h2>
+        <p>Questions about privacy? Email <a href="mailto:{{SUPPORT_EMAIL}}">{{SUPPORT_EMAIL}}</a>.</p>
+      </article>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div>
+        <p class="footer-brand">Kayak to *I</p>
+        <p class="footer-version">Version 1.0.0 · <span data-current-year>2024</span></p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="terms.html">Terms</a>
+      </div>
+      <div class="footer-cta">
+        <a class="btn btn-secondary" href="{{CHROME_WEB_STORE_URL}}" data-event="install" data-location="privacy">Add to Chrome</a>
+      </div>
+    </div>
+  </footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

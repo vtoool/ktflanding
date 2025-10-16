@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://vtoool.github.io/ktflanding/sitemap.xml
