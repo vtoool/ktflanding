@@ -1,5 +1,5 @@
 import { SCENARIOS } from './demo-data.js';
-import { formatSegmentsToI, getZonedDateTimeParts, calculateArrivalOffset } from './demo-formatter.js';
+import { formatSegmentsDetailed, getZonedDateTimeParts, calculateArrivalOffset } from './demo-formatter.js';
 import { trackEvent } from './analytics.js';
 
 const CABIN_FALLBACK_BOOKING = {
@@ -77,6 +77,7 @@ function buildSegmentNode(segment, index, options) {
   })();
   const wrapper = document.createElement('li');
   wrapper.className = 'segment';
+  wrapper.setAttribute('data-segment-index', String(index + 1));
   wrapper.innerHTML = `
     <div class="segment__times">
       <div>
@@ -97,7 +98,115 @@ function buildSegmentNode(segment, index, options) {
     </div>
     ${layover ? `<div class="segment__connections">${layover}</div>` : ''}
   `;
+
+  const preview = document.createElement('div');
+  preview.className = 'segment__line-preview';
+  preview.innerHTML = `
+    <span class="segment__line-number" aria-hidden="true">${index + 1}</span>
+    <code class="segment__line-text" data-line-text></code>
+    <button class="segment__line-copy" type="button" data-copy-line aria-label="Copy *I line ${index + 1}">Copy line</button>
+    <span class="segment__line-note" data-line-note hidden></span>
+  `;
+
+  const copyButton = preview.querySelector('[data-copy-line]');
+  if (copyButton) {
+    copyButton.dataset.defaultLabel = 'Copy line';
+    copyButton.dataset.copiedLabel = 'Copied!';
+    copyButton.dataset.errorLabel = 'Copy failed';
+    copyButton.disabled = true;
+  }
+
+  wrapper.appendChild(preview);
   return wrapper;
+}
+
+function setCopyButtonFeedback(button, label, { revert = true } = {}) {
+  if (!button) return;
+  clearTimeout(button._feedbackTimer);
+  button.textContent = label;
+  if (revert) {
+    button._feedbackTimer = setTimeout(() => {
+      if (!button.isConnected) return;
+      const defaultLabel = button.dataset?.defaultLabel || 'Copy line';
+      button.textContent = defaultLabel;
+    }, 1800);
+  }
+}
+
+function resetSegmentCopyButton(button) {
+  if (!button) return;
+  setCopyButtonFeedback(button, button.dataset?.defaultLabel || 'Copy line', { revert: false });
+  button.disabled = true;
+}
+
+function setActiveSegment(root, target) {
+  const segments = root.querySelectorAll('[data-segment-index]');
+  segments.forEach((segmentEl) => {
+    segmentEl.classList.toggle('segment--active', segmentEl === target);
+  });
+  root._activeSegment = target || null;
+}
+
+function clearSegmentPreviews(root) {
+  const segments = root.querySelectorAll('[data-segment-index]');
+  segments.forEach((segmentEl) => {
+    segmentEl.classList.remove('segment--has-line');
+    const lineText = segmentEl.querySelector('[data-line-text]');
+    if (lineText) {
+      lineText.textContent = '';
+    }
+    const note = segmentEl.querySelector('[data-line-note]');
+    if (note) {
+      note.textContent = '';
+      note.hidden = true;
+    }
+    const copyButton = segmentEl.querySelector('[data-copy-line]');
+    if (copyButton) {
+      resetSegmentCopyButton(copyButton);
+    }
+  });
+  root._defaultSegment = null;
+  setActiveSegment(root, null);
+}
+
+function applySegmentPreviews(root, details) {
+  clearSegmentPreviews(root);
+  details.forEach((detail) => {
+    const segmentEl = root.querySelector(`[data-segment-index="${detail.index}"]`);
+    if (!segmentEl) return;
+    const lineText = segmentEl.querySelector('[data-line-text]');
+    if (lineText) {
+      lineText.textContent = detail.line;
+    }
+    const note = segmentEl.querySelector('[data-line-note]');
+    if (note) {
+      if (detail.arrivalNote) {
+        note.textContent = detail.arrivalNote;
+        note.hidden = false;
+      } else {
+        note.textContent = '';
+        note.hidden = true;
+      }
+    }
+    const copyButton = segmentEl.querySelector('[data-copy-line]');
+    if (copyButton) {
+      copyButton.disabled = false;
+      const defaultLabel = copyButton.dataset?.defaultLabel || 'Copy line';
+      copyButton.textContent = defaultLabel;
+    }
+    segmentEl.classList.add('segment--has-line');
+  });
+
+  if (details.length) {
+    const first = root.querySelector(`[data-segment-index="${details[0].index}"]`);
+    root._defaultSegment = first || null;
+    if (first) {
+      setActiveSegment(root, first);
+    }
+  } else {
+    root._defaultSegment = null;
+    setActiveSegment(root, null);
+  }
 }
 
 function renderScenario(root, state) {
@@ -126,6 +235,8 @@ function renderScenario(root, state) {
       listEl.appendChild(node);
     });
   }
+
+  clearSegmentPreviews(root);
 
   const codeshareToggle = root.querySelector('[data-toggle="codeshare"]');
   if (codeshareToggle) {
@@ -195,6 +306,9 @@ export function initDemo() {
       if (copyButton) {
         copyButton.disabled = true;
       }
+      if (outputField) {
+        outputField.value = '';
+      }
     });
   });
 
@@ -208,6 +322,9 @@ export function initDemo() {
       }
       if (copyButton) {
         copyButton.disabled = true;
+      }
+      if (outputField) {
+        outputField.value = '';
       }
     });
   }
@@ -223,6 +340,9 @@ export function initDemo() {
       if (copyButton) {
         copyButton.disabled = true;
       }
+      if (outputField) {
+        outputField.value = '';
+      }
     });
   }
 
@@ -231,13 +351,15 @@ export function initDemo() {
     generateButton.addEventListener('click', () => {
       const scenario = SCENARIOS[state.scenarioKey];
       if (!scenario) return;
-      const text = formatSegmentsToI(scenario.segments, {
+      const details = formatSegmentsDetailed(scenario.segments, {
         simulateCodeshare: state.simulateCodeshare,
         forceShortFirstAsBusiness: state.forceShortFirstAsBusiness,
       });
+      const text = details.map((detail) => detail.line).join('\n');
       if (outputField) {
         outputField.value = text;
       }
+      applySegmentPreviews(root, details);
       if (outputWrapper) {
         outputWrapper.hidden = false;
       }
@@ -268,4 +390,55 @@ export function initDemo() {
       }
     });
   }
+
+  root.addEventListener('click', async (event) => {
+    const button = event.target.closest('[data-copy-line]');
+    if (!button || button.disabled) return;
+    const segmentEl = button.closest('[data-segment-index]');
+    if (!segmentEl) return;
+    const lineText = segmentEl.querySelector('[data-line-text]');
+    const value = lineText?.textContent?.trim();
+    if (!value) return;
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopyButtonFeedback(button, button.dataset?.copiedLabel || 'Copied!');
+      showToast(toast, 'Line copied');
+      trackEvent('demo_copy_line', {
+        scenario: state.scenarioKey,
+        segment: segmentEl.getAttribute('data-segment-index'),
+      });
+    } catch (err) {
+      setCopyButtonFeedback(button, button.dataset?.errorLabel || 'Copy failed');
+    }
+  });
+
+  root.addEventListener('pointerenter', (event) => {
+    const segmentEl = event.target.closest('[data-segment-index]');
+    if (segmentEl) {
+      setActiveSegment(root, segmentEl);
+    }
+  });
+
+  root.addEventListener('pointerleave', (event) => {
+    const segmentEl = event.target.closest('[data-segment-index]');
+    if (segmentEl) {
+      const defaultSegment = root._defaultSegment || null;
+      setActiveSegment(root, defaultSegment);
+    }
+  });
+
+  root.addEventListener('focusin', (event) => {
+    const segmentEl = event.target.closest('[data-segment-index]');
+    if (segmentEl) {
+      setActiveSegment(root, segmentEl);
+    }
+  });
+
+  root.addEventListener('focusout', () => {
+    const activeElement = document.activeElement;
+    if (!root.contains(activeElement)) {
+      const defaultSegment = root._defaultSegment || null;
+      setActiveSegment(root, defaultSegment);
+    }
+  });
 }
