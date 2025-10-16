@@ -3,61 +3,321 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FareSnap demo — Kayak-style itinerary card</title>
-  <meta name="description" content="Responsive, accessible itinerary card demo with Kayak-style layout and *I formatter.">
+  <title>Kayak to *I — Clipboard-ready GDS itineraries in one click</title>
+  <meta name="description" content="Kayak to *I adds a *I pill to flight search results so travel teams can copy flawless Sabre-format itineraries without retyping.">
+  <link rel="canonical" href="https://vtoool.github.io/ktflanding/">
+  <meta name="theme-color" content="#0b1f3a">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Kayak to *I — Clipboard-ready GDS itineraries">
+  <meta property="og:description" content="Trigger the *I pill on any flight card and paste Sabre-ready lines instantly.">
+  <meta property="og:url" content="https://vtoool.github.io/ktflanding/">
+  <meta property="og:image" content="assets/og.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kayak to *I — Clipboard-ready GDS itineraries">
+  <meta name="twitter:description" content="Trigger the *I pill on any flight card and paste Sabre-ready lines instantly.">
+  <meta name="twitter:image" content="assets/og.svg">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
-  <main id="main" class="page" aria-labelledby="page-title">
-    <header class="page-header">
-      <p class="page-eyebrow">FareSnap demo</p>
-      <h1 id="page-title">Kayak-style itinerary cards with clipboard-ready *I output</h1>
-      <p class="page-lead">Brand-neutral recreation of the Kayak multi-segment itinerary card. Inspect outbound and inbound legs, hover for amenities, and click the floating *I pill to generate Sabre-format lines.</p>
-    </header>
-
-    <div class="card-stack">
-      <section class="itinerary-card" data-itinerary="outbound" aria-labelledby="outbound-title">
-        <button class="pill" type="button" aria-label="Format outbound segments to *I" data-action="format" aria-controls="outbound-output" aria-expanded="false">*I</button>
-        <header class="itinerary-card__header">
-          <div class="itinerary-card__title">
-            <h2 id="outbound-title">Depart — <span data-leg-date></span></h2>
-            <p class="itinerary-card__subtitle">Dallas/Fort Worth to Rome Fiumicino</p>
-          </div>
-          <div class="duration-pill" data-leg-duration></div>
-        </header>
-        <ul class="segment-list" data-segment-list></ul>
-        <div class="format-output" id="outbound-output" data-output hidden>
-          <label class="format-output__label" for="outbound-text">Formatted *I lines</label>
-          <textarea id="outbound-text" class="format-output__textarea" rows="5" readonly spellcheck="false" data-output-text></textarea>
-          <div class="format-output__actions">
-            <button class="btn-copy" type="button" data-copy>Copy</button>
-            <span class="toast" role="status" aria-live="polite" data-toast hidden>Copied</span>
-          </div>
+  <header class="site-header" data-site-header>
+    <div class="container header-bar">
+      <a class="brand" href="#top" aria-label="Kayak to *I home">
+        <img src="assets/logo.svg" alt="Kayak to *I" width="152" height="40">
+      </a>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="siteNav">
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <nav class="site-nav" id="siteNav" aria-label="Primary">
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#demo">Live demo</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a class="btn btn-secondary" href="{{CHROME_WEB_STORE_URL}}" data-event="install" data-location="nav">Add to Chrome</a>
         </div>
-      </section>
-
-      <section class="itinerary-card" data-itinerary="inbound" aria-labelledby="inbound-title">
-        <button class="pill" type="button" aria-label="Format return segments to *I" data-action="format" aria-controls="inbound-output" aria-expanded="false">*I</button>
-        <header class="itinerary-card__header">
-          <div class="itinerary-card__title">
-            <h2 id="inbound-title">Return — <span data-leg-date></span></h2>
-            <p class="itinerary-card__subtitle">Rome Fiumicino to Dallas/Fort Worth</p>
-          </div>
-          <div class="duration-pill" data-leg-duration></div>
-        </header>
-        <ul class="segment-list" data-segment-list></ul>
-        <div class="format-output" id="inbound-output" data-output hidden>
-          <label class="format-output__label" for="inbound-text">Formatted *I lines</label>
-          <textarea id="inbound-text" class="format-output__textarea" rows="5" readonly spellcheck="false" data-output-text></textarea>
-          <div class="format-output__actions">
-            <button class="btn-copy" type="button" data-copy>Copy</button>
-            <span class="toast" role="status" aria-live="polite" data-toast hidden>Copied</span>
-          </div>
-        </div>
-      </section>
+      </nav>
     </div>
+    <div class="nav-backdrop" data-nav-backdrop></div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <p class="eyebrow">Sabre-format itineraries from every Kayak card</p>
+          <h1 id="hero-title">Add a *I pill to Kayak results and paste perfect GDS lines in one click.</h1>
+          <p class="lead">Kayak to *I mirrors your agency playbook: multi-city awareness, cabin-aware booking classes, and clipboard-ready text that never breaks formatting.</p>
+          <div class="hero__actions">
+            <a class="btn btn-primary" href="{{CHROME_WEB_STORE_URL}}" data-event="install" data-location="hero">Add to Chrome</a>
+            <a class="btn btn-ghost" href="#pricing" data-event="pro" data-location="hero">See Pro (coming soon)</a>
+          </div>
+          <ul class="hero__bullets" aria-label="Key benefits">
+            <li>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+              <span>Guaranteed Sabre spacing &amp; sequencing</span>
+            </li>
+            <li>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3 2 9l10 6 10-6-10-6Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M2 15l10 6 10-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+              <span>Understands long layovers &amp; overnight rolls</span>
+            </li>
+            <li>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 9h6v6H9z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+              <span>MV3 compliant with privacy-first analytics</span>
+            </li>
+          </ul>
+        </div>
+        <div class="hero__visual" aria-hidden="true">
+          <div class="hero-card">
+            <header class="hero-card__header">
+              <span class="hero-pill">Kayak result</span>
+              <span class="hero-status">*I pill armed</span>
+            </header>
+            <div class="hero-card__body">
+              <div class="hero-segment">
+                <div>
+                  <p class="hero-time">09:15</p>
+                  <p class="hero-airport">JFK</p>
+                </div>
+                <button class="hero-pill-action" type="button">*I</button>
+                <div>
+                  <p class="hero-time">12:05</p>
+                  <p class="hero-airport">LAX</p>
+                </div>
+              </div>
+              <div class="hero-output">1 AA 001J  04OCT F  JFKLAX*SS1  915A  1205P /DCAA /E</div>
+              <div class="hero-toast">Copied ✓</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Why travel agents use FareSnap</span>
+          <h2 id="features-title">Designed for exacting airline desks.</h2>
+          <p>Every behaviour mirrors the production extension so you can validate before rolling it out agency-wide.</p>
+        </div>
+        <div class="feature-grid" role="list">
+          <article class="feature-card" role="listitem">
+            <div class="feature-card__icon" aria-hidden="true">
+              <img src="assets/demo-carrier-generic.svg" alt="">
+            </div>
+            <h3>Accurate conversion for any itinerary</h3>
+            <p>Turn any flight option into clean *I lines&mdash;from simple roundtrips to multi-city marathons&mdash;with correct times, dates, and segment numbering ready to paste into your GDS.</p>
+          </article>
+          <article class="feature-card" role="listitem">
+            <div class="feature-card__icon" aria-hidden="true">
+              <img src="assets/demo-carrier-generic.svg" alt="">
+            </div>
+            <h3>Booking-class mapping</h3>
+            <p>Dynamic RBD mapping by airline and cabin, so classes reflect real inventory rules instead of generic guesses.</p>
+          </article>
+          <article class="feature-card" role="listitem">
+            <div class="feature-card__icon" aria-hidden="true">
+              <img src="assets/demo-carrier-generic.svg" alt="">
+            </div>
+            <h3>VI* → *I transformation</h3>
+            <p>Paste a VI* itinerary and get the matching *I output instantly&mdash;perfect for quick re-quotes or clean hand-offs.</p>
+          </article>
+          <article class="feature-card" role="listitem">
+            <div class="feature-card__icon" aria-hidden="true">
+              <img src="assets/demo-carrier-generic.svg" alt="">
+            </div>
+            <h3>Simple, privacy-first interface</h3>
+            <p>A single *I pill where you expect it. Click once, copy once&mdash;no tabs to babysit, with MV3-native privacy and zero PII collection baked in.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="how-it-works" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Fast onboarding</span>
+          <h2 id="how-title">From search result to PNR in three steps.</h2>
+        </div>
+        <ol class="steps">
+          <li>
+            <span class="step-number">1</span>
+            <h3>Expand a Kayak card</h3>
+            <p>The extension detects full itineraries, even multi-city and fare brand views.</p>
+          </li>
+          <li>
+            <span class="step-number">2</span>
+            <h3>Tap the floating *I pill</h3>
+            <p>Segment numbering, booking classes, and layovers are resolved instantly.</p>
+          </li>
+          <li>
+            <span class="step-number">3</span>
+            <h3>Paste into the GDS</h3>
+            <p>Sabre-format lines and availability commands land in your clipboard ready for ticketing.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section demo" id="demo" aria-labelledby="demo-title">
+      <div class="container" data-demo>
+        <div class="section-header">
+          <span class="eyebrow">Live sandbox</span>
+          <h2 id="demo-title">Click the *I pill to see the exact Sabre output.</h2>
+          <p>Three curated itineraries mirror the extension—generate the lines to reveal per-segment previews with one-click copy.</p>
+        </div>
+        <div class="demo-tabs" role="tablist" aria-label="Demo scenarios">
+          <button class="demo-tab is-active" type="button" role="tab" aria-selected="true" data-scenario-tab="simple">Simple roundtrip</button>
+          <button class="demo-tab" type="button" role="tab" aria-selected="false" data-scenario-tab="layover">Long layover</button>
+          <button class="demo-tab" type="button" role="tab" aria-selected="false" data-scenario-tab="multicity">Multi-city stress</button>
+        </div>
+        <div class="demo-content">
+          <article class="demo-card" aria-live="polite">
+            <header class="demo-card__header">
+              <div>
+                <p class="demo-card__title" data-scenario-name>Simple roundtrip</p>
+                <p class="demo-card__meta" data-scenario-meta>Business · 4 segments</p>
+              </div>
+              <button class="pill-action" type="button" data-generate aria-label="Generate *I output">*I</button>
+            </header>
+            <div class="demo-card__summary">
+              <span data-total-duration>18h 40m total</span>
+              <span aria-hidden="true">•</span>
+              <span data-stop-summary>1 stop each way</span>
+            </div>
+            <ul class="segment-list" data-segment-list></ul>
+          </article>
+          <aside class="demo-controls" aria-label="Demo toggles">
+            <div class="toggle">
+              <input type="checkbox" id="toggleCodeshare" data-toggle="codeshare">
+              <label for="toggleCodeshare">Simulate codeshare</label>
+              <p class="toggle__help">Swaps operating carriers to show the //OPERATED BY line.</p>
+            </div>
+            <div class="toggle">
+              <input type="checkbox" id="toggleFirstRule" data-toggle="first">
+              <label for="toggleFirstRule">Force First &lt; 6h → Business</label>
+              <p class="toggle__help">Mirrors the extension option that downgrades short-haul First segments to J.</p>
+            </div>
+            <p class="demo-hint">All data is static and processed locally—no network calls.</p>
+          </aside>
+        </div>
+        <div class="demo-output" data-output-wrapper hidden>
+          <label class="demo-output__label" for="demoOutput">*I output</label>
+          <textarea id="demoOutput" class="demo-output__field" rows="8" readonly data-demo-output aria-live="polite"></textarea>
+          <div class="demo-output__actions">
+            <button class="btn btn-secondary" type="button" data-copy disabled>Copy</button>
+            <span class="demo-toast" role="status" aria-live="polite" data-toast></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Pricing</span>
+          <h2 id="pricing-title">Start free, plan ahead for Pro.</h2>
+          <p>Every install today is free while we finish Pro workflows. Pro launches with shared profiles, audit logs, and priority support.</p>
+        </div>
+        <div class="pricing-grid">
+          <article class="pricing-card">
+            <h3>Free</h3>
+            <p class="pricing-price">$0</p>
+            <ul>
+              <li>Unlimited itineraries</li>
+              <li>Clipboard-ready Sabre *I output</li>
+              <li>Offline sandbox</li>
+            </ul>
+            <a class="btn btn-primary" href="{{CHROME_WEB_STORE_URL}}" data-event="install" data-location="pricing-free">Add to Chrome</a>
+          </article>
+          <article class="pricing-card pricing-card--soon">
+            <h3>Pro <span class="pill pill--soon">Coming soon</span></h3>
+            <p class="pricing-price">TBA</p>
+            <ul>
+              <li>Shared agency rules</li>
+              <li>Team analytics</li>
+              <li>Priority servicing</li>
+            </ul>
+            <button class="btn btn-ghost" type="button" data-event="pro" data-location="pricing-pro">See Pro (coming soon)</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">FAQ</span>
+          <h2 id="faq-title">Answers for travel ops leads.</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>Which engines are supported?</summary>
+            <p>The extension watches Kayak search and itinerary pages. Support for additional engines is on the roadmap—contact us to prioritise yours.</p>
+          </details>
+          <details>
+            <summary>How accurate is booking-class mapping?</summary>
+            <p>We prioritise your configured overrides, then fall back to cabin-based logic that mirrors Sabre defaults. The demo below uses the same formatter.</p>
+          </details>
+          <details>
+            <summary>Does it handle multi-city options?</summary>
+            <p>Yes. Multi-city searches with 6+ segments render correctly and continue numbering beyond 9, exactly like the live extension.</p>
+          </details>
+          <details>
+            <summary>Is any data sent to servers?</summary>
+            <p>No personal data leaves the browser. Analytics are optional, aggregated, and can be disabled entirely by switching the provider to <code>none</code>.</p>
+          </details>
+          <details>
+            <summary>Can I customise status codes?</summary>
+            <p>The extension defaults to <code>SS1</code> but honours the status you set in the popup. The sandbox shows the default value.</p>
+          </details>
+          <details>
+            <summary>How do I try Pro?</summary>
+            <p>Pro will introduce shared settings, audit logs, and SLA-backed support. Click any “See Pro” button to register interest—we track anonymous demand only.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section privacy-blurb" aria-labelledby="privacy-title">
+      <div class="container">
+        <h2 id="privacy-title">Privacy-first analytics</h2>
+        <p>We ship with Plausible enabled by default and no personal identifiers. Prefer zero tracking? Flip the provider to <code>none</code> in <code>analytics.js</code>. Read the full <a href="privacy.html">privacy policy</a>.</p>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer" aria-labelledby="footer-title">
+    <div class="container">
+      <div>
+        <h2 id="footer-title" class="sr-only">Footer</h2>
+        <p class="footer-brand">Kayak to *I</p>
+        <p class="footer-version">Version 1.0.0 · <span data-current-year>2024</span></p>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:{{SUPPORT_EMAIL}}">{{SUPPORT_EMAIL}}</a>
+        <a href="https://github.com/vtoool/ktflanding">GitHub repo</a>
+        <a href="terms.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+      <div class="footer-cta">
+        <a class="btn btn-secondary" href="{{CHROME_WEB_STORE_URL}}" data-event="install" data-location="footer">Add to Chrome</a>
+        <button class="btn btn-ghost" type="button" data-event="pro" data-location="footer">See Pro (coming soon)</button>
+      </div>
+    </div>
+  </footer>
 
   <script type="module" src="app.js"></script>
 </body>
