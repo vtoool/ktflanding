@@ -357,3 +357,74 @@
     grid-area: amenities;
   }
 }
+
+/* ===== COMPACT DENSITY (Kayak sandbox only) ===== */
+#kayak-sandbox.compact .itinerary{
+  max-width: 1120px;         /* wider container to fit two cards */
+  margin: 16px auto;
+  padding: 0 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* side-by-side cards */
+  gap: 12px;
+}
+
+/* Card + header condense */
+#kayak-sandbox.compact .itinerary-card{
+  padding: 8px 10px 10px;
+  border-radius: 12px;
+}
+#kayak-sandbox.compact .card-header{
+  padding: 6px 6px 8px;
+  gap: 8px;
+}
+#kayak-sandbox.compact .card-header .card-duration{
+  padding: 4px 8px;
+  font-size: 12px;
+}
+#kayak-sandbox.compact .pill-i{
+  right: 8px; top: 8px;
+  width: 36px; height: 36px; font-size: 14px;
+}
+
+/* Leg rows tighten + slimmer rail */
+#kayak-sandbox.compact .leg{
+  grid-template-columns: 24px 1fr; /* rail narrower */
+  gap: 8px;
+  padding: 10px 6px;
+}
+#kayak-sandbox.compact .rail .line{ width: 1.5px; }
+#kayak-sandbox.compact .dot{ width: 10px; height: 10px; border-width: 1.5px; }
+
+/* Badges smaller */
+#kayak-sandbox.compact .badges{ gap: 6px; }
+#kayak-sandbox.compact .airline-logo{ height: 14px; }
+#kayak-sandbox.compact .chip{ font-size: 11px; padding: 2px 6px; }
+#kayak-sandbox.compact .chip.warn{ padding: 2px 6px; }
+
+/* Times + labels tighter */
+#kayak-sandbox.compact .times{
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+#kayak-sandbox.compact .times .bigtime{ font-size: 18px; line-height: 1.15; }
+#kayak-sandbox.compact .place{ font-size: 12px; }
+#kayak-sandbox.compact .arrives-note{ font-size: 11px; margin-top: 1px; }
+
+/* Extras + amenities smaller */
+#kayak-sandbox.compact .extra{ gap: 6px; margin-top: 2px; }
+#kayak-sandbox.compact .amenities{ gap: 6px; }
+#kayak-sandbox.compact .icon-btn{
+  width: 22px; height: 22px; line-height: 22px;
+  font-size: 12px;
+}
+
+/* Layover row tighter */
+#kayak-sandbox.compact .layover{
+  padding: 6px 6px 0 30px;
+}
+#kayak-sandbox.compact .layover-text{ font-size: 12px; }
+
+/* Stack to one column on tablets/phones */
+@media (max-width: 1024px){
+  #kayak-sandbox.compact .itinerary{ grid-template-columns: 1fr; }
+}
