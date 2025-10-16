@@ -185,19 +185,33 @@
         </div>
         <div class="demo-content">
           <article class="demo-card" aria-live="polite">
-            <header class="demo-card__header">
-              <div>
-                <p class="demo-card__title" data-scenario-name>Simple roundtrip</p>
-                <p class="demo-card__meta" data-scenario-meta>Business · 4 segments</p>
+            <header class="itinerary-card__header">
+              <div class="itinerary-card__intro">
+                <span class="itinerary-card__pill">Kayak-style sandbox</span>
+                <h3 class="itinerary-card__title" data-scenario-name>Simple roundtrip</h3>
+                <p class="itinerary-card__meta" data-scenario-meta>Business · 4 segments</p>
+                <p class="itinerary-card__route" data-itinerary-route>LHR → SFO</p>
+                <p class="itinerary-card__dates">
+                  <span data-itinerary-start>Fri, Oct 04 · London Heathrow (LHR)</span>
+                  <span aria-hidden="true">—</span>
+                  <span data-itinerary-end>Sun, Oct 13 · London Heathrow (LHR)</span>
+                </p>
               </div>
-              <button class="pill-action" type="button" data-generate aria-label="Generate *I output">*I</button>
+              <div class="itinerary-card__controls">
+                <dl class="itinerary-card__metrics">
+                  <div>
+                    <dt>Total travel</dt>
+                    <dd data-total-duration>21h 40m total travel</dd>
+                  </div>
+                  <div>
+                    <dt>Stops</dt>
+                    <dd data-stop-summary>1 stop each way</dd>
+                  </div>
+                </dl>
+                <button class="pill-action" type="button" data-generate aria-label="Generate *I output">*I</button>
+              </div>
             </header>
-            <div class="demo-card__summary">
-              <span data-total-duration>18h 40m total</span>
-              <span aria-hidden="true">•</span>
-              <span data-stop-summary>1 stop each way</span>
-            </div>
-            <ul class="segment-list" data-segment-list></ul>
+            <ul class="segment-list itinerary-card__segments" data-segment-list></ul>
           </article>
           <aside class="demo-controls" aria-label="Demo toggles">
             <div class="toggle">

@@ -17,11 +17,13 @@ export const SCENARIOS = {
         cabin: 'business',
         departure: {
           airport: 'LHR',
+          city: 'London Heathrow',
           iso: '2024-10-04T12:20:00+01:00',
           timeZone: 'Europe/London',
         },
         arrival: {
           airport: 'ORD',
+          city: 'Chicago O'Hare',
           iso: '2024-10-04T15:10:00-05:00',
           timeZone: 'America/Chicago',
         },
@@ -44,11 +46,13 @@ export const SCENARIOS = {
         cabin: 'business',
         departure: {
           airport: 'ORD',
+          city: 'Chicago O'Hare',
           iso: '2024-10-04T17:05:00-05:00',
           timeZone: 'America/Chicago',
         },
         arrival: {
           airport: 'SFO',
+          city: 'San Francisco',
           iso: '2024-10-04T19:40:00-07:00',
           timeZone: 'America/Los_Angeles',
         },
@@ -66,11 +70,13 @@ export const SCENARIOS = {
         cabin: 'business',
         departure: {
           airport: 'SFO',
+          city: 'San Francisco',
           iso: '2024-10-12T13:15:00-07:00',
           timeZone: 'America/Los_Angeles',
         },
         arrival: {
           airport: 'IAD',
+          city: 'Washington Dulles',
           iso: '2024-10-12T21:25:00-04:00',
           timeZone: 'America/New_York',
         },
@@ -88,11 +94,13 @@ export const SCENARIOS = {
         cabin: 'business',
         departure: {
           airport: 'IAD',
+          city: 'Washington Dulles',
           iso: '2024-10-12T23:30:00-04:00',
           timeZone: 'America/New_York',
         },
         arrival: {
           airport: 'LHR',
+          city: 'London Heathrow',
           iso: '2024-10-13T11:45:00+01:00',
           timeZone: 'Europe/London',
         },
@@ -121,11 +129,13 @@ export const SCENARIOS = {
         cabin: 'business',
         departure: {
           airport: 'JFK',
+          city: 'New York JFK',
           iso: '2024-11-18T22:00:00-05:00',
           timeZone: 'America/New_York',
         },
         arrival: {
           airport: 'DOH',
+          city: 'Doha',
           iso: '2024-11-19T17:35:00+03:00',
           timeZone: 'Asia/Qatar',
         },
@@ -149,11 +159,13 @@ export const SCENARIOS = {
         businessFallbackClass: 'J',
         departure: {
           airport: 'DOH',
+          city: 'Doha',
           iso: '2024-11-20T05:00:00+03:00',
           timeZone: 'Asia/Qatar',
         },
         arrival: {
           airport: 'SYD',
+          city: 'Sydney',
           iso: '2024-11-21T02:45:00+11:00',
           timeZone: 'Australia/Sydney',
         },
@@ -171,11 +183,13 @@ export const SCENARIOS = {
         cabin: 'first',
         departure: {
           airport: 'SYD',
+          city: 'Sydney',
           iso: '2024-11-23T09:50:00+11:00',
           timeZone: 'Australia/Sydney',
         },
         arrival: {
           airport: 'LAX',
+          city: 'Los Angeles',
           iso: '2024-11-23T05:30:00-08:00',
           timeZone: 'America/Los_Angeles',
         },
@@ -204,11 +218,13 @@ export const SCENARIOS = {
         cabin: 'economy',
         departure: {
           airport: 'JFK',
+          city: 'New York JFK',
           iso: '2025-02-01T20:55:00-05:00',
           timeZone: 'America/New_York',
         },
         arrival: {
           airport: 'FRA',
+          city: 'Frankfurt',
           iso: '2025-02-02T10:40:00+01:00',
           timeZone: 'Europe/Berlin',
         },
@@ -226,11 +242,13 @@ export const SCENARIOS = {
         cabin: 'economy',
         departure: {
           airport: 'FRA',
+          city: 'Frankfurt',
           iso: '2025-02-02T12:50:00+01:00',
           timeZone: 'Europe/Berlin',
         },
         arrival: {
           airport: 'SIN',
+          city: 'Singapore Changi',
           iso: '2025-02-03T07:45:00+08:00',
           timeZone: 'Asia/Singapore',
         },
@@ -248,11 +266,13 @@ export const SCENARIOS = {
         cabin: 'economy',
         departure: {
           airport: 'SIN',
+          city: 'Singapore Changi',
           iso: '2025-02-05T09:05:00+08:00',
           timeZone: 'Asia/Singapore',
         },
         arrival: {
           airport: 'DPS',
+          city: 'Bali Denpasar',
           iso: '2025-02-05T11:55:00+08:00',
           timeZone: 'Asia/Makassar',
         },
@@ -270,11 +290,13 @@ export const SCENARIOS = {
         cabin: 'economy',
         departure: {
           airport: 'DPS',
+          city: 'Bali Denpasar',
           iso: '2025-02-05T16:15:00+08:00',
           timeZone: 'Asia/Makassar',
         },
         arrival: {
           airport: 'CGK',
+          city: 'Jakarta Soekarno-Hatta',
           iso: '2025-02-05T17:05:00+07:00',
           timeZone: 'Asia/Jakarta',
         },
@@ -297,11 +319,13 @@ export const SCENARIOS = {
         cabin: 'economy',
         departure: {
           airport: 'CGK',
+          city: 'Jakarta Soekarno-Hatta',
           iso: '2025-02-06T22:30:00+07:00',
           timeZone: 'Asia/Jakarta',
         },
         arrival: {
           airport: 'NRT',
+          city: 'Tokyo Narita',
           iso: '2025-02-07T07:10:00+09:00',
           timeZone: 'Asia/Tokyo',
         },
@@ -319,11 +343,13 @@ export const SCENARIOS = {
         cabin: 'economy',
         departure: {
           airport: 'NRT',
+          city: 'Tokyo Narita',
           iso: '2025-02-07T13:20:00+09:00',
           timeZone: 'Asia/Tokyo',
         },
         arrival: {
           airport: 'YVR',
+          city: 'Vancouver',
           iso: '2025-02-07T06:10:00-08:00',
           timeZone: 'America/Vancouver',
         },
@@ -341,11 +367,13 @@ export const SCENARIOS = {
         cabin: 'economy',
         departure: {
           airport: 'YVR',
+          city: 'Vancouver',
           iso: '2025-02-08T12:30:00-08:00',
           timeZone: 'America/Vancouver',
         },
         arrival: {
           airport: 'YYZ',
+          city: 'Toronto',
           iso: '2025-02-08T20:10:00-05:00',
           timeZone: 'America/Toronto',
         },
@@ -363,11 +391,13 @@ export const SCENARIOS = {
         cabin: 'economy',
         departure: {
           airport: 'YYZ',
+          city: 'Toronto',
           iso: '2025-02-08T23:25:00-05:00',
           timeZone: 'America/Toronto',
         },
         arrival: {
           airport: 'BCN',
+          city: 'Barcelona',
           iso: '2025-02-09T12:55:00+01:00',
           timeZone: 'Europe/Madrid',
         },
@@ -385,11 +415,13 @@ export const SCENARIOS = {
         cabin: 'economy',
         departure: {
           airport: 'BCN',
+          city: 'Barcelona',
           iso: '2025-02-10T07:30:00+01:00',
           timeZone: 'Europe/Madrid',
         },
         arrival: {
           airport: 'MAD',
+          city: 'Madrid',
           iso: '2025-02-10T08:35:00+01:00',
           timeZone: 'Europe/Madrid',
         },
@@ -407,11 +439,13 @@ export const SCENARIOS = {
         cabin: 'economy',
         departure: {
           airport: 'MAD',
+          city: 'Madrid',
           iso: '2025-02-10T10:55:00+01:00',
           timeZone: 'Europe/Madrid',
         },
         arrival: {
           airport: 'JFK',
+          city: 'New York JFK',
           iso: '2025-02-10T13:35:00-05:00',
           timeZone: 'America/New_York',
         },
