@@ -1,0 +1,359 @@
+#kayak-sandbox {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #0b1f3a;
+  background: #f7f9fc;
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+}
+
+#kayak-sandbox .ribbon {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #0b1f3a;
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+#kayak-sandbox .sandbox-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+#kayak-sandbox .sandbox-sub {
+  margin: 4px 0 0;
+  font-weight: 500;
+  color: #33435a;
+}
+
+#kayak-sandbox .sandbox-meta {
+  margin: 4px 0 24px;
+  color: #5b6c86;
+  font-size: 14px;
+}
+
+#kayak-sandbox .itinerary {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+#kayak-sandbox .itinerary-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(15, 30, 64, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+#kayak-sandbox .card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20px 24px 12px 24px;
+  gap: 16px;
+}
+
+#kayak-sandbox .card-header .card-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#kayak-sandbox .card-header strong {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#kayak-sandbox .card-header span {
+  color: #5b6c86;
+  font-size: 14px;
+}
+
+#kayak-sandbox .card-duration {
+  color: #0b1f3a;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+#kayak-sandbox .pill-i {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: none;
+  background: #fff8f0;
+  color: #c75000;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 8px 14px;
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(199, 80, 0, 0.18);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+#kayak-sandbox .pill-i:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(199, 80, 0, 0.25);
+}
+
+#kayak-sandbox .pill-i:active {
+  transform: translateY(0);
+}
+
+#kayak-sandbox .legs {
+  display: flex;
+  flex-direction: column;
+}
+
+#kayak-sandbox .leg,
+#kayak-sandbox .layover {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
+  gap: 20px;
+  padding: 20px 24px;
+}
+
+#kayak-sandbox .leg + .leg,
+#kayak-sandbox .layover + .leg,
+#kayak-sandbox .leg + .layover {
+  border-top: 1px solid #e3eaf4;
+}
+
+#kayak-sandbox .rail {
+  position: relative;
+  width: 32px;
+}
+
+#kayak-sandbox .line {
+  position: absolute;
+  left: 15px;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: linear-gradient(180deg, #d2dded 0%, #9eb4d4 100%);
+}
+
+#kayak-sandbox .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #0b1f3a;
+  position: absolute;
+  left: 10px;
+}
+
+#kayak-sandbox .dot.takeoff {
+  top: 6px;
+}
+
+#kayak-sandbox .dot.landing {
+  bottom: 6px;
+}
+
+#kayak-sandbox .leg-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+#kayak-sandbox .badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+#kayak-sandbox .airline-logo {
+  width: 44px;
+  height: 36px;
+  object-fit: contain;
+}
+
+#kayak-sandbox .chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #eef2f9;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #22334d;
+}
+
+#kayak-sandbox .chip.hollow {
+  border: 1px solid #b9c6da;
+  background: transparent;
+  color: #22334d;
+}
+
+#kayak-sandbox .chip.warn {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+#kayak-sandbox .times {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+#kayak-sandbox .bigtime {
+  font-size: 24px;
+  font-weight: 600;
+  color: #0b1f3a;
+}
+
+#kayak-sandbox .place {
+  font-size: 14px;
+  color: #33435a;
+  margin-top: 4px;
+}
+
+#kayak-sandbox .arrives-note {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #c2410c;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+#kayak-sandbox .extra {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #5b6c86;
+  font-size: 13px;
+}
+
+#kayak-sandbox .amenities {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 72px;
+}
+
+#kayak-sandbox .icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  border: 1px solid #dce4f2;
+  background: #f7f9fc;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #33435a;
+}
+
+#kayak-sandbox .icon-btn.caret {
+  background: #e8edf7;
+  color: #0b1f3a;
+}
+
+#kayak-sandbox .layover {
+  align-items: center;
+  background: #f7f9fc;
+  color: #33435a;
+  font-size: 13px;
+}
+
+#kayak-sandbox .layover-line {
+  position: relative;
+  width: 32px;
+  height: 100%;
+}
+
+#kayak-sandbox .layover-line::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 20px;
+  bottom: 20px;
+  width: 2px;
+  background: #d2dded;
+  border-style: dashed;
+}
+
+#kayak-sandbox .layover-text {
+  grid-column: span 2;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+#kayak-sandbox .toast {
+  position: absolute;
+  top: 64px;
+  right: 24px;
+  background: rgba(11, 31, 58, 0.92);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#kayak-sandbox .toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 720px) {
+  #kayak-sandbox {
+    padding: 16px;
+  }
+
+  #kayak-sandbox .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 72px;
+  }
+
+  #kayak-sandbox .card-duration {
+    font-size: 15px;
+  }
+
+  #kayak-sandbox .leg,
+  #kayak-sandbox .layover {
+    grid-template-columns: 24px minmax(0, 1fr);
+  }
+
+  #kayak-sandbox .amenities {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 16px;
+  }
+
+  #kayak-sandbox .leg {
+    grid-template-areas:
+      "rail main"
+      "rail amenities";
+  }
+
+  #kayak-sandbox .rail {
+    grid-area: rail;
+  }
+
+  #kayak-sandbox .leg-main {
+    grid-area: main;
+  }
+
+  #kayak-sandbox .amenities {
+    grid-area: amenities;
+  }
+}
