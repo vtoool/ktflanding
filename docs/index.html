@@ -185,34 +185,21 @@
         </div>
         <div class="demo-content">
           <article class="demo-card" aria-live="polite">
-            <div class="demo-card__intro">
-              <span class="demo-card__pill">Kayak-style sandbox</span>
-              <h3 class="demo-card__title" data-scenario-name>Simple roundtrip</h3>
-              <p class="demo-card__meta" data-scenario-meta>Business · 4 segments</p>
-              <p class="demo-card__dates">
-                <span data-itinerary-start>Fri, Oct 04 · London Heathrow (LHR)</span>
-                <span aria-hidden="true">—</span>
-                <span data-itinerary-end>Sun, Oct 13 · London Heathrow (LHR)</span>
-              </p>
-            </div>
-            <section class="itinerary" aria-label="Itinerary preview">
-              <article class="itinerary-card">
-                <header class="card-header">
-                  <div class="card-title">
-                    <strong data-card-label>Itinerary • Fri, Oct 04</strong>
-                    <span class="card-subtitle" data-itinerary-route>London Heathrow (LHR) → San Francisco (SFO)</span>
-                  </div>
-                  <div class="card-duration" data-total-duration>21h 40m total travel</div>
-                  <button class="pill-i" type="button" data-generate aria-label="Generate *I output">*I</button>
-                </header>
-                <div class="card-submeta">
-                  <span data-scenario-meta>Business · 4 segments</span>
-                  <span aria-hidden="true" class="card-submeta__dot">•</span>
-                  <span data-stop-summary>1 stop each way</span>
-                </div>
-                <div class="itinerary-body" data-segment-list></div>
-              </article>
-            </section>
+<!-- BEGIN KAYAK_SANDBOX -->
+<link rel="stylesheet" href="./sandbox/kayak/kayak.css">
+<section id="kayak-sandbox" aria-label="Kayak-style sandbox">
+  <div class="ribbon">KAYAK-STYLE SANDBOX</div>
+
+  <!-- Scenario header (keep your existing headings above if you have them) -->
+  <h3 class="sandbox-title">Simple roundtrip</h3>
+  <p class="sandbox-sub">Business · 4 segments</p>
+  <p class="sandbox-meta">Fri, Oct 04 · London Heathrow (LHR) — Sun, Oct 13 · London Heathrow (LHR)</p>
+
+  <!-- Real itinerary cards mount here -->
+  <div id="kayak-root"></div>
+</section>
+<script type="module" src="./sandbox/kayak/kayak.js"></script>
+<!-- END KAYAK_SANDBOX -->
           </article>
           <aside class="demo-controls" aria-label="Demo toggles">
             <div class="toggle">
