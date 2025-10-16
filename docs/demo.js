@@ -68,7 +68,6 @@ function buildSegmentNode(segment, index, options) {
   const bookingClass = resolveBookingClass(segment, options);
   const arrivalOffset = calculateArrivalOffset(depParts, arrParts, segment.departure.iso, segment.arrival.iso);
   const duration = formatDuration(segment.durationMinutes);
-  const layover = segment.connectionText;
   const departurePlace = formatPlace(segment.departure);
   const arrivalPlace = formatPlace(segment.arrival);
   const marketingLabel = `${segment.marketingCarrier || ''} ${segment.flightNumber || ''}`.trim();
@@ -97,56 +96,72 @@ function buildSegmentNode(segment, index, options) {
     }
     return '';
   })();
-  const wrapper = document.createElement('li');
-  wrapper.className = 'segment';
+  const arrivalNote = (() => {
+    if (srArrivalOffset) return srArrivalOffset;
+    if (depParts?.displayDate && arrParts?.displayDate && depParts.displayDate !== arrParts.displayDate) {
+      return `Arrives ${arrParts.displayDate}`;
+    }
+    return '';
+  })();
+  const overnightFlight = (() => {
+    const diff = parseInt(arrivalOffset, 10);
+    return Number.isFinite(diff) && diff > 0;
+  })();
+  const wrapper = document.createElement('div');
+  wrapper.className = 'leg segment';
   wrapper.setAttribute('data-segment-index', String(index + 1));
-  const cabinLabel = toTitleCase(segment.cabin) || 'Cabin N/A';
-  const chips = [
-    `Class ${bookingClass}`,
-    cabinLabel,
-    segment.aircraft ? `Equipment ${segment.aircraft}` : 'Equipment TBD',
-  ];
+  const cabinLabel = toTitleCase(segment.cabin);
+  const badgeLabels = [marketingLabel || 'Flight TBD', segment.aircraft ? `Equipment ${segment.aircraft}` : 'Equipment TBD'];
   if (operatedBy) {
-    chips.push(operatedBy);
+    badgeLabels.push(operatedBy);
   }
-  const chipsHtml = chips
+  const badgesHtml = badgeLabels
     .filter(Boolean)
-    .map((chip) => `<span class="itinerary-leg__chip">${chip}</span>`)
+    .map((badge) => `<span class="chip">${badge}</span>`)
     .join('');
-  const layoverHtml = layover ? `<div class="itinerary-leg__layover">${layover}</div>` : '';
-  const planeSvg = `
-    <svg class="itinerary-leg__plane" viewBox="0 0 24 24" role="img" aria-hidden="true">
-      <path d="M21.5 14c0 .6-.4 1-1 1h-5.1l-3.2 6.6c-.2.3-.5.4-.8.4-.6 0-1-.5-1-1.1V15H5.4l-1.7 1.7c-.3.2-.6.3-.9.3-.5 0-.8-.3-.8-.8 0-.2.1-.5.2-.7L3 12 2.1 9.5c0-.2-.1-.4-.1-.6 0-.5.3-.9.8-.9.3 0 .6.1.9.3L5.4 10H10V3.1c0-.6.4-1.1 1-1.1.3 0 .6.1.8.4L15 9h5.5c.6 0 1 .4 1 1z" fill="currentColor"/>
-    </svg>
-  `;
+  const extraChips = [];
+  if (duration) {
+    extraChips.push(`<span class="chip hollow">${duration}</span>`);
+  }
+  if (cabinLabel) {
+    extraChips.push(`<span class="chip hollow">Cabin ${cabinLabel}</span>`);
+  }
+  if (bookingClass) {
+    extraChips.push(`<span class="chip hollow">Class ${bookingClass}</span>`);
+  }
+  if (overnightFlight) {
+    extraChips.push('<span class="chip warn">Overnight flight</span>');
+  }
   wrapper.innerHTML = `
-    <div class="itinerary-leg__row">
-      <div class="itinerary-leg__col itinerary-leg__col--depart">
-        <p class="itinerary-leg__label">Depart</p>
-        <p class="itinerary-leg__time">${depParts.displayTime || ''}</p>
-        <p class="itinerary-leg__location">${departurePlace || segment.departure.airport || ''}</p>
-        <p class="itinerary-leg__date">${depParts.displayDate || ''}</p>
-      </div>
-      <div class="itinerary-leg__col itinerary-leg__col--center">
-        <p class="itinerary-leg__carrier">${marketingLabel || 'Flight TBD'}</p>
-        <div class="itinerary-leg__graphic" aria-hidden="true">
-          <span class="itinerary-leg__dot"></span>
-          <span class="itinerary-leg__bar"></span>
-          ${planeSvg}
-          <span class="itinerary-leg__bar"></span>
-          <span class="itinerary-leg__dot"></span>
+    <div class="rail" aria-hidden="true">
+      <span class="dot takeoff"></span>
+      <span class="line"></span>
+      <span class="dot landing"></span>
+    </div>
+    <div class="leg-main">
+      <div class="badges">${badgesHtml}</div>
+      <div class="times">
+        <div class="col">
+          <div class="bigtime">${depParts.displayTime || ''}</div>
+          <div class="place">${departurePlace || segment.departure.airport || ''}</div>
+          ${depParts.displayDate ? `<div class="date">${depParts.displayDate}</div>` : ''}
         </div>
-        <p class="itinerary-leg__duration">${duration || 'Duration TBD'}</p>
+        <div class="col">
+          <div class="bigtime">${arrParts.displayTime || ''}${srArrivalOffset ? `<span class="sr-only">${srArrivalOffset}</span>` : ''}</div>
+          <div class="place">${arrivalPlace || segment.arrival.airport || ''}</div>
+          ${arrParts.displayDate ? `<div class="date">${arrParts.displayDate}</div>` : ''}
+          ${arrivalNote ? `<div class="arrives-note">${arrivalNote}</div>` : ''}
+        </div>
       </div>
-      <div class="itinerary-leg__col itinerary-leg__col--arrive">
-        <p class="itinerary-leg__label">Arrive</p>
-        <p class="itinerary-leg__time">${arrParts.displayTime || ''}${arrivalOffset ? ` <span class="itinerary-leg__offset" aria-hidden="true">${arrivalOffset}</span>` : ''}${srArrivalOffset ? `<span class="sr-only">${srArrivalOffset}</span>` : ''}</p>
-        <p class="itinerary-leg__location">${arrivalPlace || segment.arrival.airport || ''}</p>
-        <p class="itinerary-leg__date">${arrParts.displayDate || ''}</p>
+      ${extraChips.length ? `<div class="extra">${extraChips.join('')}</div>` : ''}
+      <div class="amenities" aria-label="Amenities">
+        <button class="icon-btn" type="button" aria-label="Wi-Fi" title="Wi-Fi">🌐</button>
+        <button class="icon-btn" type="button" aria-label="Baggage" title="Baggage">🧳</button>
+        <button class="icon-btn" type="button" aria-label="Seat" title="Seat">💺</button>
+        <button class="icon-btn" type="button" aria-label="Power" title="Power">🔌</button>
+        <button class="icon-btn caret" type="button" aria-label="More details" title="More">▾</button>
       </div>
     </div>
-    ${chipsHtml ? `<div class="itinerary-leg__meta">${chipsHtml}</div>` : ''}
-    ${layoverHtml}
   `;
 
   const preview = document.createElement('div');
@@ -166,8 +181,23 @@ function buildSegmentNode(segment, index, options) {
     copyButton.disabled = true;
   }
 
-  wrapper.appendChild(preview);
+  const main = wrapper.querySelector('.leg-main');
+  if (main) {
+    main.appendChild(preview);
+  } else {
+    wrapper.appendChild(preview);
+  }
   return wrapper;
+}
+
+function buildLayoverNode(text) {
+  const node = document.createElement('div');
+  node.className = 'layover';
+  node.innerHTML = `
+    <div class="layover-line" aria-hidden="true"></div>
+    <div class="layover-text">${text}</div>
+  `;
+  return node;
 }
 
 function setCopyButtonFeedback(button, label, { revert = true } = {}) {
@@ -268,13 +298,14 @@ function renderScenario(root, state) {
   };
 
   const titleEl = root.querySelector('[data-scenario-name]');
-  const metaEl = root.querySelector('[data-scenario-meta]');
+  const metaEls = root.querySelectorAll('[data-scenario-meta]');
   const durationEl = root.querySelector('[data-total-duration]');
-  const stopEl = root.querySelector('[data-stop-summary]');
+  const stopEls = root.querySelectorAll('[data-stop-summary]');
   const listEl = root.querySelector('[data-segment-list]');
-  const routeEl = root.querySelector('[data-itinerary-route]');
-  const startEl = root.querySelector('[data-itinerary-start]');
-  const endEl = root.querySelector('[data-itinerary-end]');
+  const routeEls = root.querySelectorAll('[data-itinerary-route]');
+  const startEls = root.querySelectorAll('[data-itinerary-start]');
+  const endEls = root.querySelectorAll('[data-itinerary-end]');
+  const cardLabelEl = root.querySelector('[data-card-label]');
 
   const firstSegment = scenario.segments[0];
   const lastSegment = scenario.segments[scenario.segments.length - 1];
@@ -288,27 +319,46 @@ function renderScenario(root, state) {
   const arrivalPlace = lastSegment ? formatPlace(lastSegment.arrival) : '';
 
   if (titleEl) titleEl.textContent = scenario.name;
-  if (metaEl) metaEl.textContent = scenario.meta;
-  if (durationEl) durationEl.textContent = scenario.summary.duration;
-  if (stopEl) stopEl.textContent = scenario.summary.stops;
-  if (routeEl) {
-    if (departurePlace || arrivalPlace) {
-      routeEl.textContent = departurePlace && arrivalPlace
-        ? `${departurePlace} → ${arrivalPlace}`
-        : departurePlace || arrivalPlace;
-    } else {
-      routeEl.textContent = '';
-    }
+  metaEls.forEach((el) => {
+    el.textContent = scenario.meta;
+  });
+  if (durationEl) {
+    const totalDuration = scenario.summary.duration || '';
+    const cleaned = totalDuration
+      .replace(/\b(total travel|door-to-door)\b/gi, '')
+      .replace(/\s{2,}/g, ' ')
+      .trim();
+    durationEl.textContent = cleaned || totalDuration;
   }
-  if (startEl) {
-    startEl.textContent = firstDepParts
+  stopEls.forEach((el) => {
+    el.textContent = scenario.summary.stops;
+  });
+  const routeText = (() => {
+    if (departurePlace || arrivalPlace) {
+      if (departurePlace && arrivalPlace) {
+        return `${departurePlace} → ${arrivalPlace}`;
+      }
+      return departurePlace || arrivalPlace;
+    }
+    return '';
+  })();
+  routeEls.forEach((el) => {
+    el.textContent = routeText;
+  });
+  startEls.forEach((el) => {
+    el.textContent = firstDepParts
       ? `${firstDepParts.displayDate}${departurePlace ? ` · ${departurePlace}` : ''}`
       : '';
-  }
-  if (endEl) {
-    endEl.textContent = lastArrParts
+  });
+  endEls.forEach((el) => {
+    el.textContent = lastArrParts
       ? `${lastArrParts.displayDate}${arrivalPlace ? ` · ${arrivalPlace}` : ''}`
       : '';
+  });
+  if (cardLabelEl) {
+    cardLabelEl.textContent = firstDepParts?.displayDate
+      ? `Itinerary • ${firstDepParts.displayDate}`
+      : 'Itinerary preview';
   }
 
   if (listEl) {
@@ -316,6 +366,9 @@ function renderScenario(root, state) {
     scenario.segments.forEach((segment, index) => {
       const node = buildSegmentNode(segment, index, options);
       listEl.appendChild(node);
+      if (segment.connectionText) {
+        listEl.appendChild(buildLayoverNode(segment.connectionText));
+      }
     });
   }
 
