@@ -1,33 +1,25 @@
-# Kayak to *I landing page
+# FareSnap itinerary card demo
 
-Marketing site and live sandbox for the Kayak to *I Chrome extension. GitHub Pages publishes from the `docs/` directory.
+Static landing-page demo that reproduces Kayak-style multi-segment itinerary cards with a functioning `*I` formatter. GitHub Pages publishes from the `docs/` directory.
 
 ## Local preview
 
-No build step is required. Serve the `docs/` directory with any static server:
+Serve the `docs/` directory with any static server:
 
 ```bash
 python3 -m http.server --directory docs 4173
 ```
 
-Then visit [http://localhost:4173](http://localhost:4173).
+Visit [http://localhost:4173](http://localhost:4173).
 
-## Analytics configuration
+## Customising the demo
 
-Edit `docs/analytics.js` to choose your provider:
+- Update `docs/demo-data.js` to tweak carrier names, equipment, cabins, or times. Add or remove legs and layovers to extend the scenario.
+- Adjust formatter behaviour inside `docs/demo-formatter.js`. The helper exposes `formatSegmentsToI(segments, options)` and includes a miniature booking-class lookup to mimic the production extension.
+- Layout and styling live in `docs/styles.css`; tweak spacing tokens or colours there to adapt the card to another brand system.
+- `docs/app.js` binds the itinerary data to the DOM, renders amenity icons, and wires clipboard behaviour for the floating `*I` pill.
 
-- `ANALYTICS_PROVIDER = 'plausible'` (default) loads Plausible’s manual script and uses `ANALYTICS_SITE_DOMAIN` for the site ID.
-- `ANALYTICS_PROVIDER = 'ga4'` loads Google Analytics 4; set `GA4_ID` to your property ID (e.g. `G-XXXXXXX`).
-- `ANALYTICS_PROVIDER = 'none'` disables all tracking calls.
-
-Attribution values for `utm_source`, `utm_campaign`, and `ref` are stored in `localStorage` and automatically appended to every tracked event.
-
-## Demo data and formatter
-
-- `docs/demo-data.js` contains the three curated scenarios. Update or add segments to adjust the sandbox.
-- `docs/demo-formatter.js` provides `formatSegmentsToI(segments, options)`—a pure function mirroring the extension formatter.
-- `docs/demo.js` binds the UI, toggles, analytics events, and clipboard behaviour.
-- `docs/assets/og.svg` is the Open Graph preview (1200×630). Edit the SVG text directly or replace the file with your own artwork.
+To embed the card in another page, include the five core files (`index.html`, `styles.css`, `app.js`, `demo-data.js`, and `demo-formatter.js`) in your project, ensure the CSS variables are loaded, and call the default initialiser in `app.js` after the DOM is ready. The component is framework-agnostic and works with any static host.
 
 ## Deploying to GitHub Pages
 
@@ -35,4 +27,4 @@ Attribution values for `utm_source`, `utm_campaign`, and `ref` are stored in `lo
 2. Push to GitHub.
 3. Ensure the repository is configured to publish from the `docs/` folder (Settings → Pages).
 
-Updates will appear at <https://vtoool.github.io/ktflanding/> once Pages finishes the deploy.
+Updates will appear at <https://vtoool.github.io/ktflanding/> when the Pages build completes.
