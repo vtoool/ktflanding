@@ -938,11 +938,12 @@ body.legal .site-header {
 }
 
 .demo-clipboard {
-  background: #0b1f3a;
-  color: #fff;
+  background: #fff;
+  color: var(--color-text);
   padding: 2rem;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(11, 31, 58, 0.08);
   display: grid;
   gap: 1.25rem;
 }
@@ -961,7 +962,7 @@ body.legal .site-header {
 
 .demo-clipboard__status {
   font-weight: 600;
-  color: rgba(219, 234, 254, 0.95);
+  color: var(--color-accent);
   opacity: 0;
   transition: opacity var(--transition);
 }
@@ -973,15 +974,15 @@ body.legal .site-header {
 .demo-clipboard__hint,
 .demo-clipboard__note {
   margin: 0;
-  color: rgba(219, 234, 254, 0.75);
+  color: var(--color-muted);
   font-size: 0.9rem;
 }
 
 .demo-clipboard__output {
   border-radius: var(--radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background: rgba(0, 0, 0, 0.35);
-  color: #fff;
+  border: 1px solid rgba(11, 31, 58, 0.12);
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--color-text);
   padding: 1rem;
   font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
   font-size: 0.92rem;
@@ -993,7 +994,7 @@ body.legal .site-header {
 }
 
 .demo-clipboard__output[data-empty="true"] {
-  color: rgba(219, 234, 254, 0.65);
+  color: var(--color-muted);
   font-style: italic;
 }
 
@@ -1036,24 +1037,25 @@ body.legal .site-header {
 }
 
 .pricing-card--soon {
-  background: rgba(11, 31, 58, 0.95);
-  color: #fff;
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.22);
+  color: var(--color-text);
 }
 
 .pricing-card--soon ul {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-muted);
 }
 
 .pricing-card--soon .btn-ghost {
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--color-accent);
+  border-color: rgba(37, 99, 235, 0.35);
 }
 
 .pricing-card--soon .btn-ghost:hover,
 .pricing-card--soon .btn-ghost:focus-visible {
-  border-color: #fff;
-  color: #0b1f3a;
-  background: #fff;
+  border-color: var(--color-accent);
+  color: #fff;
+  background: var(--color-accent);
 }
 
 .pill {
@@ -1062,13 +1064,17 @@ body.legal .site-header {
   border-radius: 999px;
   padding: 0.15rem 0.6rem;
   font-size: 0.75rem;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(37, 99, 235, 0.12);
+  border: 1px solid rgba(37, 99, 235, 0.28);
+  color: var(--color-accent);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .pill--soon {
-  background: rgba(219, 234, 254, 0.16);
-  border-color: rgba(219, 234, 254, 0.4);
+  background: rgba(37, 99, 235, 0.16);
+  border-color: rgba(37, 99, 235, 0.32);
 }
 
 .faq {
