@@ -428,3 +428,68 @@
 @media (max-width: 1024px){
   #kayak-sandbox.compact .itinerary{ grid-template-columns: 1fr; }
 }
+
+/* ================= COMPACT STACKED MODE (fits both cards on one screen) ================= */
+#kayak-sandbox.compactStack .itinerary{
+  max-width: 820px;         /* narrower container, one column */
+  margin: 8px auto 24px;
+  padding: 0 8px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;                /* small gap between Depart/Return cards */
+}
+
+/* Header + pill shrink */
+#kayak-sandbox.compactStack .itinerary-card{ padding: 8px 10px 10px; border-radius: 12px; }
+#kayak-sandbox.compactStack .card-header{ padding: 6px 6px 8px; gap: 8px; }
+#kayak-sandbox.compactStack .card-header .card-duration{ padding: 3px 8px; font-size: 12px; }
+#kayak-sandbox.compactStack .pill-i{ right: 8px; top: 8px; width: 34px; height: 34px; font-size: 13px; }
+
+/* Leg rows: tighter + slimmer rail */
+#kayak-sandbox.compactStack .leg{
+  grid-template-columns: 22px 1fr;  /* rail narrower */
+  gap: 8px;
+  padding: 8px 6px;
+}
+#kayak-sandbox.compactStack .rail .line{ width: 1.5px; }
+#kayak-sandbox.compactStack .dot{ width: 9px; height: 9px; border-width: 1.5px; }
+
+/* Badges smaller */
+#kayak-sandbox.compactStack .badges{ gap: 6px; }
+#kayak-sandbox.compactStack .airline-logo{ height: 12px; }
+#kayak-sandbox.compactStack .chip{ font-size: 11px; padding: 2px 6px; }
+#kayak-sandbox.compactStack .chip.warn{ padding: 2px 6px; }
+
+/* Times + labels smaller */
+#kayak-sandbox.compactStack .times{ grid-template-columns: 1fr 1fr; gap: 12px; }
+#kayak-sandbox.compactStack .times .bigtime{ font-size: 17px; line-height: 1.15; }
+#kayak-sandbox.compactStack .place{ font-size: 11.5px; }
+#kayak-sandbox.compactStack .arrives-note{ font-size: 11px; margin-top: 1px; letter-spacing: .01em; }
+
+/* Keep amenities INLINE at top-right (was stacking vertically) */
+#kayak-sandbox.compactStack .leg-main{ grid-template-columns: 1fr auto; align-items: start; }
+#kayak-sandbox.compactStack .amenities{
+  grid-column: 2;           /* force right column */
+  align-self: start;
+  display: flex; gap: 6px; flex-wrap: nowrap; white-space: nowrap;
+  margin-top: 0;
+}
+#kayak-sandbox.compactStack .icon-btn{
+  width: 20px; height: 20px; line-height: 20px; font-size: 12px;
+  border-radius: 999px;
+}
+
+/* Extras + layover tighter */
+#kayak-sandbox.compactStack .extra{ gap: 6px; margin-top: 2px; }
+#kayak-sandbox.compactStack .layover{ padding: 6px 6px 0 28px; }
+#kayak-sandbox.compactStack .layover-text{ font-size: 12px; }
+#kayak-sandbox.compactStack .layover-line{ margin: 6px 0 6px; }
+
+/* Slightly smaller separator + no heavy borders to save vertical space */
+#kayak-sandbox.compactStack .leg + .leg{ border-top: 1px solid rgba(0,0,0,.045); }
+#kayak-sandbox.compactStack .card-header{ border-bottom: 1px solid rgba(0,0,0,.05); }
+
+/* Desktop viewport fit target */
+@media (min-width: 1200px){
+  #kayak-sandbox.compactStack .itinerary-card{ margin-block: 4px; }
+}
