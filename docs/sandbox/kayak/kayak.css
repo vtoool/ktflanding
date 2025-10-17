@@ -236,10 +236,10 @@
 
 #kayak-sandbox .amenities {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 8px;
-  align-items: flex-end;
-  justify-content: center;
+  align-items: center;
+  justify-content: flex-end;
   min-width: 72px;
 }
 
