@@ -55,8 +55,8 @@
 
 #kayak-sandbox .card-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
+  justify-content: flex-start;
   padding: 20px 24px 12px 24px;
   gap: 16px;
   flex-wrap: wrap;
@@ -66,7 +66,8 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  flex: 1;
+  flex: 1 1 220px;
+  min-width: 0;
 }
 
 #kayak-sandbox .card-header strong {
@@ -83,11 +84,14 @@
   color: #0b1f3a;
   font-weight: 600;
   font-size: 16px;
+  margin-left: auto;
 }
 
 #kayak-sandbox .card-actions {
   display: flex;
   align-items: center;
+  flex: 0 0 auto;
+  margin-left: 12px;
 }
 
 #kayak-sandbox .pill-i {
@@ -257,8 +261,9 @@
 }
 
 #kayak-sandbox .cabin-label {
-  background: #0b1f3a;
-  color: #fff;
+  background: #fff;
+  color: #22334d;
+  border: 1px solid #b9c6da;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
