@@ -93,7 +93,10 @@ function buildCard(label, data, locationKey) {
 
   if (pill && toast) {
     pill.addEventListener('click', async () => {
-      const text = formatSegmentsToI(data.segments);
+      const text = formatSegmentsToI([
+        ...(itinerary.outbound?.segments || []),
+        ...(itinerary.inbound?.segments || []),
+      ]);
       if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function') {
         window.dispatchEvent(
           new CustomEvent('demo:clipboard', {
