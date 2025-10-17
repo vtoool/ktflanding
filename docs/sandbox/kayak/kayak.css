@@ -55,16 +55,18 @@
 
 #kayak-sandbox .card-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   padding: 20px 24px 12px 24px;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
 #kayak-sandbox .card-header .card-title {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  flex: 1;
 }
 
 #kayak-sandbox .card-header strong {
@@ -83,25 +85,27 @@
   font-size: 16px;
 }
 
+#kayak-sandbox .card-actions {
+  display: flex;
+  align-items: center;
+}
+
 #kayak-sandbox .pill-i {
-  position: absolute;
-  top: 16px;
-  right: 16px;
   border: none;
-  background: #fff8f0;
-  color: #c75000;
+  background: #e6f1ff;
+  color: #1b4ed4;
   font-weight: 700;
   letter-spacing: 0.05em;
   padding: 8px 14px;
   border-radius: 999px;
-  box-shadow: 0 10px 24px rgba(199, 80, 0, 0.18);
+  box-shadow: 0 10px 24px rgba(27, 78, 212, 0.18);
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 #kayak-sandbox .pill-i:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 28px rgba(199, 80, 0, 0.25);
+  box-shadow: 0 12px 28px rgba(27, 78, 212, 0.25);
 }
 
 #kayak-sandbox .pill-i:active {

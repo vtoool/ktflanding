@@ -50,19 +50,28 @@ function buildCard(label, data, locationKey) {
   header.appendChild(duration);
   card.appendChild(header);
 
-  const pill = document.createElement('button');
-  pill.type = 'button';
-  pill.className = 'pill-i';
-  pill.textContent = '*I';
-  pill.setAttribute('aria-label', `Copy ${label.toLowerCase()} *I lines`);
-  card.appendChild(pill);
+  let pill;
+  let toast;
+  if (locationKey === 'outbound') {
+    const actions = document.createElement('div');
+    actions.className = 'card-actions';
 
-  const toast = document.createElement('div');
-  toast.className = 'toast';
-  toast.setAttribute('role', 'status');
-  toast.setAttribute('aria-live', 'polite');
-  toast.textContent = 'Copied';
-  card.appendChild(toast);
+    pill = document.createElement('button');
+    pill.type = 'button';
+    pill.className = 'pill-i';
+    pill.textContent = '*I';
+    pill.setAttribute('aria-label', `Copy ${label.toLowerCase()} *I lines`);
+
+    actions.appendChild(pill);
+    header.appendChild(actions);
+
+    toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    toast.textContent = 'Copied';
+    card.appendChild(toast);
+  }
 
   const legs = document.createElement('div');
   legs.className = 'legs';
@@ -82,32 +91,34 @@ function buildCard(label, data, locationKey) {
 
   card.appendChild(legs);
 
-  pill.addEventListener('click', async () => {
-    const text = formatSegmentsToI(data.segments);
-    if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function') {
-      window.dispatchEvent(
-        new CustomEvent('demo:clipboard', {
-          detail: { text, source: locationKey },
-        }),
-      );
-    }
-    let copied = false;
-    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
-      try {
-        await navigator.clipboard.writeText(text);
-        copied = true;
-      } catch (err) {
+  if (pill && toast) {
+    pill.addEventListener('click', async () => {
+      const text = formatSegmentsToI(data.segments);
+      if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function') {
+        window.dispatchEvent(
+          new CustomEvent('demo:clipboard', {
+            detail: { text, source: locationKey },
+          }),
+        );
+      }
+      let copied = false;
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        try {
+          await navigator.clipboard.writeText(text);
+          copied = true;
+        } catch (err) {
+          copied = fallbackCopy(text);
+        }
+      } else {
         copied = fallbackCopy(text);
       }
-    } else {
-      copied = fallbackCopy(text);
-    }
 
-    if (copied) {
-      showToast(toast);
-      trackEvent('demo_copy', { location: locationKey });
-    }
-  });
+      if (copied) {
+        showToast(toast);
+        trackEvent('demo_copy', { location: locationKey });
+      }
+    });
+  }
 
   return card;
 }
