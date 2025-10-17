@@ -387,6 +387,18 @@ export function initDemo() {
   const clipboardStatus = root.querySelector('[data-clipboard-status]');
   let clipboardTimer = null;
 
+  function emitClipboard(text, detail = {}) {
+    const value = typeof text === 'string' ? text : String(text ?? '');
+    setClipboardDisplay(value);
+    if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function') {
+      window.dispatchEvent(
+        new CustomEvent('demo:clipboard', {
+          detail: { text: value, ...detail },
+        }),
+      );
+    }
+  }
+
   function setClipboardDisplay(text) {
     if (!clipboardOutput) return;
     const value = typeof text === 'string' ? text : String(text ?? '');
@@ -454,6 +466,12 @@ export function initDemo() {
     const lineText = segmentEl.querySelector('[data-line-text]');
     const value = lineText?.textContent?.trim();
     if (!value) return;
+    emitClipboard(value, {
+      scenario: state.scenarioKey,
+      segment: segmentEl.getAttribute('data-segment-index') || null,
+      source: 'segment',
+    });
+
     try {
       await navigator.clipboard.writeText(value);
       setCopyButtonFeedback(button, button.dataset?.copiedLabel || 'Copied!');
