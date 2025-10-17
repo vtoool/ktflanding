@@ -17,6 +17,33 @@ const itineraryContainer = document.createElement('div');
 itineraryContainer.className = 'itinerary';
 root.appendChild(itineraryContainer);
 
+const updateClipboardSimulator = (() => {
+  let statusTimer = null;
+  return (text) => {
+    const output = document.querySelector('[data-clipboard-output]');
+    if (!output) return;
+    const status = document.querySelector('[data-clipboard-status]');
+    const value = typeof text === 'string' ? text : String(text ?? '');
+    output.textContent = value;
+    output.dataset.empty = value ? 'false' : 'true';
+    output.scrollTop = 0;
+    if (!status) return;
+    window.clearTimeout(statusTimer);
+    if (value) {
+      status.textContent = 'Copied \u2713';
+      status.classList.add('is-visible');
+      statusTimer = window.setTimeout(() => {
+        if (!status.isConnected) return;
+        status.classList.remove('is-visible');
+        status.textContent = '';
+      }, 1800);
+    } else {
+      status.classList.remove('is-visible');
+      status.textContent = '';
+    }
+  };
+})();
+
 const cards = [
   { label: 'Depart', data: itinerary.outbound, key: 'outbound' },
   { label: 'Return', data: itinerary.inbound, key: 'inbound' }
@@ -99,6 +126,7 @@ function buildCard(label, data, locationKey) {
         ...(itinerary.outbound?.segments || []),
         ...(itinerary.inbound?.segments || []),
       ]);
+      updateClipboardSimulator(text);
       if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function') {
         window.dispatchEvent(
           new CustomEvent('demo:clipboard', {
