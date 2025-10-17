@@ -674,13 +674,48 @@ body.legal .site-header {
   font-weight: 700;
   font-size: 1.05rem;
   box-shadow: 0 18px 36px rgba(11, 31, 58, 0.15);
-  transition: transform var(--transition), box-shadow var(--transition);
+  position: relative;
+  z-index: 0;
+  overflow: visible;
+  transition: transform var(--transition),
+    box-shadow var(--transition),
+    background 0.35s ease,
+    color 0.35s ease;
 }
 
 .pill-i:hover,
 .pill-i:focus-visible {
   transform: translateY(-2px);
   box-shadow: 0 22px 44px rgba(11, 31, 58, 0.22);
+}
+
+.pill-i::after {
+  content: '';
+  position: absolute;
+  inset: -0.45rem;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle,
+    rgba(96, 165, 250, 0.45),
+    rgba(37, 99, 235, 0)
+  );
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.pill-i.pill-i--success {
+  background: linear-gradient(135deg, #5f7cff, #2563eb);
+  color: #fff;
+  animation: pill-i-success-pop 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  box-shadow: 0 20px 44px rgba(37, 99, 235, 0.35);
+}
+
+.pill-i.pill-i--success::after {
+  opacity: 1;
+  transform: scale(1.15);
 }
 
 .card-submeta {
@@ -1312,6 +1347,21 @@ body.legal .site-header {
 
   .demo-output {
     padding: 1.5rem;
+  }
+}
+
+@keyframes pill-i-success-pop {
+  0% {
+    transform: scale(0.82);
+    box-shadow: 0 18px 36px rgba(11, 31, 58, 0.2);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 26px 54px rgba(37, 99, 235, 0.45);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 20px 44px rgba(37, 99, 235, 0.35);
   }
 }
 

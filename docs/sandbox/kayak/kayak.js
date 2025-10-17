@@ -61,6 +61,8 @@ function buildCard(label, data, locationKey) {
     pill.className = 'pill-i';
     pill.textContent = '*I';
     pill.setAttribute('aria-label', `Copy ${label.toLowerCase()} *I lines`);
+    pill.dataset.defaultLabel = pill.textContent;
+    pill.dataset.defaultAria = pill.getAttribute('aria-label') || '';
 
     actions.appendChild(pill);
     header.appendChild(actions);
@@ -117,6 +119,7 @@ function buildCard(label, data, locationKey) {
       }
 
       if (copied) {
+        showPillSuccess(pill);
         showToast(toast);
         trackEvent('demo_copy', { location: locationKey });
       }
@@ -278,6 +281,25 @@ function showToast(toast) {
   toast.hideTimer = setTimeout(() => {
     toast.classList.remove('is-visible');
   }, 1500);
+}
+
+function showPillSuccess(pill) {
+  if (!pill) return;
+  const defaultLabel = pill.dataset.defaultLabel || '*I';
+  const defaultAria = pill.dataset.defaultAria || pill.getAttribute('aria-label') || '';
+  pill.classList.add('pill-i--success');
+  pill.textContent = '✓';
+  if (defaultAria) {
+    pill.setAttribute('aria-label', 'Itinerary copied');
+  }
+  clearTimeout(pill._successTimer);
+  pill._successTimer = setTimeout(() => {
+    pill.classList.remove('pill-i--success');
+    pill.textContent = defaultLabel;
+    if (defaultAria) {
+      pill.setAttribute('aria-label', defaultAria);
+    }
+  }, 1400);
 }
 
 function fallbackCopy(text) {
