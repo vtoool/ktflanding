@@ -252,6 +252,13 @@
   min-width: 72px;
 }
 
+#kayak-sandbox .cabin-label {
+  background: #0b1f3a;
+  color: #fff;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 #kayak-sandbox .icon-btn {
   width: 36px;
   height: 36px;

@@ -6,6 +6,7 @@ export const itinerary = {
       {
         carrierName: "Lufthansa", flightNumber: "439",
         equipment: "Airbus A330-300",
+        cabin: "Business",
         depart: { time: "4:15 pm", airport: "Dallas/Fort Worth", iata: "DFW", date: "Thu, Nov 6" },
         arrive: { time: "9:05 am", airport: "Frankfurt am Main", iata: "FRA", date: "Fri, Nov 7" },
         duration: "9h 50m", overnight: true, amenities: { wifi: true, bag: true, seat: true, power: true }
@@ -14,6 +15,7 @@ export const itinerary = {
       {
         carrierName: "Lufthansa", flightNumber: "232",
         equipment: "Airbus A321-100/200",
+        cabin: "Business",
         depart: { time: "10:50 am", airport: "Frankfurt am Main", iata: "FRA", date: "Fri, Nov 7" },
         arrive: { time: "12:40 pm", airport: "Rome Fiumicino", iata: "FCO", date: "Fri, Nov 7" },
         duration: "1h 50m", amenities: { wifi: true, bag: true, seat: true, power: true }
@@ -27,6 +29,7 @@ export const itinerary = {
       {
         carrierName: "Lufthansa", flightNumber: "243",
         equipment: "Airbus A321-100/200",
+        cabin: "Business",
         depart: { time: "7:05 am", airport: "Rome Fiumicino", iata: "FCO", date: "Thu, Nov 27" },
         arrive: { time: "9:00 am", airport: "Frankfurt am Main", iata: "FRA", date: "Thu, Nov 27" },
         duration: "1h 55m", amenities: { wifi: true, bag: true, seat: true, power: true }
@@ -35,6 +38,7 @@ export const itinerary = {
       {
         carrierName: "Lufthansa", flightNumber: "438",
         equipment: "Airbus A330-300",
+        cabin: "Business",
         depart: { time: "10:10 am", airport: "Frankfurt am Main", iata: "FRA", date: "Thu, Nov 27" },
         arrive: { time: "2:25 pm", airport: "Dallas/Fort Worth", iata: "DFW", date: "Thu, Nov 27" },
         duration: "11h 15m", amenities: { wifi: true, bag: true, seat: true, power: true }
