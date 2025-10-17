@@ -113,12 +113,21 @@
   flex-direction: column;
 }
 
-#kayak-sandbox .leg,
-#kayak-sandbox .layover {
+#kayak-sandbox .leg {
   display: grid;
   grid-template-columns: 32px minmax(0, 1fr) auto;
   gap: 20px;
   padding: 20px 24px;
+}
+
+#kayak-sandbox .layover {
+  padding: 20px 24px 20px 76px;
+  background: #f7f9fc;
+  color: #33435a;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 #kayak-sandbox .leg + .leg,
@@ -261,35 +270,8 @@
   color: #0b1f3a;
 }
 
-#kayak-sandbox .layover {
-  align-items: center;
-  background: #f7f9fc;
-  color: #33435a;
-  font-size: 13px;
-}
-
-#kayak-sandbox .layover-line {
-  position: relative;
-  width: 32px;
-  height: 100%;
-}
-
-#kayak-sandbox .layover-line::before {
-  content: "";
-  position: absolute;
-  left: 15px;
-  top: 20px;
-  bottom: 20px;
-  width: 2px;
-  background: #d2dded;
-  border-style: dashed;
-}
-
 #kayak-sandbox .layover-text {
-  grid-column: span 2;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  display: block;
 }
 
 #kayak-sandbox .toast {
@@ -327,8 +309,7 @@
     font-size: 15px;
   }
 
-  #kayak-sandbox .leg,
-  #kayak-sandbox .layover {
+  #kayak-sandbox .leg {
     grid-template-columns: 24px minmax(0, 1fr);
   }
 
@@ -420,7 +401,8 @@
 
 /* Layover row tighter */
 #kayak-sandbox.compact .layover{
-  padding: 6px 6px 0 30px;
+  padding: 6px 6px 0 38px;
+  font-size: 12px;
 }
 #kayak-sandbox.compact .layover-text{ font-size: 12px; }
 
@@ -481,9 +463,8 @@
 
 /* Extras + layover tighter */
 #kayak-sandbox.compactStack .extra{ gap: 6px; margin-top: 2px; }
-#kayak-sandbox.compactStack .layover{ padding: 6px 6px 0 28px; }
+#kayak-sandbox.compactStack .layover{ padding: 6px 6px 0 36px; font-size: 12px; }
 #kayak-sandbox.compactStack .layover-text{ font-size: 12px; }
-#kayak-sandbox.compactStack .layover-line{ margin: 6px 0 6px; }
 
 /* Slightly smaller separator + no heavy borders to save vertical space */
 #kayak-sandbox.compactStack .leg + .leg{ border-top: 1px solid rgba(0,0,0,.045); }

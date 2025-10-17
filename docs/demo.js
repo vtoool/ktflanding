@@ -93,10 +93,6 @@ function buildSegmentNode(segment, index) {
     }
     return '';
   })();
-  const overnightFlight = (() => {
-    const diff = parseInt(arrivalOffset, 10);
-    return Number.isFinite(diff) && diff > 0;
-  })();
   const wrapper = document.createElement('div');
   wrapper.className = 'leg segment';
   wrapper.setAttribute('data-segment-index', String(index + 1));
@@ -118,9 +114,6 @@ function buildSegmentNode(segment, index) {
   }
   if (bookingClass) {
     extraChips.push(`<span class="chip hollow">Class ${bookingClass}</span>`);
-  }
-  if (overnightFlight) {
-    extraChips.push('<span class="chip warn">Overnight flight</span>');
   }
   wrapper.innerHTML = `
     <div class="rail" aria-hidden="true">
@@ -183,10 +176,10 @@ function buildSegmentNode(segment, index) {
 function buildLayoverNode(text) {
   const node = document.createElement('div');
   node.className = 'layover';
-  node.innerHTML = `
-    <div class="layover-line" aria-hidden="true"></div>
-    <div class="layover-text">${text}</div>
-  `;
+  const layoverText = document.createElement('div');
+  layoverText.className = 'layover-text';
+  layoverText.textContent = text;
+  node.appendChild(layoverText);
   return node;
 }
 
