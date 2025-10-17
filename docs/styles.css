@@ -854,16 +854,13 @@ body.legal .site-header {
   padding: 0.35rem 0.85rem 0.85rem 2.7rem;
   color: var(--color-muted);
   font-size: 0.9rem;
-  display: grid;
-  gap: 0.35rem;
-}
-
-.layover-line {
-  height: 1px;
-  background: rgba(11, 31, 58, 0.12);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .layover-text {
+  display: block;
   font-size: 0.9rem;
 }
 

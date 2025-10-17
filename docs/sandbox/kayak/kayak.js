@@ -205,12 +205,6 @@ function buildLeg(segment, index, lastIndex) {
   const durationChip = createChip(segment.duration);
   extra.appendChild(durationChip);
 
-  if (segment.overnight) {
-    const overnightChip = createChip('Overnight flight');
-    overnightChip.classList.add('warn');
-    extra.appendChild(overnightChip);
-  }
-
   main.appendChild(extra);
 
   const amenities = document.createElement('div');
@@ -246,10 +240,6 @@ function buildLeg(segment, index, lastIndex) {
 function buildLayover(segment) {
   const layover = document.createElement('div');
   layover.className = 'layover';
-
-  const rail = document.createElement('div');
-  rail.className = 'layover-line';
-  layover.appendChild(rail);
 
   const text = document.createElement('div');
   text.className = 'layover-text';
