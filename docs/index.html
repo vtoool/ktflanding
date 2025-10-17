@@ -201,27 +201,21 @@
 <script type="module" src="./sandbox/kayak/kayak.js"></script>
 <!-- END KAYAK_SANDBOX -->
           </article>
-          <aside class="demo-controls" aria-label="Demo toggles">
-            <div class="toggle">
-              <input type="checkbox" id="toggleCodeshare" data-toggle="codeshare">
-              <label for="toggleCodeshare">Simulate codeshare</label>
-              <p class="toggle__help">Swaps operating carriers to show the //OPERATED BY line.</p>
+          <aside class="demo-clipboard" aria-label="Clipboard simulator">
+            <div class="demo-clipboard__header">
+              <h3 class="demo-clipboard__title">Clipboard simulator</h3>
+              <span class="demo-clipboard__status" data-clipboard-status aria-live="polite"></span>
             </div>
-            <div class="toggle">
-              <input type="checkbox" id="toggleFirstRule" data-toggle="first">
-              <label for="toggleFirstRule">Force First &lt; 6h → Business</label>
-              <p class="toggle__help">Mirrors the extension option that downgrades short-haul First segments to J.</p>
-            </div>
-            <p class="demo-hint">All data is static and processed locally—no network calls.</p>
+            <p class="demo-clipboard__hint">Click any *I pill to preview what lands in the clipboard.</p>
+            <div
+              class="demo-clipboard__output"
+              data-clipboard-output
+              data-empty="true"
+              role="status"
+              aria-live="polite"
+            ></div>
+            <p class="demo-clipboard__note">All data is static and processed locally—no network calls.</p>
           </aside>
-        </div>
-        <div class="demo-output" data-output-wrapper hidden>
-          <label class="demo-output__label" for="demoOutput">*I output</label>
-          <textarea id="demoOutput" class="demo-output__field" rows="8" readonly data-demo-output aria-live="polite"></textarea>
-          <div class="demo-output__actions">
-            <button class="btn btn-secondary" type="button" data-copy disabled>Copy</button>
-            <span class="demo-toast" role="status" aria-live="polite" data-toast></span>
-          </div>
         </div>
       </div>
     </section>

@@ -32,15 +32,10 @@ function toCabinKey(cabin) {
   return cabin ? String(cabin).trim().toUpperCase() : '';
 }
 
-function resolveBookingClass(segment, options) {
-  const { forceShortFirstAsBusiness } = options;
+function resolveBookingClass(segment) {
   let bookingClass = segment.bookingClass ? String(segment.bookingClass).trim().toUpperCase() : '';
   const durationMinutes = Number.isFinite(segment.durationMinutes) ? segment.durationMinutes : null;
   const cabinKey = toCabinKey(segment.cabin);
-
-  if (forceShortFirstAsBusiness && cabinKey === 'FIRST' && Number.isFinite(durationMinutes) && durationMinutes < 360) {
-    bookingClass = segment.businessFallbackClass || 'J';
-  }
 
   if (!bookingClass && cabinKey && CABIN_FALLBACK_BOOKING[cabinKey]) {
     bookingClass = CABIN_FALLBACK_BOOKING[cabinKey];
@@ -62,10 +57,10 @@ function formatDuration(minutes) {
   return `${hours}h ${mins}m`;
 }
 
-function buildSegmentNode(segment, index, options) {
+function buildSegmentNode(segment, index) {
   const depParts = getZonedDateTimeParts(segment.departure.iso, segment.departure.timeZone);
   const arrParts = getZonedDateTimeParts(segment.arrival.iso, segment.arrival.timeZone);
-  const bookingClass = resolveBookingClass(segment, options);
+  const bookingClass = resolveBookingClass(segment);
   const arrivalOffset = calculateArrivalOffset(depParts, arrParts, segment.departure.iso, segment.arrival.iso);
   const duration = formatDuration(segment.durationMinutes);
   const departurePlace = formatPlace(segment.departure);
@@ -85,11 +80,6 @@ function buildSegmentNode(segment, index, options) {
     return '';
   })();
   const operatedBy = (() => {
-    if (options.simulateCodeshare && segment.codeshare && segment.codeshare.code) {
-      const cs = segment.codeshare;
-      const code = cs.code + (cs.flightNumber ? ` ${cs.flightNumber}` : '');
-      return `Operated by ${code}${cs.name ? ` · ${cs.name}` : ''}`;
-    }
     if (segment.operatingCarrier && segment.operatingCarrier !== segment.marketingCarrier) {
       const code = segment.operatingCarrier;
       return `Operated by ${code}${segment.operatingCarrierName ? ` · ${segment.operatingCarrierName}` : ''}`;
@@ -292,10 +282,6 @@ function applySegmentPreviews(root, details) {
 function renderScenario(root, state) {
   const scenario = SCENARIOS[state.scenarioKey];
   if (!scenario) return;
-  const options = {
-    forceShortFirstAsBusiness: state.forceShortFirstAsBusiness,
-    simulateCodeshare: state.simulateCodeshare,
-  };
 
   const titleEl = root.querySelector('[data-scenario-name]');
   const metaEls = root.querySelectorAll('[data-scenario-meta]');
@@ -364,7 +350,7 @@ function renderScenario(root, state) {
   if (listEl) {
     listEl.innerHTML = '';
     scenario.segments.forEach((segment, index) => {
-      const node = buildSegmentNode(segment, index, options);
+      const node = buildSegmentNode(segment, index);
       listEl.appendChild(node);
       if (segment.connectionText) {
         listEl.appendChild(buildLayoverNode(segment.connectionText));
@@ -373,22 +359,6 @@ function renderScenario(root, state) {
   }
 
   clearSegmentPreviews(root);
-
-  const codeshareToggle = root.querySelector('[data-toggle="codeshare"]');
-  if (codeshareToggle) {
-    const hasCodeshare = scenario.segments.some((seg) => Boolean(seg.codeshare));
-    codeshareToggle.disabled = !hasCodeshare;
-    if (!hasCodeshare) {
-      codeshareToggle.setAttribute('aria-disabled', 'true');
-    } else {
-      codeshareToggle.removeAttribute('aria-disabled');
-    }
-    codeshareToggle.parentElement?.classList.toggle('toggle--disabled', !hasCodeshare);
-    if (!hasCodeshare && codeshareToggle.checked) {
-      codeshareToggle.checked = false;
-      state.simulateCodeshare = false;
-    }
-  }
 }
 
 function updateTabs(root, activeKey) {
@@ -417,14 +387,43 @@ export function initDemo() {
 
   const state = {
     scenarioKey: 'simple',
-    simulateCodeshare: false,
-    forceShortFirstAsBusiness: false,
   };
 
-  const outputWrapper = root.querySelector('[data-output-wrapper]');
-  const outputField = root.querySelector('[data-demo-output]');
-  const copyButton = root.querySelector('[data-copy]');
   const toast = root.querySelector('[data-toast]');
+  const clipboardOutput = root.querySelector('[data-clipboard-output]');
+  const clipboardStatus = root.querySelector('[data-clipboard-status]');
+  let clipboardTimer = null;
+
+  function setClipboardDisplay(text) {
+    if (!clipboardOutput) return;
+    const value = typeof text === 'string' ? text : String(text ?? '');
+    clipboardOutput.textContent = value;
+    clipboardOutput.dataset.empty = value ? 'false' : 'true';
+    clipboardOutput.scrollTop = 0;
+    if (!clipboardStatus) return;
+    clearTimeout(clipboardTimer);
+    if (value) {
+      clipboardStatus.textContent = 'Copied ✓';
+      clipboardStatus.classList.add('is-visible');
+      clipboardTimer = setTimeout(() => {
+        if (!clipboardStatus.isConnected) return;
+        clipboardStatus.classList.remove('is-visible');
+        clipboardStatus.textContent = '';
+      }, 1800);
+    } else {
+      clipboardStatus.classList.remove('is-visible');
+      clipboardStatus.textContent = '';
+    }
+  }
+
+  if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
+    window.addEventListener('demo:clipboard', (event) => {
+      const text = event?.detail?.text ?? '';
+      setClipboardDisplay(text);
+    });
+  }
+
+  setClipboardDisplay('');
 
   updateTabs(root, state.scenarioKey);
   renderScenario(root, state);
@@ -436,94 +435,21 @@ export function initDemo() {
       state.scenarioKey = key;
       updateTabs(root, state.scenarioKey);
       renderScenario(root, state);
-      if (outputWrapper) {
-        outputWrapper.hidden = true;
-      }
-      if (copyButton) {
-        copyButton.disabled = true;
-      }
-      if (outputField) {
-        outputField.value = '';
-      }
     });
   });
-
-  const codeshareToggle = root.querySelector('[data-toggle="codeshare"]');
-  if (codeshareToggle) {
-    codeshareToggle.addEventListener('change', () => {
-      state.simulateCodeshare = codeshareToggle.checked;
-      renderScenario(root, state);
-      if (outputWrapper) {
-        outputWrapper.hidden = true;
-      }
-      if (copyButton) {
-        copyButton.disabled = true;
-      }
-      if (outputField) {
-        outputField.value = '';
-      }
-    });
-  }
-
-  const firstToggle = root.querySelector('[data-toggle="first"]');
-  if (firstToggle) {
-    firstToggle.addEventListener('change', () => {
-      state.forceShortFirstAsBusiness = firstToggle.checked;
-      renderScenario(root, state);
-      if (outputWrapper) {
-        outputWrapper.hidden = true;
-      }
-      if (copyButton) {
-        copyButton.disabled = true;
-      }
-      if (outputField) {
-        outputField.value = '';
-      }
-    });
-  }
 
   const generateButton = root.querySelector('[data-generate]');
   if (generateButton) {
     generateButton.addEventListener('click', () => {
       const scenario = SCENARIOS[state.scenarioKey];
       if (!scenario) return;
-      const details = formatSegmentsDetailed(scenario.segments, {
-        simulateCodeshare: state.simulateCodeshare,
-        forceShortFirstAsBusiness: state.forceShortFirstAsBusiness,
-      });
-      const text = details.map((detail) => detail.line).join('\n');
-      if (outputField) {
-        outputField.value = text;
-      }
+      const details = formatSegmentsDetailed(scenario.segments);
       applySegmentPreviews(root, details);
-      if (outputWrapper) {
-        outputWrapper.hidden = false;
-      }
-      if (copyButton) {
-        copyButton.disabled = !text;
-      }
       trackEvent('demo_generate', {
         scenario: state.scenarioKey,
         segments: scenario.segments.length,
         location: 'demo',
       });
-    });
-  }
-
-  if (copyButton && outputField) {
-    copyButton.addEventListener('click', async () => {
-      const value = outputField.value;
-      if (!value) return;
-      try {
-        await navigator.clipboard.writeText(value);
-        showToast(toast, 'Copied');
-        trackEvent('demo_copy', {
-          length: value.length,
-          location: 'demo',
-        });
-      } catch (err) {
-        showToast(toast, 'Copy failed');
-      }
     });
   }
 
