@@ -41,10 +41,6 @@ function buildCard(label, data, locationKey) {
   titleWrap.appendChild(strong);
 
   const flightSegments = data.segments.filter(segment => !segment.layover);
-  const route = `${flightSegments[0].depart.airport} (${flightSegments[0].depart.iata}) → ${flightSegments[flightSegments.length - 1].arrive.airport} (${flightSegments[flightSegments.length - 1].arrive.iata})`;
-  const subtitle = document.createElement('span');
-  subtitle.textContent = route;
-  titleWrap.appendChild(subtitle);
 
   const duration = document.createElement('div');
   duration.className = 'card-duration';
@@ -230,6 +226,12 @@ function buildLeg(segment, index, lastIndex) {
   caret.className = 'icon-btn caret';
   caret.textContent = '›';
   amenities.appendChild(caret);
+
+  if (segment.cabin) {
+    const cabinLabel = createChip(segment.cabin);
+    cabinLabel.classList.add('cabin-label');
+    amenities.appendChild(cabinLabel);
+  }
 
   leg.appendChild(main);
   leg.appendChild(amenities);
