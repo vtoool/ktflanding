@@ -267,11 +267,6 @@ function buildLeg(segment, index, lastIndex) {
     amenities.appendChild(icon);
   }
 
-  const caret = document.createElement('span');
-  caret.className = 'icon-btn caret';
-  caret.textContent = '›';
-  amenities.appendChild(caret);
-
   if (segment.cabin) {
     const cabinLabel = createChip(segment.cabin);
     cabinLabel.classList.add('cabin-label');
