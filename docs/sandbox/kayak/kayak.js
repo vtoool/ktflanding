@@ -87,6 +87,13 @@ function buildCard(label, data, locationKey) {
 
   pill.addEventListener('click', async () => {
     const text = formatSegmentsToI(data.segments);
+    if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function') {
+      window.dispatchEvent(
+        new CustomEvent('demo:clipboard', {
+          detail: { text, source: locationKey },
+        }),
+      );
+    }
     let copied = false;
     if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
       try {
