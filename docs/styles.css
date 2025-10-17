@@ -231,7 +231,7 @@ body.legal .site-header {
 }
 
 .hero {
-  padding: clamp(3.5rem, 7vw, 5rem) 0 5rem;
+  padding: clamp(1rem, 2.5vw, 1.5rem) 0 5rem;
 }
 
 .hero__grid {
@@ -1286,7 +1286,7 @@ body.legal .site-header {
   }
 
   .hero {
-    padding: 4.5rem 0;
+    padding: 2.75rem 0 4.5rem;
   }
 
   .section {
