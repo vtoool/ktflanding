@@ -555,7 +555,7 @@ body.legal .site-header {
 
 .demo-content {
   display: grid;
-  grid-template-columns: minmax(0, 2.1fr) minmax(400px, 1fr);
+  grid-template-columns: minmax(0, 2.1fr) minmax(480px, 1fr);
   gap: 2.75rem;
   align-items: flex-start;
 }
@@ -1031,7 +1031,7 @@ body.legal .site-header {
   color: var(--color-text);
   padding: 1rem;
   font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   line-height: 1.5;
   min-height: 220px;
   white-space: pre;
