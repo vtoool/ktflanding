@@ -523,6 +523,10 @@ body.legal .site-header {
   background: var(--color-surface);
 }
 
+.demo .container {
+  width: min(100% - 2.5rem, 1200px);
+}
+
 .demo-tabs {
   display: flex;
   flex-wrap: wrap;
@@ -550,7 +554,7 @@ body.legal .site-header {
 
 .demo-content {
   display: grid;
-  grid-template-columns: minmax(0, 1.95fr) minmax(360px, 1fr);
+  grid-template-columns: minmax(0, 2.1fr) minmax(400px, 1fr);
   gap: 2.75rem;
   align-items: flex-start;
 }
