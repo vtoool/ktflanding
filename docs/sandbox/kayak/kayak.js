@@ -7,6 +7,7 @@ if (!root) {
 }
 
 document.getElementById('kayak-sandbox')?.classList.add('compact');
+document.getElementById('kayak-sandbox')?.classList.add('compactStack');
 
 const trackEvent = (typeof window !== 'undefined' && window.analytics && typeof window.analytics.trackEvent === 'function')
   ? window.analytics.trackEvent.bind(window.analytics)
