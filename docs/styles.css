@@ -682,11 +682,15 @@ body.legal .site-header {
   place-items: center;
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.16), rgba(14, 116, 144, 0.16));
   border: 1px solid rgba(37, 99, 235, 0.25);
+  color: var(--color-accent);
 }
 
-.feature-card__icon img {
-  width: 24px;
-  height: 24px;
+.feature-card__icon-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  font-weight: 700;
 }
 
 .feature-card h3 {
@@ -891,9 +895,10 @@ body.legal .site-header {
 
 .card-actions {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex: 0 0 auto;
   margin-left: 0.5rem;
+  margin-top: -0.2rem;
 }
 
 .pill-i {
@@ -1561,6 +1566,10 @@ body.legal .site-header {
   .card-header {
     grid-template-columns: 1fr;
     padding-right: 3.75rem;
+  }
+
+  .card-actions {
+    margin-top: 0.4rem;
   }
 
   .card-duration {
