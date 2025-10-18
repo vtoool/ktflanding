@@ -3,7 +3,7 @@ import { formatSegmentsToI } from './kayak-formatter.js';
 
 const root = document.getElementById('kayak-root');
 if (!root) {
-  throw new Error('Kayak sandbox root not found');
+  throw new Error('FareSnap sandbox root not found');
 }
 
 document.getElementById('kayak-sandbox')?.classList.add('compact');
@@ -78,7 +78,6 @@ function buildCard(label, data, locationKey) {
   card.appendChild(header);
 
   let pill;
-  let toast;
   if (locationKey === 'outbound') {
     const actions = document.createElement('div');
     actions.className = 'card-actions';
@@ -94,12 +93,6 @@ function buildCard(label, data, locationKey) {
     actions.appendChild(pill);
     header.appendChild(actions);
 
-    toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.setAttribute('role', 'status');
-    toast.setAttribute('aria-live', 'polite');
-    toast.textContent = 'Copied';
-    card.appendChild(toast);
   }
 
   const legs = document.createElement('div');
@@ -120,7 +113,7 @@ function buildCard(label, data, locationKey) {
 
   card.appendChild(legs);
 
-  if (pill && toast) {
+  if (pill) {
     pill.addEventListener('click', async () => {
       const text = formatSegmentsToI([
         ...(itinerary.outbound?.segments || []),
@@ -148,7 +141,6 @@ function buildCard(label, data, locationKey) {
 
       if (copied) {
         showPillSuccess(pill);
-        showToast(toast);
         trackEvent('demo_copy', { location: locationKey });
       }
     });
@@ -252,10 +244,10 @@ function buildLeg(segment, index, lastIndex) {
   amenities.className = 'amenities';
 
   const amenityIcons = [
-    { key: 'wifi', label: 'Wi-Fi', symbol: '📶' },
-    { key: 'bag', label: 'Checked bag', symbol: '🧳' },
-    { key: 'seat', label: 'Seat selection', symbol: '💺' },
-    { key: 'power', label: 'Power', symbol: '🔌' }
+    { key: 'wifi', label: 'Wi-Fi' },
+    { key: 'bag', label: 'Checked bag' },
+    { key: 'seat', label: 'Seat selection' },
+    { key: 'power', label: 'Power' }
   ];
 
   for (const amenity of amenityIcons) {
@@ -263,7 +255,7 @@ function buildLeg(segment, index, lastIndex) {
     const icon = document.createElement('span');
     icon.className = 'icon-btn';
     icon.setAttribute('title', amenity.label);
-    icon.textContent = amenity.symbol;
+    icon.textContent = '✓';
     amenities.appendChild(icon);
   }
 
@@ -296,14 +288,6 @@ function createChip(text) {
   chip.className = 'chip';
   chip.textContent = text;
   return chip;
-}
-
-function showToast(toast) {
-  toast.classList.add('is-visible');
-  clearTimeout(toast.hideTimer);
-  toast.hideTimer = setTimeout(() => {
-    toast.classList.remove('is-visible');
-  }, 1500);
 }
 
 function showPillSuccess(pill) {
