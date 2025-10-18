@@ -320,6 +320,8 @@
   grid-column: 1;
   position: relative;
   pointer-events: none;
+  --timeline-plane-size: 16px;
+  --timeline-line-gap: calc(var(--timeline-plane-size) + 8px);
 }
 
 #kayak-sandbox .timeline-connector__line {
@@ -328,7 +330,16 @@
   top: calc(var(--timeline-dot-size) / 2);
   bottom: calc(var(--timeline-dot-size) / 2);
   width: 1px;
-  background: rgba(34, 51, 77, 0.75);
+  background: linear-gradient(
+    to bottom,
+    rgba(34, 51, 77, 0.75) 0,
+    rgba(34, 51, 77, 0.75) calc(50% - var(--timeline-line-gap) / 2),
+    transparent calc(50% - var(--timeline-line-gap) / 2),
+    transparent calc(50% + var(--timeline-line-gap) / 2),
+    rgba(34, 51, 77, 0.75) calc(50% + var(--timeline-line-gap) / 2),
+    rgba(34, 51, 77, 0.75) 100%
+  );
+  background-repeat: no-repeat;
   transform: translateX(-50%);
 }
 
@@ -336,8 +347,8 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 12px;
-  height: 12px;
+  width: var(--timeline-plane-size);
+  height: var(--timeline-plane-size);
   transform: translate(-50%, -50%);
   fill: rgba(34, 51, 77, 0.75);
   opacity: 0.85;
@@ -516,7 +527,10 @@
 #kayak-sandbox.compact .timeline-event__time{ font-size: 18px; line-height: 1.2; }
 #kayak-sandbox.compact .timeline-event__detail{ font-size: 12px; }
 #kayak-sandbox.compact .timeline-event__date{ font-size: 10px; letter-spacing: 0.05em; }
-#kayak-sandbox.compact .timeline-connector__plane{ width: 10px; height: 10px; }
+#kayak-sandbox.compact .timeline-connector{
+  --timeline-plane-size: 12px;
+  --timeline-line-gap: calc(var(--timeline-plane-size) + 6px);
+}
 #kayak-sandbox.compact .duration-chip{ font-size: 11px; padding: 2px 6px; }
 #kayak-sandbox.compact .arrives-note,
 #kayak-sandbox.compact .depart-note{ font-size: 11px; margin-top: 2px; }
@@ -582,7 +596,10 @@
 #kayak-sandbox.compactStack .timeline-event__time{ font-size: 16px; line-height: 1.2; }
 #kayak-sandbox.compactStack .timeline-event__detail{ font-size: 11.5px; }
 #kayak-sandbox.compactStack .timeline-event__date{ font-size: 10px; letter-spacing: .05em; }
-#kayak-sandbox.compactStack .timeline-connector__plane{ width: 9px; height: 9px; }
+#kayak-sandbox.compactStack .timeline-connector{
+  --timeline-plane-size: 11px;
+  --timeline-line-gap: calc(var(--timeline-plane-size) + 6px);
+}
 #kayak-sandbox.compactStack .duration-chip{ font-size: 10.5px; padding: 2px 6px; }
 #kayak-sandbox.compactStack .arrives-note,
 #kayak-sandbox.compactStack .depart-note{ font-size: 10.5px; margin-top: 2px; letter-spacing: .02em; }
