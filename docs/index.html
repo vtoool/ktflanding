@@ -64,72 +64,119 @@
 
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow">Sabre-format itineraries from every Kayak card</p>
-        <h1 id="hero-title">Add a *I pill to Kayak results and paste perfect GDS lines in one click.</h1>
-        <p class="lead">Kayak to *I mirrors your agency playbook: multi-city awareness, cabin-aware booking classes, and clipboard-ready text that never breaks formatting.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="{{CHROME_WEB_STORE_URL}}" data-event="install" data-location="hero">Add to Chrome</a>
-          <a class="btn btn-ghost" href="#pricing" data-event="pro" data-location="hero">See Pro (coming soon)</a>
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <p class="eyebrow">Sabre-format itineraries from every Kayak card</p>
+          <h1 id="hero-title">Add a *I pill to Kayak results and paste perfect GDS lines in one click.</h1>
+          <p class="lead">Kayak to *I mirrors your agency playbook: multi-city awareness, cabin-aware booking classes, and clipboard-ready text that never breaks formatting.</p>
+          <div class="hero__actions">
+            <a class="btn btn-primary" href="{{CHROME_WEB_STORE_URL}}" data-event="install" data-location="hero">Add to Chrome</a>
+            <a class="btn btn-ghost" href="#pricing" data-event="pro" data-location="hero">See Pro (coming soon)</a>
+          </div>
+          <ul class="hero__bullets" aria-label="Key benefits">
+            <li>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+              <span>Guaranteed Sabre spacing &amp; sequencing</span>
+            </li>
+            <li>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3 2 9l10 6 10-6-10-6Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M2 15l10 6 10-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+              <span>Understands long layovers &amp; overnight rolls</span>
+            </li>
+            <li>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 9h6v6H9z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+              <span>MV3 compliant with privacy-first analytics</span>
+            </li>
+          </ul>
         </div>
-        <ul class="bullets" aria-label="Key benefits">
-          <li>
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-            <span>Guaranteed Sabre spacing &amp; sequencing</span>
-          </li>
-          <li>
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3 2 9l10 6 10-6-10-6Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M2 15l10 6 10-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-            <span>Understands long layovers &amp; overnight rolls</span>
-          </li>
-          <li>
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 9h6v6H9z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-            <span>MV3 compliant with privacy-first analytics</span>
-          </li>
-        </ul>
-      </div>
-      <div class="hero-demo" aria-label="Kayak itinerary preview">
-        <div class="demo-frame">
-          <article class="kayak-card hero-card">
-            <header class="meta">
-              <span class="chip">Kayak card</span>
-              <span class="chip">Detected ✦</span>
-              <span class="chip">Roundtrip</span>
-            </header>
-            <div class="segment">
-              <div class="seg-head">Depart • Wed, Feb 11 <span class="dur">6h 50m</span></div>
-              <button class="pill pill-i" type="button" data-hero-pill aria-label="Copy *I for this trip">*I</button>
-              <div class="seg-body">
-                <div class="airline">British Airways</div>
-                <div class="equip">Boeing 777-300ER</div>
-                <div class="times">
-                  <time class="dep" datetime="2024-02-11T21:50">9:50 pm</time>
-                  <span class="arrow" aria-hidden="true">→</span>
-                  <time class="arr" datetime="2024-02-12T09:40">9:40 am</time>
-                </div>
-                <div class="airports">
-                  <span class="from">New York JFK</span>
-                  <span class="to">London LHR</span>
-                </div>
-                <div class="notes"><span class="overnight">Overnight flight</span></div>
+        <div class="hero__visual" aria-hidden="true">
+          <div class="hero-demo">
+            <span class="hero-demo__glow hero-demo__glow--left"></span>
+            <span class="hero-demo__glow hero-demo__glow--right"></span>
+
+            <article class="hero-demo__card hero-demo__card--kayak">
+              <header class="hero-demo__header">
+                <span class="hero-demo__pill">Kayak card</span>
+                <span class="hero-demo__tag">Detected ✦</span>
+              </header>
+              <div class="hero-demo__availability" role="group" aria-label="Availability buttons">
+                <button type="button" class="hero-demo__availability-btn hero-demo__availability-btn--active">JFK-LHR</button>
+                <button type="button" class="hero-demo__availability-btn">LHR-JFK</button>
               </div>
-            </div>
-            <div class="segment return">
-              <div class="seg-head">Return • Thu, Feb 26 <span class="dur">8h 00m</span></div>
-              <div class="seg-body">
-                <div class="airline">British Airways</div>
-                <div class="equip">Boeing 777</div>
-                <div class="times">
-                  <time class="dep" datetime="2024-02-26T11:20">11:20 am</time>
-                  <span class="arrow" aria-hidden="true">→</span>
-                  <time class="arr" datetime="2024-02-26T14:20">2:20 pm</time>
-                </div>
-                <div class="airports">
-                  <span class="from">London LHR</span>
-                  <span class="to">New York JFK</span>
-                </div>
+              <div class="hero-demo__itinerary">
+                <section class="hero-demo__trip">
+                  <div class="hero-demo__trip-header">
+                    <p class="hero-demo__trip-title">Depart • Wed, Feb 11</p>
+                    <span class="hero-demo__trip-duration">6h 50m</span>
+                  </div>
+                  <div class="hero-demo__trip-airline">
+                    <span class="hero-demo__badge hero-demo__badge--inline">*I✓</span>
+                    <span class="hero-demo__airline">British Airways</span>
+                  </div>
+                  <p class="hero-demo__flight-meta">British Airways 1515 · Operated by American Airlines</p>
+                  <p class="hero-demo__equipment">Boeing 777-300ER</p>
+                  <div class="hero-demo__trip-timeline">
+                    <div>
+                      <p class="hero-demo__time">9:50 pm</p>
+                      <p class="hero-demo__airport">New York John F Kennedy Intl (JFK)</p>
+                    </div>
+                    <div class="hero-demo__duration-block">
+                      <span class="hero-demo__duration-value">6h 50m</span>
+                      <span class="hero-demo__chip hero-demo__chip--warn">Overnight flight</span>
+                    </div>
+                    <div class="hero-demo__arrival-block">
+                      <p class="hero-demo__time">9:40 am</p>
+                      <p class="hero-demo__airport">London Heathrow (LHR)</p>
+                      <p class="hero-demo__arrives">Arrives Thu, Feb 12</p>
+                    </div>
+                  </div>
+                </section>
+                <section class="hero-demo__trip">
+                  <div class="hero-demo__trip-header">
+                    <p class="hero-demo__trip-title">Return • Thu, Feb 26</p>
+                    <span class="hero-demo__trip-duration">8h 00m</span>
+                  </div>
+                  <div class="hero-demo__trip-airline">
+                    <span class="hero-demo__airline">British Airways</span>
+                  </div>
+                  <p class="hero-demo__flight-meta">British Airways 173</p>
+                  <p class="hero-demo__equipment">Boeing 777</p>
+                  <div class="hero-demo__trip-timeline">
+                    <div>
+                      <p class="hero-demo__time">11:20 am</p>
+                      <p class="hero-demo__airport">London Heathrow (LHR)</p>
+                    </div>
+                    <div class="hero-demo__duration-block">
+                      <span class="hero-demo__duration-value">8h 00m</span>
+                    </div>
+                    <div class="hero-demo__arrival-block">
+                      <p class="hero-demo__time">2:20 pm</p>
+                      <p class="hero-demo__airport">New York John F Kennedy Intl (JFK)</p>
+                    </div>
+                  </div>
+                </section>
               </div>
+            </article>
+
+            <div class="hero-demo__connector">
+              <div class="hero-demo__connector-line">
+                <span class="hero-demo__dot" aria-hidden="true"></span>
+                <span class="hero-demo__beam" aria-hidden="true"></span>
+              </div>
+              <div class="hero-demo__connector-label">Simulated result</div>
             </div>
-          </article>
+
+            <article class="hero-demo__card hero-demo__card--clipboard">
+              <header class="hero-demo__header">
+                <span class="hero-demo__pill hero-demo__pill--soft">Clipboard preview</span>
+                <span class="hero-demo__tag hero-demo__tag--success">Copied ✓</span>
+              </header>
+              <div class="hero-demo__clipboard" role="presentation">
+                <code>1 BA1515J 11FEB W JFKLHR*SS1 950P 940A 12FEB Q /DCBA /E</code>
+                <code>2 BA173J 26FEB Q LHRJFK*SS1 1120A 220P /DCBA /E</code>
+              </div>
+              <p class="hero-demo__hint">Perfect spacing, booking classes, and segment numbers every time.</p>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -228,9 +275,7 @@
   <p class="sandbox-meta">Fri, Oct 04 · London Heathrow (LHR) — Sun, Oct 13 · London Heathrow (LHR)</p>
 
   <!-- Real itinerary cards mount here -->
-  <div class="kayak-sandbox">
-    <div id="kayak-root"></div>
-  </div>
+  <div id="kayak-root"></div>
 </section>
 <script type="module" src="./sandbox/kayak/kayak.js"></script>
 <!-- END KAYAK_SANDBOX -->
