@@ -166,7 +166,7 @@
 
 #kayak-sandbox .leg {
   display: grid;
-  grid-template-columns: 32px minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 20px;
   padding: 20px 24px;
   align-items: start;
@@ -185,37 +185,6 @@
 #kayak-sandbox .layover + .leg,
 #kayak-sandbox .leg + .layover {
   border-top: 1px solid #e3eaf4;
-}
-
-#kayak-sandbox .rail {
-  position: relative;
-  width: 32px;
-}
-
-#kayak-sandbox .line {
-  position: absolute;
-  left: 15px;
-  top: 12px;
-  bottom: 12px;
-  width: 2px;
-  background: linear-gradient(180deg, #d2dded 0%, #9eb4d4 100%);
-}
-
-#kayak-sandbox .dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #0b1f3a;
-  position: absolute;
-  left: 10px;
-}
-
-#kayak-sandbox .dot.takeoff {
-  top: 6px;
-}
-
-#kayak-sandbox .dot.landing {
-  bottom: 6px;
 }
 
 #kayak-sandbox .leg-main {
@@ -275,31 +244,57 @@
 }
 
 #kayak-sandbox .timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  --timeline-rail-width: 20px;
+  --timeline-dot-size: 10px;
+  --timeline-column-gap: 14px;
+  --timeline-offset: 52px;
+  display: grid;
+  grid-template-columns: var(--timeline-rail-width) 92px minmax(0, 1fr);
+  column-gap: var(--timeline-column-gap);
+  row-gap: 16px;
+  position: relative;
+  margin-left: calc(var(--timeline-offset) - var(--timeline-rail-width) - var(--timeline-column-gap));
 }
 
 #kayak-sandbox .timeline-event {
-  display: grid;
-  grid-template-columns: 92px minmax(0, 1fr);
-  gap: 14px;
-  align-items: start;
+  display: contents;
+}
+
+#kayak-sandbox .timeline-event__rail {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+#kayak-sandbox .timeline-dot {
+  width: var(--timeline-dot-size);
+  height: var(--timeline-dot-size);
+  border-radius: 9999px;
+  background: #fff;
+  border: 1px solid #22334d;
+  box-sizing: border-box;
 }
 
 #kayak-sandbox .timeline-event__time {
+  grid-column: 2;
   font-size: 24px;
   font-weight: 600;
   color: #0b1f3a;
   line-height: 1.1;
+  align-self: center;
 }
 
 #kayak-sandbox .timeline-event__detail {
+  grid-column: 3;
   display: flex;
   flex-direction: column;
   gap: 4px;
   font-size: 14px;
   color: #33435a;
+  align-self: center;
 }
 
 #kayak-sandbox .timeline-cityline {
@@ -314,9 +309,38 @@
 }
 
 #kayak-sandbox .timeline-duration {
-  padding-left: 92px;
   display: flex;
   align-items: center;
+  grid-column: 2 / span 2;
+  position: relative;
+  z-index: 1;
+}
+
+#kayak-sandbox .timeline-connector {
+  grid-column: 1;
+  position: relative;
+  pointer-events: none;
+}
+
+#kayak-sandbox .timeline-connector__line {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--timeline-dot-size) / 2);
+  bottom: calc(var(--timeline-dot-size) / 2);
+  width: 1px;
+  background: rgba(34, 51, 77, 0.75);
+  transform: translateX(-50%);
+}
+
+#kayak-sandbox .timeline-connector__plane {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  transform: translate(-50%, -50%);
+  fill: rgba(34, 51, 77, 0.75);
+  opacity: 0.85;
 }
 
 #kayak-sandbox .duration-chip {
@@ -426,7 +450,7 @@
   }
 
   #kayak-sandbox .leg {
-    grid-template-columns: 24px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
   }
 
   #kayak-sandbox .amenities {
@@ -434,24 +458,6 @@
     justify-content: flex-start;
     align-items: center;
     margin-top: 16px;
-  }
-
-  #kayak-sandbox .leg {
-    grid-template-areas:
-      "rail main"
-      "rail amenities";
-  }
-
-  #kayak-sandbox .rail {
-    grid-area: rail;
-  }
-
-  #kayak-sandbox .leg-main {
-    grid-area: main;
-  }
-
-  #kayak-sandbox .amenities {
-    grid-area: amenities;
   }
 }
 
@@ -485,12 +491,10 @@
 
 /* Leg rows tighten + slimmer rail */
 #kayak-sandbox.compact .leg{
-  grid-template-columns: 24px minmax(0, 1fr) auto; /* rail narrower */
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px;
   padding: 10px 6px;
 }
-#kayak-sandbox.compact .rail .line{ width: 1.5px; }
-#kayak-sandbox.compact .dot{ width: 10px; height: 10px; border-width: 1.5px; }
 
 /* Badges smaller */
 #kayak-sandbox.compact .badges{ gap: 6px; }
@@ -500,15 +504,19 @@
 
 /* Times + labels tighter */
 #kayak-sandbox.compact .leg-main{ gap: 12px; }
-#kayak-sandbox.compact .timeline{ gap: 12px; }
-#kayak-sandbox.compact .timeline-event{
-  grid-template-columns: 76px minmax(0, 1fr);
-  gap: 10px;
+#kayak-sandbox.compact .timeline{
+  --timeline-rail-width: 16px;
+  --timeline-dot-size: 8px;
+  --timeline-column-gap: 10px;
+  --timeline-offset: 38px;
+  grid-template-columns: var(--timeline-rail-width) 76px minmax(0, 1fr);
+  column-gap: var(--timeline-column-gap);
+  row-gap: 12px;
 }
 #kayak-sandbox.compact .timeline-event__time{ font-size: 18px; line-height: 1.2; }
 #kayak-sandbox.compact .timeline-event__detail{ font-size: 12px; }
 #kayak-sandbox.compact .timeline-event__date{ font-size: 10px; letter-spacing: 0.05em; }
-#kayak-sandbox.compact .timeline-duration{ padding-left: 76px; }
+#kayak-sandbox.compact .timeline-connector__plane{ width: 10px; height: 10px; }
 #kayak-sandbox.compact .duration-chip{ font-size: 11px; padding: 2px 6px; }
 #kayak-sandbox.compact .arrives-note,
 #kayak-sandbox.compact .depart-note{ font-size: 11px; margin-top: 2px; }
@@ -550,12 +558,10 @@
 
 /* Leg rows: tighter + slimmer rail */
 #kayak-sandbox.compactStack .leg{
-  grid-template-columns: 22px minmax(0, 1fr) auto;  /* rail narrower */
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px;
   padding: 8px 6px;
 }
-#kayak-sandbox.compactStack .rail .line{ width: 1.5px; }
-#kayak-sandbox.compactStack .dot{ width: 9px; height: 9px; border-width: 1.5px; }
 
 /* Badges smaller */
 #kayak-sandbox.compactStack .badges{ gap: 6px; }
@@ -564,22 +570,26 @@
 #kayak-sandbox.compactStack .chip.warn{ padding: 2px 6px; }
 
 #kayak-sandbox.compactStack .leg-main{ gap: 10px; }
-#kayak-sandbox.compactStack .timeline{ gap: 10px; }
-#kayak-sandbox.compactStack .timeline-event{
-  grid-template-columns: 68px minmax(0, 1fr);
-  gap: 8px;
+#kayak-sandbox.compactStack .timeline{
+  --timeline-rail-width: 14px;
+  --timeline-dot-size: 8px;
+  --timeline-column-gap: 8px;
+  --timeline-offset: 36px;
+  grid-template-columns: var(--timeline-rail-width) 68px minmax(0, 1fr);
+  column-gap: var(--timeline-column-gap);
+  row-gap: 10px;
 }
 #kayak-sandbox.compactStack .timeline-event__time{ font-size: 16px; line-height: 1.2; }
 #kayak-sandbox.compactStack .timeline-event__detail{ font-size: 11.5px; }
 #kayak-sandbox.compactStack .timeline-event__date{ font-size: 10px; letter-spacing: .05em; }
-#kayak-sandbox.compactStack .timeline-duration{ padding-left: 68px; }
+#kayak-sandbox.compactStack .timeline-connector__plane{ width: 9px; height: 9px; }
 #kayak-sandbox.compactStack .duration-chip{ font-size: 10.5px; padding: 2px 6px; }
 #kayak-sandbox.compactStack .arrives-note,
 #kayak-sandbox.compactStack .depart-note{ font-size: 10.5px; margin-top: 2px; letter-spacing: .02em; }
 
 /* Keep amenities INLINE at top-right (was stacking vertically) */
 #kayak-sandbox.compactStack .amenities{
-  grid-column: 3;           /* force right column */
+  grid-column: 2;           /* force right column */
   align-self: start;
   display: flex; gap: 6px; flex-wrap: nowrap; white-space: nowrap;
   margin-top: 0;
