@@ -461,7 +461,11 @@ function createTimelineEvent({ type, time, city, code, date, note }, rowIndex) {
 
   const cityLine = createCityLine(city, code);
   cityLine.classList.add('timeline-cityline');
-  detail.appendChild(cityLine);
+
+  const primary = document.createElement('div');
+  primary.className = 'timeline-event__primary';
+  primary.appendChild(cityLine);
+  detail.appendChild(primary);
 
   if (date) {
     const dateEl = document.createElement('div');
