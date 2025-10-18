@@ -407,18 +407,9 @@ export function initDemo() {
     clipboardOutput.scrollTop = 0;
     if (!clipboardStatus) return;
     clearTimeout(clipboardTimer);
-    if (value) {
-      clipboardStatus.textContent = 'Copied ✓';
-      clipboardStatus.classList.add('is-visible');
-      clipboardTimer = setTimeout(() => {
-        if (!clipboardStatus.isConnected) return;
-        clipboardStatus.classList.remove('is-visible');
-        clipboardStatus.textContent = '';
-      }, 1800);
-    } else {
-      clipboardStatus.classList.remove('is-visible');
-      clipboardStatus.textContent = '';
-    }
+    clipboardTimer = null;
+    clipboardStatus.classList.remove('is-visible');
+    clipboardStatus.textContent = '';
   }
 
   if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {

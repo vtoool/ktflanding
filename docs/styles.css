@@ -123,6 +123,13 @@ body.legal .site-header {
   gap: 0.6rem;
 }
 
+.brand__logo {
+  height: 40px;
+  width: auto;
+  display: block;
+  color: var(--color-accent);
+}
+
 .site-nav {
   display: flex;
   align-items: center;
@@ -473,13 +480,13 @@ body.legal .site-header {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.16), rgba(14, 116, 144, 0.16));
-  border: 1px solid rgba(37, 99, 235, 0.25);
+  background: var(--color-accent);
+  color: #fff;
 }
 
-.feature-card__icon img {
-  width: 24px;
-  height: 24px;
+.feature-card__icon svg {
+  width: 20px;
+  height: 20px;
 }
 
 .feature-card h3 {
@@ -1052,11 +1059,14 @@ body.legal .site-header {
   color: var(--color-text);
   padding: 1rem;
   font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
-  font-size: 0.85rem;
+  font-size: 0.76rem;
   line-height: 1.5;
   min-height: 220px;
-  white-space: pre;
-  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .demo-clipboard__output[data-empty="true"] {
