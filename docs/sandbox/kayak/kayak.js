@@ -271,28 +271,6 @@ function buildLeg(segment, index, lastIndex, itineraryData, previousArrivalDate)
   const leg = document.createElement('div');
   leg.className = 'leg';
 
-  const rail = document.createElement('div');
-  rail.className = 'rail';
-
-  const line = document.createElement('div');
-  line.className = 'line';
-  if (index === 0) {
-    line.style.top = '24px';
-  }
-  if (index === lastIndex) {
-    line.style.bottom = '24px';
-  }
-
-  const topDot = document.createElement('div');
-  topDot.className = 'dot takeoff';
-  const bottomDot = document.createElement('div');
-  bottomDot.className = 'dot landing';
-
-  rail.appendChild(line);
-  rail.appendChild(topDot);
-  rail.appendChild(bottomDot);
-  leg.appendChild(rail);
-
   const main = document.createElement('div');
   main.className = 'leg-main';
 
@@ -329,6 +307,8 @@ function buildLeg(segment, index, lastIndex, itineraryData, previousArrivalDate)
   const timeline = document.createElement('div');
   timeline.className = 'timeline';
 
+  let timelineRowIndex = 1;
+
   const departNote = (
     segment.depart?.date &&
     previousArrivalDate &&
@@ -344,15 +324,22 @@ function buildLeg(segment, index, lastIndex, itineraryData, previousArrivalDate)
     code: segment.depart.iata,
     date: departNote ? null : segment.depart?.date,
     note: departNote,
-  });
+  }, timelineRowIndex);
   timeline.appendChild(departEvent);
+
+  const departRow = timelineRowIndex;
+  timelineRowIndex += 1;
 
   const timelineDuration = document.createElement('div');
   timelineDuration.className = 'timeline-duration';
   const durationChip = createChip(segment.duration);
   durationChip.classList.add('duration-chip');
   timelineDuration.appendChild(durationChip);
+  timelineDuration.style.gridColumn = '2 / span 2';
+  timelineDuration.style.gridRow = String(timelineRowIndex);
   timeline.appendChild(timelineDuration);
+
+  timelineRowIndex += 1;
 
   const arriveNote = (segment.arrive.date && segment.arrive.date !== segment.depart.date)
     ? `Arrives ${segment.arrive.date}`
@@ -365,8 +352,14 @@ function buildLeg(segment, index, lastIndex, itineraryData, previousArrivalDate)
     code: segment.arrive.iata,
     date: arriveNote ? null : segment.arrive?.date,
     note: arriveNote,
-  });
+  }, timelineRowIndex);
   timeline.appendChild(arriveEvent);
+
+  const arriveRow = timelineRowIndex;
+  timelineRowIndex += 1;
+
+  const connector = createTimelineConnector(departRow, arriveRow);
+  timeline.appendChild(connector);
 
   main.appendChild(timeline);
 
@@ -444,17 +437,27 @@ function createCityLine(city, code) {
   return wrapper;
 }
 
-function createTimelineEvent({ type, time, city, code, date, note }) {
+function createTimelineEvent({ type, time, city, code, date, note }, rowIndex) {
   const event = document.createElement('div');
   event.className = `timeline-event timeline-event--${type}`;
+
+  const rail = document.createElement('div');
+  rail.className = `timeline-event__rail timeline-event__rail--${type}`;
+  rail.style.gridRow = String(rowIndex);
+
+  const dot = document.createElement('span');
+  dot.className = `timeline-dot timeline-dot--${type}`;
+  dot.setAttribute('aria-hidden', 'true');
+  rail.appendChild(dot);
 
   const timeEl = document.createElement('div');
   timeEl.className = 'timeline-event__time';
   timeEl.textContent = time || '';
-  event.appendChild(timeEl);
+  timeEl.style.gridRow = String(rowIndex);
 
   const detail = document.createElement('div');
   detail.className = 'timeline-event__detail';
+  detail.style.gridRow = String(rowIndex);
 
   const cityLine = createCityLine(city, code);
   cityLine.classList.add('timeline-cityline');
@@ -474,8 +477,43 @@ function createTimelineEvent({ type, time, city, code, date, note }) {
     detail.appendChild(noteEl);
   }
 
+  event.appendChild(rail);
+  event.appendChild(timeEl);
   event.appendChild(detail);
   return event;
+}
+
+function createTimelineConnector(startRow, endRow) {
+  const connector = document.createElement('div');
+  connector.className = 'timeline-connector';
+  connector.setAttribute('aria-hidden', 'true');
+  connector.style.gridColumn = '1';
+  connector.style.gridRowStart = String(startRow);
+  connector.style.gridRowEnd = String(endRow + 1);
+
+  const line = document.createElement('span');
+  line.className = 'timeline-connector__line';
+  connector.appendChild(line);
+
+  const plane = createPlaneIcon();
+  plane.classList.add('timeline-connector__plane');
+  connector.appendChild(plane);
+
+  return connector;
+}
+
+function createPlaneIcon() {
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(svgNS, 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('focusable', 'false');
+  svg.setAttribute('aria-hidden', 'true');
+
+  const path = document.createElementNS(svgNS, 'path');
+  path.setAttribute('d', 'M2 12l20-3-20-3 6 6-6 6z');
+  svg.appendChild(path);
+
+  return svg;
 }
 
 function getClipboardText(itineraryData) {
