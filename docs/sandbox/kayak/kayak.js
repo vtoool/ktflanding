@@ -322,7 +322,7 @@ function buildLeg(segment, index, lastIndex, itineraryData, previousArrivalDate)
     time: segment.depart.time,
     city: segment.depart.airport,
     code: segment.depart.iata,
-    date: departNote ? null : segment.depart?.date,
+    date: null,
     note: departNote,
   }, timelineRowIndex);
   timeline.appendChild(departEvent);
@@ -350,7 +350,7 @@ function buildLeg(segment, index, lastIndex, itineraryData, previousArrivalDate)
     time: segment.arrive.time,
     city: segment.arrive.airport,
     code: segment.arrive.iata,
-    date: arriveNote ? null : segment.arrive?.date,
+    date: null,
     note: arriveNote,
   }, timelineRowIndex);
   timeline.appendChild(arriveEvent);
