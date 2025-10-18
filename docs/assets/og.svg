@@ -25,7 +25,7 @@
   <g filter="url(#shadow)" transform="translate(160 150)">
     <rect width="880" height="330" rx="32" fill="#102a4e"/>
     <g transform="translate(60 60)">
-      <text x="0" y="0" font-family="'Inter', 'Segoe UI', sans-serif" font-size="42" fill="#9fb7d5" letter-spacing="0.08em" text-transform="uppercase">FareSnap</text>
+      <text x="0" y="0" font-family="'Inter', 'Segoe UI', sans-serif" font-size="42" fill="#9fb7d5" letter-spacing="0.08em" text-transform="uppercase">Kayak to *I</text>
       <text x="0" y="86" font-family="'Inter', 'Segoe UI', sans-serif" font-size="70" font-weight="700" fill="#ffffff">Clipboard-perfect Sabre lines in one click.</text>
       <text x="0" y="150" font-family="'Inter', 'Segoe UI', sans-serif" font-size="32" fill="#9fb7d5">Mirror the extension demo, stress-test long itineraries, and share flawlessly formatted output.</text>
       <g transform="translate(0 190)">

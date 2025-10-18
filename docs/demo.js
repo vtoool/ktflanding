@@ -138,10 +138,10 @@ function buildSegmentNode(segment, index) {
       </div>
       ${extraChips.length ? `<div class="extra">${extraChips.join('')}</div>` : ''}
       <div class="amenities" aria-label="Amenities">
-        <button class="icon-btn" type="button" aria-label="Wi-Fi" title="Wi-Fi">✓</button>
-        <button class="icon-btn" type="button" aria-label="Baggage" title="Baggage">✓</button>
-        <button class="icon-btn" type="button" aria-label="Seat" title="Seat">✓</button>
-        <button class="icon-btn" type="button" aria-label="Power" title="Power">✓</button>
+        <button class="icon-btn" type="button" aria-label="Wi-Fi" title="Wi-Fi">🌐</button>
+        <button class="icon-btn" type="button" aria-label="Baggage" title="Baggage">🧳</button>
+        <button class="icon-btn" type="button" aria-label="Seat" title="Seat">💺</button>
+        <button class="icon-btn" type="button" aria-label="Power" title="Power">🔌</button>
         <button class="icon-btn caret" type="button" aria-label="More details" title="More">▾</button>
       </div>
     </div>
