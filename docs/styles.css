@@ -1059,7 +1059,7 @@ body.legal .site-header {
   color: var(--color-text);
   padding: 1rem;
   font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
-  font-size: 0.76rem;
+  font-size: 0.8rem;
   line-height: 1.5;
   min-height: 220px;
   white-space: pre-wrap;
@@ -1067,6 +1067,14 @@ body.legal .site-header {
   overflow-wrap: anywhere;
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+.demo-clipboard__output pre {
+  margin: 0;
+  font: inherit;
+  white-space: inherit;
+  word-break: inherit;
+  overflow-wrap: inherit;
 }
 
 .demo-clipboard__output[data-empty="true"] {

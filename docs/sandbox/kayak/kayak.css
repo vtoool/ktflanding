@@ -55,10 +55,10 @@
 
 #kayak-sandbox .card-header {
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: space-between;
   padding: 20px 24px 12px 24px;
-  gap: 16px;
+  gap: 16px 24px;
   flex-wrap: wrap;
 }
 
@@ -84,14 +84,26 @@
   color: #0b1f3a;
   font-weight: 600;
   font-size: 16px;
+  margin-left: 0;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+#kayak-sandbox .card-meta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
   margin-left: auto;
+  flex-wrap: nowrap;
 }
 
 #kayak-sandbox .card-actions {
   display: flex;
   align-items: center;
   flex: 0 0 auto;
-  margin-left: 12px;
+  margin-left: 0;
 }
 
 #kayak-sandbox .pill-i {
@@ -224,6 +236,22 @@
   object-fit: contain;
 }
 
+#kayak-sandbox .airline-logo--fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background: #eef2f9;
+  color: #22334d;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding: 0 6px;
+}
+
 #kayak-sandbox .chip {
   padding: 4px 10px;
   border-radius: 999px;
@@ -318,6 +346,7 @@
 
 #kayak-sandbox .layover-text {
   display: block;
+  white-space: pre-line;
 }
 
 #kayak-sandbox .toast {
@@ -349,6 +378,12 @@
     flex-direction: column;
     align-items: flex-start;
     padding-right: 72px;
+  }
+
+  #kayak-sandbox .card-meta {
+    margin-left: 0;
+    justify-content: flex-start;
+    width: 100%;
   }
 
   #kayak-sandbox .card-duration {
