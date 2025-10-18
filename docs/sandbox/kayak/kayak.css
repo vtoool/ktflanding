@@ -169,6 +169,7 @@
   grid-template-columns: 32px minmax(0, 1fr) auto;
   gap: 20px;
   padding: 20px 24px;
+  align-items: start;
 }
 
 #kayak-sandbox .layover {
@@ -218,8 +219,8 @@
 }
 
 #kayak-sandbox .leg-main {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 }
 
@@ -273,40 +274,74 @@
   color: #92400e;
 }
 
-#kayak-sandbox .times {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+#kayak-sandbox .timeline {
+  display: flex;
+  flex-direction: column;
   gap: 16px;
+}
+
+#kayak-sandbox .timeline-event {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 14px;
   align-items: start;
 }
 
-#kayak-sandbox .bigtime {
+#kayak-sandbox .timeline-event__time {
   font-size: 24px;
   font-weight: 600;
   color: #0b1f3a;
+  line-height: 1.1;
 }
 
-#kayak-sandbox .place {
+#kayak-sandbox .timeline-event__detail {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   font-size: 14px;
   color: #33435a;
-  margin-top: 4px;
 }
 
-#kayak-sandbox .arrives-note {
-  margin-top: 6px;
+#kayak-sandbox .timeline-cityline {
+  display: block;
+}
+
+#kayak-sandbox .timeline-event__date {
+  font-size: 12px;
+  color: #5b6c86;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+#kayak-sandbox .timeline-duration {
+  padding-left: 92px;
+  display: flex;
+  align-items: center;
+}
+
+#kayak-sandbox .duration-chip {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+#kayak-sandbox .cityline {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+#kayak-sandbox .cityline-code {
+  color: #5b6c86;
+}
+
+#kayak-sandbox .arrives-note,
+#kayak-sandbox .depart-note {
+  margin-top: 2px;
   font-size: 12px;
   color: #c2410c;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-}
-
-#kayak-sandbox .extra {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #5b6c86;
-  font-size: 13px;
 }
 
 #kayak-sandbox .amenities {
@@ -450,7 +485,7 @@
 
 /* Leg rows tighten + slimmer rail */
 #kayak-sandbox.compact .leg{
-  grid-template-columns: 24px 1fr; /* rail narrower */
+  grid-template-columns: 24px minmax(0, 1fr) auto; /* rail narrower */
   gap: 8px;
   padding: 10px 6px;
 }
@@ -464,16 +499,21 @@
 #kayak-sandbox.compact .chip.warn{ padding: 2px 6px; }
 
 /* Times + labels tighter */
-#kayak-sandbox.compact .times{
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+#kayak-sandbox.compact .leg-main{ gap: 12px; }
+#kayak-sandbox.compact .timeline{ gap: 12px; }
+#kayak-sandbox.compact .timeline-event{
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 10px;
 }
-#kayak-sandbox.compact .times .bigtime{ font-size: 18px; line-height: 1.15; }
-#kayak-sandbox.compact .place{ font-size: 12px; }
-#kayak-sandbox.compact .arrives-note{ font-size: 11px; margin-top: 1px; }
+#kayak-sandbox.compact .timeline-event__time{ font-size: 18px; line-height: 1.2; }
+#kayak-sandbox.compact .timeline-event__detail{ font-size: 12px; }
+#kayak-sandbox.compact .timeline-event__date{ font-size: 10px; letter-spacing: 0.05em; }
+#kayak-sandbox.compact .timeline-duration{ padding-left: 76px; }
+#kayak-sandbox.compact .duration-chip{ font-size: 11px; padding: 2px 6px; }
+#kayak-sandbox.compact .arrives-note,
+#kayak-sandbox.compact .depart-note{ font-size: 11px; margin-top: 2px; }
 
-/* Extras + amenities smaller */
-#kayak-sandbox.compact .extra{ gap: 6px; margin-top: 2px; }
+/* Amenities smaller */
 #kayak-sandbox.compact .amenities{ gap: 6px; }
 #kayak-sandbox.compact .icon-btn{
   width: 22px; height: 22px; line-height: 22px;
@@ -510,7 +550,7 @@
 
 /* Leg rows: tighter + slimmer rail */
 #kayak-sandbox.compactStack .leg{
-  grid-template-columns: 22px 1fr;  /* rail narrower */
+  grid-template-columns: 22px minmax(0, 1fr) auto;  /* rail narrower */
   gap: 8px;
   padding: 8px 6px;
 }
@@ -523,16 +563,23 @@
 #kayak-sandbox.compactStack .chip{ font-size: 11px; padding: 2px 6px; }
 #kayak-sandbox.compactStack .chip.warn{ padding: 2px 6px; }
 
-/* Times + labels smaller */
-#kayak-sandbox.compactStack .times{ grid-template-columns: 1fr 1fr; gap: 12px; }
-#kayak-sandbox.compactStack .times .bigtime{ font-size: 17px; line-height: 1.15; }
-#kayak-sandbox.compactStack .place{ font-size: 11.5px; }
-#kayak-sandbox.compactStack .arrives-note{ font-size: 11px; margin-top: 1px; letter-spacing: .01em; }
+#kayak-sandbox.compactStack .leg-main{ gap: 10px; }
+#kayak-sandbox.compactStack .timeline{ gap: 10px; }
+#kayak-sandbox.compactStack .timeline-event{
+  grid-template-columns: 68px minmax(0, 1fr);
+  gap: 8px;
+}
+#kayak-sandbox.compactStack .timeline-event__time{ font-size: 16px; line-height: 1.2; }
+#kayak-sandbox.compactStack .timeline-event__detail{ font-size: 11.5px; }
+#kayak-sandbox.compactStack .timeline-event__date{ font-size: 10px; letter-spacing: .05em; }
+#kayak-sandbox.compactStack .timeline-duration{ padding-left: 68px; }
+#kayak-sandbox.compactStack .duration-chip{ font-size: 10.5px; padding: 2px 6px; }
+#kayak-sandbox.compactStack .arrives-note,
+#kayak-sandbox.compactStack .depart-note{ font-size: 10.5px; margin-top: 2px; letter-spacing: .02em; }
 
 /* Keep amenities INLINE at top-right (was stacking vertically) */
-#kayak-sandbox.compactStack .leg-main{ grid-template-columns: 1fr auto; align-items: start; }
 #kayak-sandbox.compactStack .amenities{
-  grid-column: 2;           /* force right column */
+  grid-column: 3;           /* force right column */
   align-self: start;
   display: flex; gap: 6px; flex-wrap: nowrap; white-space: nowrap;
   margin-top: 0;
@@ -542,8 +589,7 @@
   border-radius: 999px;
 }
 
-/* Extras + layover tighter */
-#kayak-sandbox.compactStack .extra{ gap: 6px; margin-top: 2px; }
+/* Layover tighter */
 #kayak-sandbox.compactStack .layover{ padding: 6px 6px 0 36px; font-size: 12px; }
 #kayak-sandbox.compactStack .layover-text{ font-size: 12px; }
 

@@ -1059,12 +1059,12 @@ body.legal .site-header {
   color: var(--color-text);
   padding: 1rem;
   font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   line-height: 1.5;
   min-height: 220px;
-  white-space: pre-wrap;
-  word-break: break-word;
-  overflow-wrap: anywhere;
+  white-space: pre;
+  word-break: normal;
+  overflow-wrap: normal;
   overflow-x: hidden;
   overflow-y: auto;
 }
