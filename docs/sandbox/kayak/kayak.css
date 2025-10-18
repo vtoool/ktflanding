@@ -249,7 +249,7 @@
   --timeline-column-gap: 14px;
   --timeline-offset: 52px;
   display: grid;
-  grid-template-columns: var(--timeline-rail-width) 92px minmax(0, 1fr);
+  grid-template-columns: var(--timeline-rail-width) auto minmax(0, 1fr);
   column-gap: var(--timeline-column-gap);
   row-gap: 16px;
   position: relative;
@@ -285,6 +285,7 @@
   color: #0b1f3a;
   line-height: 1.1;
   align-self: center;
+  white-space: nowrap;
 }
 
 #kayak-sandbox .timeline-event__detail {
