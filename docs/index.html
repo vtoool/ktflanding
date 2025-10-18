@@ -89,26 +89,59 @@
           </ul>
         </div>
         <div class="hero__visual" aria-hidden="true">
-          <div class="hero-card">
-            <header class="hero-card__header">
-              <span class="hero-pill">Kayak result</span>
-              <span class="hero-status">*I pill armed</span>
-            </header>
-            <div class="hero-card__body">
-              <div class="hero-segment">
-                <div>
-                  <p class="hero-time">09:15</p>
-                  <p class="hero-airport">JFK</p>
+          <div class="hero-demo">
+            <span class="hero-demo__glow hero-demo__glow--left"></span>
+            <span class="hero-demo__glow hero-demo__glow--right"></span>
+
+            <article class="hero-demo__card hero-demo__card--kayak">
+              <header class="hero-demo__header">
+                <span class="hero-demo__pill">Kayak card</span>
+                <span class="hero-demo__tag">Detected ✦</span>
+              </header>
+              <div class="hero-demo__legs">
+                <div class="hero-demo__leg">
+                  <p class="hero-demo__time">09:15</p>
+                  <p class="hero-demo__airport">JFK</p>
+                  <p class="hero-demo__meta">Terminal 8</p>
                 </div>
-                <button class="hero-pill-action" type="button">*I</button>
-                <div>
-                  <p class="hero-time">12:05</p>
-                  <p class="hero-airport">LAX</p>
+                <div class="hero-demo__divider" role="presentation">
+                  <span class="hero-demo__divider-line"></span>
+                  <svg viewBox="0 0 44 12" aria-hidden="true" focusable="false">
+                    <path d="M2 6h36l4-4v8l-4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <span class="hero-demo__divider-line"></span>
+                </div>
+                <div class="hero-demo__leg hero-demo__leg--right">
+                  <p class="hero-demo__time">12:05</p>
+                  <p class="hero-demo__airport">LAX</p>
+                  <p class="hero-demo__meta">Gate 48B</p>
                 </div>
               </div>
-              <div class="hero-output">1 AA 001J  04OCT F  JFKLAX*SS1  915A  1205P /DCAA /E</div>
-              <div class="hero-toast">Copied ✓</div>
+              <div class="hero-demo__details">
+                <span>AA 001 · Flagship Business</span>
+                <span>Nonstop · Seat 4A</span>
+              </div>
+            </article>
+
+            <div class="hero-demo__connector">
+              <div class="hero-demo__connector-line">
+                <span class="hero-demo__dot" aria-hidden="true"></span>
+                <span class="hero-demo__beam" aria-hidden="true"></span>
+              </div>
+              <div class="hero-demo__connector-label">One-click transforms to Sabre format</div>
             </div>
+
+            <article class="hero-demo__card hero-demo__card--clipboard">
+              <header class="hero-demo__header">
+                <span class="hero-demo__pill hero-demo__pill--soft">Clipboard preview</span>
+                <span class="hero-demo__tag hero-demo__tag--success">Copied ✓</span>
+              </header>
+              <div class="hero-demo__clipboard" role="presentation">
+                <code>1 AA 001J 04OCT JFKLAX  915A 1205P /DCAA /E</code>
+                <code>2 AA 432J 07OCT LAXJFK  115P  945P /DCAA /E</code>
+              </div>
+              <p class="hero-demo__hint">Perfect spacing, booking classes, and segment numbers every time.</p>
+            </article>
           </div>
         </div>
       </div>
