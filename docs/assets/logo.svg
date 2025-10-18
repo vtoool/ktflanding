@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="152" height="40" viewBox="0 0 152 40" role="img" aria-labelledby="title desc">
-  <title id="title">Kayak to *I</title>
-  <desc id="desc">Stylised logo for Kayak to *I</desc>
+  <title id="title">FareSnap</title>
+  <desc id="desc">Stylised logo for FareSnap</desc>
   <defs>
     <linearGradient id="g" x1="0%" x2="100%" y1="50%" y2="50%">
       <stop offset="0%" stop-color="#2563eb"/>
@@ -10,5 +10,5 @@
   <rect x="0" y="0" width="152" height="40" rx="12" fill="#0b1f3a"/>
   <rect x="4" y="4" width="48" height="32" rx="8" fill="url(#g)"/>
   <path d="M18 12h8l-4 6 4 6h-8l-4-6z" fill="#fff" opacity="0.9"/>
-  <text x="62" y="25" font-family="'Inter', 'Segoe UI', sans-serif" font-size="16" font-weight="600" fill="#ffffff">Kayak to *I</text>
+  <text x="54" y="25" font-family="'Inter', 'Segoe UI', sans-serif" font-size="16" font-weight="600" letter-spacing="0.04em" fill="#ffffff">FareSnap</text>
 </svg>
