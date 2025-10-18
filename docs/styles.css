@@ -1060,7 +1060,7 @@ body.legal .site-header {
   color: var(--color-text);
   padding: 1rem;
   font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
-  font-size: 0.76rem;
+  font-size: 0.85rem;
   line-height: 1.5;
   min-height: 220px;
   white-space: pre;
