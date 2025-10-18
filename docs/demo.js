@@ -402,7 +402,17 @@ export function initDemo() {
   function setClipboardDisplay(text) {
     if (!clipboardOutput) return;
     const value = typeof text === 'string' ? text : String(text ?? '');
-    clipboardOutput.textContent = value;
+    let pre = clipboardOutput._clipboardPre;
+    if (!pre || !pre.isConnected) {
+      pre = document.createElement('pre');
+      pre.dataset.clipboardPre = 'true';
+      while (clipboardOutput.firstChild) {
+        clipboardOutput.removeChild(clipboardOutput.firstChild);
+      }
+      clipboardOutput.appendChild(pre);
+      clipboardOutput._clipboardPre = pre;
+    }
+    pre.textContent = value;
     clipboardOutput.dataset.empty = value ? 'false' : 'true';
     clipboardOutput.scrollTop = 0;
     if (!clipboardStatus) return;

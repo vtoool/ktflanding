@@ -1,4 +1,4 @@
-import { itinerary } from './kayak-data.js';
+import { itinerary as defaultItinerary, longLayoverItinerary } from './kayak-data.js';
 import { formatSegmentsToI } from './kayak-formatter.js';
 
 const root = document.getElementById('kayak-root');
@@ -17,14 +17,28 @@ const itineraryContainer = document.createElement('div');
 itineraryContainer.className = 'itinerary';
 root.appendChild(itineraryContainer);
 
+const state = {
+  activeItinerary: null,
+};
+
 const updateClipboardSimulator = (() => {
   let statusTimer = null;
   return (text) => {
     const output = document.querySelector('[data-clipboard-output]');
     if (!output) return;
+    let pre = output._clipboardPre;
+    if (!pre || !pre.isConnected) {
+      pre = document.createElement('pre');
+      pre.dataset.clipboardPre = 'true';
+      while (output.firstChild) {
+        output.removeChild(output.firstChild);
+      }
+      output.appendChild(pre);
+      output._clipboardPre = pre;
+    }
     const status = document.querySelector('[data-clipboard-status]');
     const value = typeof text === 'string' ? text : String(text ?? '');
-    output.textContent = value;
+    pre.textContent = value;
     output.dataset.empty = value ? 'false' : 'true';
     output.scrollTop = 0;
     if (!status) return;
@@ -44,16 +58,72 @@ const updateClipboardSimulator = (() => {
   };
 })();
 
-const cards = [
-  { label: 'Depart', data: itinerary.outbound, key: 'outbound' },
-  { label: 'Return', data: itinerary.inbound, key: 'inbound' }
-];
+renderItinerary(defaultItinerary);
+setupScenarioListeners();
 
-for (const cardConfig of cards) {
-  itineraryContainer.appendChild(buildCard(cardConfig.label, cardConfig.data, cardConfig.key));
+function renderItinerary(itineraryData) {
+  if (!itineraryData) return;
+  state.activeItinerary = itineraryData;
+  updateSandboxHeader(itineraryData);
+
+  itineraryContainer.innerHTML = '';
+
+  const cards = [];
+  if (itineraryData.outbound) {
+    cards.push({
+      label: itineraryData.outbound.label || 'Depart',
+      data: itineraryData.outbound,
+      key: 'outbound',
+    });
+  }
+  if (itineraryData.inbound) {
+    cards.push({
+      label: itineraryData.inbound.label || 'Return',
+      data: itineraryData.inbound,
+      key: 'inbound',
+    });
+  }
+
+  if (cards.length === 0) {
+    return;
+  }
+
+  for (const cardConfig of cards) {
+    itineraryContainer.appendChild(
+      buildCard(cardConfig.label, cardConfig.data, cardConfig.key, itineraryData),
+    );
+  }
 }
 
-function buildCard(label, data, locationKey) {
+function setupScenarioListeners() {
+  const tabs = document.querySelectorAll('[data-scenario-tab]');
+  if (!tabs.length) return;
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const key = tab.getAttribute('data-scenario-tab');
+      if (key === 'layover') {
+        renderItinerary(longLayoverItinerary);
+      } else if (key === 'simple' || key === 'multicity') {
+        renderItinerary(defaultItinerary);
+      }
+    });
+  });
+}
+
+function updateSandboxHeader(itineraryData) {
+  const sandbox = document.getElementById('kayak-sandbox');
+  if (!sandbox) return;
+  const title = sandbox.querySelector('.sandbox-title');
+  if (title && itineraryData.title) {
+    title.textContent = itineraryData.title;
+  }
+  const meta = sandbox.querySelector('.sandbox-meta');
+  if (meta && itineraryData.meta) {
+    meta.textContent = itineraryData.meta;
+  }
+}
+
+function buildCard(label, data, locationKey, itineraryData) {
   const card = document.createElement('article');
   card.className = 'itinerary-card';
 
@@ -67,18 +137,17 @@ function buildCard(label, data, locationKey) {
   strong.textContent = `${label} · ${data.headerDate}`;
   titleWrap.appendChild(strong);
 
-  const flightSegments = data.segments.filter(segment => !segment.layover);
+  const flightSegments = (data.segments || []).filter(segment => !segment.layover);
 
   const duration = document.createElement('div');
   duration.className = 'card-duration';
   duration.textContent = data.totalDuration;
 
-  header.appendChild(titleWrap);
-  header.appendChild(duration);
-  card.appendChild(header);
+  const meta = document.createElement('div');
+  meta.className = 'card-meta';
+  meta.appendChild(duration);
 
   let pill;
-  let toast;
   if (locationKey === 'outbound') {
     const actions = document.createElement('div');
     actions.className = 'card-actions';
@@ -92,15 +161,12 @@ function buildCard(label, data, locationKey) {
     pill.dataset.defaultAria = pill.getAttribute('aria-label') || '';
 
     actions.appendChild(pill);
-    header.appendChild(actions);
-
-    toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.setAttribute('role', 'status');
-    toast.setAttribute('aria-live', 'polite');
-    toast.textContent = 'Copied';
-    card.appendChild(toast);
+    meta.appendChild(actions);
   }
+
+  header.appendChild(titleWrap);
+  header.appendChild(meta);
+  card.appendChild(header);
 
   const legs = document.createElement('div');
   legs.className = 'legs';
@@ -108,24 +174,21 @@ function buildCard(label, data, locationKey) {
   let flightIndex = 0;
   const lastFlightIndex = flightSegments.length - 1;
 
-  for (const segment of data.segments) {
+  for (const segment of data.segments || []) {
     if (segment.layover) {
       legs.appendChild(buildLayover(segment));
       continue;
     }
-    const leg = buildLeg(segment, flightIndex, lastFlightIndex);
+    const leg = buildLeg(segment, flightIndex, lastFlightIndex, itineraryData);
     legs.appendChild(leg);
     flightIndex += 1;
   }
 
   card.appendChild(legs);
 
-  if (pill && toast) {
+  if (pill) {
     pill.addEventListener('click', async () => {
-      const text = formatSegmentsToI([
-        ...(itinerary.outbound?.segments || []),
-        ...(itinerary.inbound?.segments || []),
-      ]);
+      const text = getClipboardText(itineraryData);
       updateClipboardSimulator(text);
       if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function') {
         window.dispatchEvent(
@@ -148,7 +211,6 @@ function buildCard(label, data, locationKey) {
 
       if (copied) {
         showPillSuccess(pill);
-        showToast(toast);
         trackEvent('demo_copy', { location: locationKey });
       }
     });
@@ -157,7 +219,7 @@ function buildCard(label, data, locationKey) {
   return card;
 }
 
-function buildLeg(segment, index, lastIndex) {
+function buildLeg(segment, index, lastIndex, itineraryData) {
   const leg = document.createElement('div');
   leg.className = 'leg';
 
@@ -189,11 +251,21 @@ function buildLeg(segment, index, lastIndex) {
   const badges = document.createElement('div');
   badges.className = 'badges';
 
-  const logo = document.createElement('img');
-  logo.className = 'airline-logo';
-  logo.src = itinerary.logoLH;
-  logo.alt = `${segment.carrierName} logo`;
-  badges.appendChild(logo);
+  const logoUrl = segment.logo || itineraryData?.logoUrl || defaultItinerary.logoUrl || '';
+  if (logoUrl) {
+    const logo = document.createElement('img');
+    logo.className = 'airline-logo';
+    logo.loading = 'lazy';
+    logo.alt = segment.carrierName || 'Airline';
+    logo.src = logoUrl;
+    logo.addEventListener('error', () => {
+      if (!logo.isConnected) return;
+      logo.replaceWith(createLogoFallback(segment.carrierName));
+    });
+    badges.appendChild(logo);
+  } else {
+    badges.appendChild(createLogoFallback(segment.carrierName));
+  }
 
   const carrierChip = createChip(`${segment.carrierName} ${segment.flightNumber}`);
   badges.appendChild(carrierChip);
@@ -246,6 +318,12 @@ function buildLeg(segment, index, lastIndex) {
   const durationChip = createChip(segment.duration);
   extra.appendChild(durationChip);
 
+  if (segment.overnight) {
+    const overnightChip = createChip('Overnight flight');
+    overnightChip.classList.add('warn');
+    extra.appendChild(overnightChip);
+  }
+
   main.appendChild(extra);
 
   const amenities = document.createElement('div');
@@ -291,6 +369,13 @@ function buildLayover(segment) {
   return layover;
 }
 
+function createLogoFallback(label) {
+  const fallback = document.createElement('span');
+  fallback.className = 'airline-logo airline-logo--fallback';
+  fallback.textContent = label || 'Airline';
+  return fallback;
+}
+
 function createChip(text) {
   const chip = document.createElement('span');
   chip.className = 'chip';
@@ -298,12 +383,21 @@ function createChip(text) {
   return chip;
 }
 
-function showToast(toast) {
-  toast.classList.add('is-visible');
-  clearTimeout(toast.hideTimer);
-  toast.hideTimer = setTimeout(() => {
-    toast.classList.remove('is-visible');
-  }, 1500);
+function getClipboardText(itineraryData) {
+  if (!itineraryData) {
+    return '';
+  }
+  if (typeof itineraryData.clipboardText === 'string') {
+    return itineraryData.clipboardText;
+  }
+  const segments = [];
+  if (Array.isArray(itineraryData.outbound?.segments)) {
+    segments.push(...itineraryData.outbound.segments);
+  }
+  if (Array.isArray(itineraryData.inbound?.segments)) {
+    segments.push(...itineraryData.inbound.segments);
+  }
+  return formatSegmentsToI(segments);
 }
 
 function showPillSuccess(pill) {
