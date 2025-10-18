@@ -78,7 +78,6 @@ function buildCard(label, data, locationKey) {
   card.appendChild(header);
 
   let pill;
-  let toast;
   if (locationKey === 'outbound') {
     const actions = document.createElement('div');
     actions.className = 'card-actions';
@@ -93,13 +92,6 @@ function buildCard(label, data, locationKey) {
 
     actions.appendChild(pill);
     header.appendChild(actions);
-
-    toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.setAttribute('role', 'status');
-    toast.setAttribute('aria-live', 'polite');
-    toast.textContent = 'Copied';
-    card.appendChild(toast);
   }
 
   const legs = document.createElement('div');
@@ -120,7 +112,7 @@ function buildCard(label, data, locationKey) {
 
   card.appendChild(legs);
 
-  if (pill && toast) {
+  if (pill) {
     pill.addEventListener('click', async () => {
       const text = formatSegmentsToI([
         ...(itinerary.outbound?.segments || []),
@@ -148,7 +140,6 @@ function buildCard(label, data, locationKey) {
 
       if (copied) {
         showPillSuccess(pill);
-        showToast(toast);
         trackEvent('demo_copy', { location: locationKey });
       }
     });
@@ -308,14 +299,6 @@ function createChip(text) {
   chip.className = 'chip';
   chip.textContent = text;
   return chip;
-}
-
-function showToast(toast) {
-  toast.classList.add('is-visible');
-  clearTimeout(toast.hideTimer);
-  toast.hideTimer = setTimeout(() => {
-    toast.classList.remove('is-visible');
-  }, 1500);
 }
 
 function showPillSuccess(pill) {
