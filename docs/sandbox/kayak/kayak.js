@@ -191,12 +191,18 @@ function buildLeg(segment, index, lastIndex) {
 
   const logo = document.createElement('img');
   logo.className = 'airline-logo';
-  logo.src = itinerary.logoLH;
+  logo.src = itinerary.logo;
   logo.alt = `${segment.carrierName} logo`;
   badges.appendChild(logo);
 
   const carrierChip = createChip(`${segment.carrierName} ${segment.flightNumber}`);
   badges.appendChild(carrierChip);
+
+  if (segment.operatedBy) {
+    const operatedChip = createChip(segment.operatedBy);
+    operatedChip.classList.add('hollow');
+    badges.appendChild(operatedChip);
+  }
 
   if (segment.equipment) {
     const equipmentChip = createChip(segment.equipment);
@@ -245,6 +251,12 @@ function buildLeg(segment, index, lastIndex) {
 
   const durationChip = createChip(segment.duration);
   extra.appendChild(durationChip);
+
+  if (segment.overnight) {
+    const overnightChip = createChip('Overnight flight');
+    overnightChip.classList.add('warn');
+    extra.appendChild(overnightChip);
+  }
 
   main.appendChild(extra);
 

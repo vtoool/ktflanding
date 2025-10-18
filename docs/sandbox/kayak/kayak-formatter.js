@@ -75,9 +75,9 @@ export function formatSegmentsToI(segments) {
     const departParts = parseDateParts(segment.depart?.date);
     const arriveParts = parseDateParts(segment.arrive?.date);
     const departToken = formatDateToken(departParts);
-    const departDow = departParts?.dowCode ? departParts.dowCode : '';
+    const departDow = segment.depart?.gdsDayCode || departParts?.dowCode || '';
     const arriveToken = formatDateToken(arriveParts);
-    const arriveDow = arriveParts?.dowCode ? arriveParts.dowCode : '';
+    const arriveDow = segment.arrive?.gdsDayCode || arriveParts?.dowCode || '';
     const times = [
       formatGdsTime(segment.depart?.time),
       formatGdsTime(segment.arrive?.time),
@@ -87,13 +87,19 @@ export function formatSegmentsToI(segments) {
       departToken && arriveToken && departToken !== arriveToken,
     );
 
+    const marketingCode = segment.carrierCode
+      || (segment.carrierName ? segment.carrierName.replace(/[^A-Za-z]/g, '').slice(0, 2).toUpperCase() : '');
+    const carrierToken = `${marketingCode}${segment.flightNumber || ''}${segment.bookingClass || ''}`.trim();
+    const routeToken = `${segment.depart?.iata || ''}${segment.arrive?.iata || ''}${segment.status || '*SS1'}`.trim();
+    const fareBasis = segment.fareBasis || '/DCBA';
+    const ticketToken = segment.ticketDesignator || '/E';
+
     const parts = [
       String(index),
-      'LH',
-      `${segment.flightNumber || ''}J`.trim(),
+      carrierToken,
       departToken,
       departDow,
-      `${segment.depart?.iata || ''}${segment.arrive?.iata || ''}*SS1`,
+      routeToken,
       ...times,
     ];
 
@@ -104,7 +110,7 @@ export function formatSegmentsToI(segments) {
       }
     }
 
-    parts.push('/DCLH', '/E');
+    parts.push(fareBasis, ticketToken);
 
     lines.push(parts.filter(Boolean).join(' '));
     index += 1;

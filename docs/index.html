@@ -98,28 +98,62 @@
                 <span class="hero-demo__pill">Kayak card</span>
                 <span class="hero-demo__tag">Detected ✦</span>
               </header>
-              <div class="hero-demo__legs">
-                <div class="hero-demo__leg">
-                  <p class="hero-demo__time">09:15</p>
-                  <p class="hero-demo__airport">JFK</p>
-                  <p class="hero-demo__meta">Terminal 8</p>
-                </div>
-                <div class="hero-demo__divider" role="presentation">
-                  <span class="hero-demo__divider-line"></span>
-                  <svg viewBox="0 0 44 12" aria-hidden="true" focusable="false">
-                    <path d="M2 6h36l4-4v8l-4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                  <span class="hero-demo__divider-line"></span>
-                </div>
-                <div class="hero-demo__leg hero-demo__leg--right">
-                  <p class="hero-demo__time">12:05</p>
-                  <p class="hero-demo__airport">LAX</p>
-                  <p class="hero-demo__meta">Gate 48B</p>
-                </div>
+              <div class="hero-demo__availability" role="group" aria-label="Availability buttons">
+                <button type="button" class="hero-demo__availability-btn hero-demo__availability-btn--active">JFK-LHR</button>
+                <button type="button" class="hero-demo__availability-btn">LHR-JFK</button>
               </div>
-              <div class="hero-demo__details">
-                <span>AA 001 · Flagship Business</span>
-                <span>Nonstop · Seat 4A</span>
+              <div class="hero-demo__itinerary">
+                <section class="hero-demo__trip">
+                  <div class="hero-demo__trip-header">
+                    <p class="hero-demo__trip-title">Depart • Wed, Feb 11</p>
+                    <span class="hero-demo__trip-duration">6h 50m</span>
+                  </div>
+                  <div class="hero-demo__trip-airline">
+                    <span class="hero-demo__badge hero-demo__badge--inline">*I✓</span>
+                    <span class="hero-demo__airline">British Airways</span>
+                  </div>
+                  <p class="hero-demo__flight-meta">British Airways 1515 · Operated by American Airlines</p>
+                  <p class="hero-demo__equipment">Boeing 777-300ER</p>
+                  <div class="hero-demo__trip-timeline">
+                    <div>
+                      <p class="hero-demo__time">9:50 pm</p>
+                      <p class="hero-demo__airport">New York John F Kennedy Intl (JFK)</p>
+                    </div>
+                    <div class="hero-demo__duration-block">
+                      <span class="hero-demo__duration-value">6h 50m</span>
+                      <span class="hero-demo__chip hero-demo__chip--warn">Overnight flight</span>
+                    </div>
+                    <div class="hero-demo__arrival-block">
+                      <p class="hero-demo__time">9:40 am</p>
+                      <p class="hero-demo__airport">London Heathrow (LHR)</p>
+                      <p class="hero-demo__arrives">Arrives Thu, Feb 12</p>
+                    </div>
+                  </div>
+                </section>
+                <section class="hero-demo__trip">
+                  <div class="hero-demo__trip-header">
+                    <p class="hero-demo__trip-title">Return • Thu, Feb 26</p>
+                    <span class="hero-demo__trip-duration">8h 00m</span>
+                  </div>
+                  <div class="hero-demo__trip-airline">
+                    <span class="hero-demo__airline">British Airways</span>
+                  </div>
+                  <p class="hero-demo__flight-meta">British Airways 173</p>
+                  <p class="hero-demo__equipment">Boeing 777</p>
+                  <div class="hero-demo__trip-timeline">
+                    <div>
+                      <p class="hero-demo__time">11:20 am</p>
+                      <p class="hero-demo__airport">London Heathrow (LHR)</p>
+                    </div>
+                    <div class="hero-demo__duration-block">
+                      <span class="hero-demo__duration-value">8h 00m</span>
+                    </div>
+                    <div class="hero-demo__arrival-block">
+                      <p class="hero-demo__time">2:20 pm</p>
+                      <p class="hero-demo__airport">New York John F Kennedy Intl (JFK)</p>
+                    </div>
+                  </div>
+                </section>
               </div>
             </article>
 
@@ -128,7 +162,7 @@
                 <span class="hero-demo__dot" aria-hidden="true"></span>
                 <span class="hero-demo__beam" aria-hidden="true"></span>
               </div>
-              <div class="hero-demo__connector-label">One-click transforms to Sabre format</div>
+              <div class="hero-demo__connector-label">Simulated result</div>
             </div>
 
             <article class="hero-demo__card hero-demo__card--clipboard">
@@ -137,8 +171,8 @@
                 <span class="hero-demo__tag hero-demo__tag--success">Copied ✓</span>
               </header>
               <div class="hero-demo__clipboard" role="presentation">
-                <code>1 AA 001J 04OCT JFKLAX  915A 1205P /DCAA /E</code>
-                <code>2 AA 432J 07OCT LAXJFK  115P  945P /DCAA /E</code>
+                <code>1 BA1515J 11FEB W JFKLHR*SS1 950P 940A 12FEB Q /DCBA /E</code>
+                <code>2 BA173J 26FEB Q LHRJFK*SS1 1120A 220P /DCBA /E</code>
               </div>
               <p class="hero-demo__hint">Perfect spacing, booking classes, and segment numbers every time.</p>
             </article>
