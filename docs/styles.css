@@ -466,6 +466,8 @@ body.legal .site-header {
   margin: 0;
   font-weight: 600;
   color: var(--color-text);
+  font-size: 0.95rem;
+  line-height: 1.35;
 }
 
 .hero-demo__meta {
@@ -502,6 +504,184 @@ body.legal .site-header {
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--color-muted);
+}
+
+.hero-demo__availability {
+  display: inline-flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin-block: 0.25rem 0.75rem;
+}
+
+.hero-demo__availability-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(37, 99, 235, 0.28);
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--color-accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.14);
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.hero-demo__availability-btn:hover,
+.hero-demo__availability-btn:focus-visible {
+  background: #fff;
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.18);
+}
+
+.hero-demo__availability-btn--active {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+  box-shadow: 0 18px 32px rgba(37, 99, 235, 0.32);
+}
+
+.hero-demo__itinerary {
+  display: grid;
+  gap: 1rem;
+}
+
+.hero-demo__trip {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 16px 32px rgba(37, 99, 235, 0.16);
+  backdrop-filter: blur(6px);
+}
+
+.hero-demo__trip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.hero-demo__trip-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.hero-demo__trip-duration {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--color-accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.hero-demo__trip-airline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.hero-demo__airline {
+  letter-spacing: 0.02em;
+}
+
+.hero-demo__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid rgba(16, 185, 129, 0.32);
+  color: var(--color-success);
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.hero-demo__badge--inline {
+  letter-spacing: 0.1em;
+}
+
+.hero-demo__flight-meta,
+.hero-demo__equipment {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.hero-demo__trip-timeline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.75rem 1.1rem;
+  align-items: start;
+}
+
+.hero-demo__duration-block {
+  display: grid;
+  gap: 0.4rem;
+  justify-items: center;
+  align-content: center;
+  padding: 0.35rem 0.6rem;
+  border-left: 1px dashed rgba(37, 99, 235, 0.2);
+  border-right: 1px dashed rgba(37, 99, 235, 0.2);
+}
+
+.hero-demo__arrival-block {
+  text-align: right;
+}
+
+.hero-demo__duration-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hero-demo__chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--color-accent);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.hero-demo__chip--warn {
+  border-color: rgba(249, 115, 22, 0.35);
+  background: rgba(249, 115, 22, 0.15);
+  color: #c2410c;
+}
+
+.hero-demo__arrives {
+  margin: 0;
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  letter-spacing: 0.02em;
 }
 
 .hero-demo__connector {
@@ -1535,14 +1715,24 @@ body.legal .site-header {
     max-width: 100%;
   }
 
-  .hero-demo__legs {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
+  .hero-demo__trip {
+    padding: 0.9rem 1rem;
   }
 
-  .hero-demo__leg,
-  .hero-demo__leg--right {
-    align-items: flex-start;
+  .hero-demo__trip-timeline {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-demo__duration-block {
+    border: 0;
+    padding: 0;
+    justify-items: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    grid-auto-flow: column;
+  }
+
+  .hero-demo__arrival-block {
     text-align: left;
   }
 

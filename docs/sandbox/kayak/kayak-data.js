@@ -1,49 +1,69 @@
 export const itinerary = {
   outbound: {
-    headerDate: "Thu, Nov 6",
-    totalDuration: "13h 25m",
+    headerDate: "Wed, Feb 11",
+    totalDuration: "6h 50m",
     segments: [
       {
-        carrierName: "Lufthansa", flightNumber: "439",
-        equipment: "Airbus A330-300",
+        carrierCode: "BA",
+        carrierName: "British Airways",
+        flightNumber: "1515",
+        bookingClass: "J",
         cabin: "Business",
-        depart: { time: "4:15 pm", airport: "Dallas/Fort Worth", iata: "DFW", date: "Thu, Nov 6" },
-        arrive: { time: "9:05 am", airport: "Frankfurt am Main", iata: "FRA", date: "Fri, Nov 7" },
-        duration: "9h 50m", overnight: true, amenities: { wifi: true, bag: true, seat: true, power: true }
-      },
-      { layover: true, text: "1h 45m • Change planes in Frankfurt am Main (FRA)" },
-      {
-        carrierName: "Lufthansa", flightNumber: "232",
-        equipment: "Airbus A321-100/200",
-        cabin: "Business",
-        depart: { time: "10:50 am", airport: "Frankfurt am Main", iata: "FRA", date: "Fri, Nov 7" },
-        arrive: { time: "12:40 pm", airport: "Rome Fiumicino", iata: "FCO", date: "Fri, Nov 7" },
-        duration: "1h 50m", amenities: { wifi: true, bag: true, seat: true, power: true }
+        status: "*SS1",
+        fareBasis: "/DCBA",
+        equipment: "Boeing 777-300ER",
+        operatedBy: "Operated by American Airlines",
+        depart: {
+          time: "9:50 pm",
+          airport: "New York John F Kennedy Intl",
+          iata: "JFK",
+          date: "Wed, Feb 11",
+          gdsDayCode: "W"
+        },
+        arrive: {
+          time: "9:40 am",
+          airport: "London Heathrow",
+          iata: "LHR",
+          date: "Thu, Feb 12",
+          gdsDayCode: "Q"
+        },
+        duration: "6h 50m",
+        overnight: true,
+        amenities: { wifi: true, bag: true, seat: true, power: true }
       }
     ]
   },
   inbound: {
-    headerDate: "Thu, Nov 27",
-    totalDuration: "14h 20m",
+    headerDate: "Thu, Feb 26",
+    totalDuration: "8h 00m",
     segments: [
       {
-        carrierName: "Lufthansa", flightNumber: "243",
-        equipment: "Airbus A321-100/200",
+        carrierCode: "BA",
+        carrierName: "British Airways",
+        flightNumber: "173",
+        bookingClass: "J",
         cabin: "Business",
-        depart: { time: "7:05 am", airport: "Rome Fiumicino", iata: "FCO", date: "Thu, Nov 27" },
-        arrive: { time: "9:00 am", airport: "Frankfurt am Main", iata: "FRA", date: "Thu, Nov 27" },
-        duration: "1h 55m", amenities: { wifi: true, bag: true, seat: true, power: true }
-      },
-      { layover: true, text: "1h 10m • Change planes in Frankfurt am Main (FRA)" },
-      {
-        carrierName: "Lufthansa", flightNumber: "438",
-        equipment: "Airbus A330-300",
-        cabin: "Business",
-        depart: { time: "10:10 am", airport: "Frankfurt am Main", iata: "FRA", date: "Thu, Nov 27" },
-        arrive: { time: "2:25 pm", airport: "Dallas/Fort Worth", iata: "DFW", date: "Thu, Nov 27" },
-        duration: "11h 15m", amenities: { wifi: true, bag: true, seat: true, power: true }
+        status: "*SS1",
+        fareBasis: "/DCBA",
+        equipment: "Boeing 777",
+        depart: {
+          time: "11:20 am",
+          airport: "London Heathrow",
+          iata: "LHR",
+          date: "Thu, Feb 26",
+          gdsDayCode: "Q"
+        },
+        arrive: {
+          time: "2:20 pm",
+          airport: "New York John F Kennedy Intl",
+          iata: "JFK",
+          date: "Thu, Feb 26",
+          gdsDayCode: "Q"
+        },
+        duration: "8h 00m",
+        amenities: { wifi: true, bag: true, seat: true, power: true }
       }
     ]
   },
-  logoLH: "https://content.r9cdn.net/rimg/provider-logos/airlines/v/LH.png?crop=false&width=108&height=92&fallback=default2.png&_v=a1e3a69579474969d2b123789717863f"
+  logo: "https://content.r9cdn.net/rimg/provider-logos/airlines/v/BA.png?crop=false&width=108&height=92&fallback=default2.png&_v=865ecae53efd9f804cb9fea79226fe07"
 };
