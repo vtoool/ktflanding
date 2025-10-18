@@ -19,6 +19,13 @@ root.appendChild(itineraryContainer);
 
 const state = {
   activeItinerary: null,
+  scenarioKey: 'simple',
+};
+
+const scenarioMap = {
+  simple: defaultItinerary,
+  layover: longLayoverItinerary,
+  multicity: defaultItinerary,
 };
 
 const updateClipboardSimulator = (() => {
@@ -58,8 +65,16 @@ const updateClipboardSimulator = (() => {
   };
 })();
 
-renderItinerary(defaultItinerary);
+applyScenario(state.scenarioKey);
 setupScenarioListeners();
+
+function applyScenario(key, { focusTab = false } = {}) {
+  const nextKey = scenarioMap[key] ? key : 'simple';
+  state.scenarioKey = nextKey;
+  const itineraryData = scenarioMap[nextKey];
+  renderItinerary(itineraryData);
+  updateScenarioTabs(nextKey, { focusTab });
+}
 
 function renderItinerary(itineraryData) {
   if (!itineraryData) return;
@@ -96,17 +111,46 @@ function renderItinerary(itineraryData) {
 }
 
 function setupScenarioListeners() {
-  const tabs = document.querySelectorAll('[data-scenario-tab]');
+  const tabs = Array.from(document.querySelectorAll('[data-scenario-tab]'));
   if (!tabs.length) return;
-  tabs.forEach((tab) => {
+
+  tabs.forEach((tab, index) => {
     tab.addEventListener('click', () => {
       const key = tab.getAttribute('data-scenario-tab');
-      if (key === 'layover') {
-        renderItinerary(longLayoverItinerary);
-      } else if (key === 'simple' || key === 'multicity') {
-        renderItinerary(defaultItinerary);
-      }
+      if (!key) return;
+      applyScenario(key, { focusTab: true });
     });
+
+    tab.addEventListener('keydown', (event) => {
+      if (event.defaultPrevented) return;
+      const { key } = event;
+      if (key !== 'ArrowRight' && key !== 'ArrowLeft' && key !== 'ArrowDown' && key !== 'ArrowUp') {
+        return;
+      }
+      event.preventDefault();
+      const direction = key === 'ArrowRight' || key === 'ArrowDown' ? 1 : -1;
+      const nextIndex = (index + direction + tabs.length) % tabs.length;
+      const nextTab = tabs[nextIndex];
+      const nextKey = nextTab?.getAttribute('data-scenario-tab');
+      if (!nextKey) return;
+      applyScenario(nextKey, { focusTab: true });
+    });
+  });
+
+  updateScenarioTabs(state.scenarioKey);
+}
+
+function updateScenarioTabs(activeKey, { focusTab = false } = {}) {
+  const tabs = document.querySelectorAll('[data-scenario-tab]');
+  tabs.forEach((tab) => {
+    const key = tab.getAttribute('data-scenario-tab');
+    const isActive = key === activeKey;
+    tab.classList.toggle('is-active', isActive);
+    tab.setAttribute('aria-selected', String(isActive));
+    tab.setAttribute('tabindex', isActive ? '0' : '-1');
+    if (isActive && focusTab) {
+      tab.focus();
+    }
   });
 }
 
@@ -173,15 +217,19 @@ function buildCard(label, data, locationKey, itineraryData) {
 
   let flightIndex = 0;
   const lastFlightIndex = flightSegments.length - 1;
+  let previousArrivalDate = null;
 
   for (const segment of data.segments || []) {
     if (segment.layover) {
       legs.appendChild(buildLayover(segment));
       continue;
     }
-    const leg = buildLeg(segment, flightIndex, lastFlightIndex, itineraryData);
+    const leg = buildLeg(segment, flightIndex, lastFlightIndex, itineraryData, previousArrivalDate);
     legs.appendChild(leg);
     flightIndex += 1;
+    if (segment.arrive?.date) {
+      previousArrivalDate = segment.arrive.date;
+    }
   }
 
   card.appendChild(legs);
@@ -219,7 +267,7 @@ function buildCard(label, data, locationKey, itineraryData) {
   return card;
 }
 
-function buildLeg(segment, index, lastIndex, itineraryData) {
+function buildLeg(segment, index, lastIndex, itineraryData, previousArrivalDate) {
   const leg = document.createElement('div');
   leg.className = 'leg';
 
@@ -278,53 +326,49 @@ function buildLeg(segment, index, lastIndex, itineraryData) {
 
   main.appendChild(badges);
 
-  const times = document.createElement('div');
-  times.className = 'times';
+  const timeline = document.createElement('div');
+  timeline.className = 'timeline';
 
-  const departColumn = document.createElement('div');
-  const departTime = document.createElement('div');
-  departTime.className = 'bigtime';
-  departTime.textContent = segment.depart.time;
-  const departPlace = document.createElement('div');
-  departPlace.className = 'place';
-  departPlace.textContent = `${segment.depart.airport} (${segment.depart.iata})`;
-  departColumn.appendChild(departTime);
-  departColumn.appendChild(departPlace);
+  const departNote = (
+    segment.depart?.date &&
+    previousArrivalDate &&
+    previousArrivalDate !== segment.depart.date
+  )
+    ? `Departs ${segment.depart.date}`
+    : null;
 
-  const arriveColumn = document.createElement('div');
-  const arriveTime = document.createElement('div');
-  arriveTime.className = 'bigtime';
-  arriveTime.textContent = segment.arrive.time;
-  const arrivePlace = document.createElement('div');
-  arrivePlace.className = 'place';
-  arrivePlace.textContent = `${segment.arrive.airport} (${segment.arrive.iata})`;
-  arriveColumn.appendChild(arriveTime);
-  arriveColumn.appendChild(arrivePlace);
+  const departEvent = createTimelineEvent({
+    type: 'depart',
+    time: segment.depart.time,
+    city: segment.depart.airport,
+    code: segment.depart.iata,
+    date: departNote ? null : segment.depart?.date,
+    note: departNote,
+  });
+  timeline.appendChild(departEvent);
 
-  if (segment.arrive.date && segment.arrive.date !== segment.depart.date) {
-    const arriveNote = document.createElement('div');
-    arriveNote.className = 'arrives-note';
-    arriveNote.textContent = `Arrives ${segment.arrive.date}`;
-    arriveColumn.appendChild(arriveNote);
-  }
-
-  times.appendChild(departColumn);
-  times.appendChild(arriveColumn);
-  main.appendChild(times);
-
-  const extra = document.createElement('div');
-  extra.className = 'extra';
-
+  const timelineDuration = document.createElement('div');
+  timelineDuration.className = 'timeline-duration';
   const durationChip = createChip(segment.duration);
-  extra.appendChild(durationChip);
+  durationChip.classList.add('duration-chip');
+  timelineDuration.appendChild(durationChip);
+  timeline.appendChild(timelineDuration);
 
-  if (segment.overnight) {
-    const overnightChip = createChip('Overnight flight');
-    overnightChip.classList.add('warn');
-    extra.appendChild(overnightChip);
-  }
+  const arriveNote = (segment.arrive.date && segment.arrive.date !== segment.depart.date)
+    ? `Arrives ${segment.arrive.date}`
+    : null;
 
-  main.appendChild(extra);
+  const arriveEvent = createTimelineEvent({
+    type: 'arrive',
+    time: segment.arrive.time,
+    city: segment.arrive.airport,
+    code: segment.arrive.iata,
+    date: arriveNote ? null : segment.arrive?.date,
+    note: arriveNote,
+  });
+  timeline.appendChild(arriveEvent);
+
+  main.appendChild(timeline);
 
   const amenities = document.createElement('div');
   amenities.className = 'amenities';
@@ -381,6 +425,57 @@ function createChip(text) {
   chip.className = 'chip';
   chip.textContent = text;
   return chip;
+}
+
+function createCityLine(city, code) {
+  const wrapper = document.createElement('span');
+  wrapper.className = 'cityline';
+  const cityText = city || '';
+  if (cityText) {
+    wrapper.appendChild(document.createTextNode(cityText));
+  }
+  if (code) {
+    const codeSpan = document.createElement('span');
+    codeSpan.className = 'cityline-code';
+    const leadingSpace = cityText ? ' ' : '';
+    codeSpan.textContent = `${leadingSpace}(${code})`;
+    wrapper.appendChild(codeSpan);
+  }
+  return wrapper;
+}
+
+function createTimelineEvent({ type, time, city, code, date, note }) {
+  const event = document.createElement('div');
+  event.className = `timeline-event timeline-event--${type}`;
+
+  const timeEl = document.createElement('div');
+  timeEl.className = 'timeline-event__time';
+  timeEl.textContent = time || '';
+  event.appendChild(timeEl);
+
+  const detail = document.createElement('div');
+  detail.className = 'timeline-event__detail';
+
+  const cityLine = createCityLine(city, code);
+  cityLine.classList.add('timeline-cityline');
+  detail.appendChild(cityLine);
+
+  if (date) {
+    const dateEl = document.createElement('div');
+    dateEl.className = 'timeline-event__date';
+    dateEl.textContent = date;
+    detail.appendChild(dateEl);
+  }
+
+  if (note) {
+    const noteEl = document.createElement('div');
+    noteEl.className = type === 'arrive' ? 'arrives-note' : 'depart-note';
+    noteEl.textContent = note;
+    detail.appendChild(noteEl);
+  }
+
+  event.appendChild(detail);
+  return event;
 }
 
 function getClipboardText(itineraryData) {
