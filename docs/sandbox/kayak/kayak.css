@@ -290,16 +290,27 @@
 
 #kayak-sandbox .timeline-event__detail {
   grid-column: 3;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  display: grid;
+  row-gap: 6px;
   font-size: 14px;
   color: #33435a;
   align-self: center;
+  align-content: center;
+}
+
+#kayak-sandbox .timeline-event__primary {
+  display: inline-flex;
+  align-items: baseline;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0b1f3a;
+  line-height: 1.1;
 }
 
 #kayak-sandbox .timeline-cityline {
-  display: block;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
 }
 
 #kayak-sandbox .timeline-event__date {
@@ -361,7 +372,9 @@
 }
 
 #kayak-sandbox .cityline {
-  display: inline-block;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
   white-space: nowrap;
 }
 
@@ -371,7 +384,7 @@
 
 #kayak-sandbox .arrives-note,
 #kayak-sandbox .depart-note {
-  margin-top: 2px;
+  margin-top: 0;
   font-size: 12px;
   color: #c2410c;
   font-weight: 600;
@@ -524,7 +537,8 @@
   row-gap: 12px;
 }
 #kayak-sandbox.compact .timeline-event__time{ font-size: 18px; line-height: 1.2; }
-#kayak-sandbox.compact .timeline-event__detail{ font-size: 12px; }
+#kayak-sandbox.compact .timeline-event__detail{ font-size: 12px; row-gap: 4px; }
+#kayak-sandbox.compact .timeline-event__primary{ font-size: 16px; }
 #kayak-sandbox.compact .timeline-event__date{ font-size: 10px; letter-spacing: 0.05em; }
 #kayak-sandbox.compact .timeline-connector{
   --timeline-plane-size: 12px;
@@ -593,7 +607,8 @@
   row-gap: 10px;
 }
 #kayak-sandbox.compactStack .timeline-event__time{ font-size: 16px; line-height: 1.2; }
-#kayak-sandbox.compactStack .timeline-event__detail{ font-size: 11.5px; }
+#kayak-sandbox.compactStack .timeline-event__detail{ font-size: 11.5px; row-gap: 4px; }
+#kayak-sandbox.compactStack .timeline-event__primary{ font-size: 15px; }
 #kayak-sandbox.compactStack .timeline-event__date{ font-size: 10px; letter-spacing: .05em; }
 #kayak-sandbox.compactStack .timeline-connector{
   --timeline-plane-size: 11px;
@@ -601,7 +616,7 @@
 }
 #kayak-sandbox.compactStack .duration-chip{ font-size: 10.5px; padding: 2px 6px; }
 #kayak-sandbox.compactStack .arrives-note,
-#kayak-sandbox.compactStack .depart-note{ font-size: 10.5px; margin-top: 2px; letter-spacing: .02em; }
+#kayak-sandbox.compactStack .depart-note{ font-size: 10.5px; margin-top: 0; letter-spacing: .02em; }
 
 /* Keep amenities INLINE at top-right (was stacking vertically) */
 #kayak-sandbox.compactStack .amenities{
