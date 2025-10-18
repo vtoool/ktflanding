@@ -897,40 +897,24 @@ body.legal .site-header {
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(11, 31, 58, 0.08));
   border-radius: var(--radius-md);
   padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.step-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  position: relative;
 }
 
 .step-number {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 999px;
-  background: rgba(37, 99, 235, 0.12);
-  color: var(--color-primary);
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.25);
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgba(11, 31, 58, 0.1);
 }
 
 .steps h3 {
-  margin: 0;
+  margin-top: 0;
 }
 
 .steps p {
   color: var(--color-muted);
-  margin: 0;
 }
 
 .demo {
