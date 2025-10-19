@@ -161,10 +161,6 @@ function updateSandboxHeader(itineraryData) {
   if (title && itineraryData.title) {
     title.textContent = itineraryData.title;
   }
-  const meta = sandbox.querySelector('.sandbox-meta');
-  if (meta && itineraryData.meta) {
-    meta.textContent = itineraryData.meta;
-  }
 }
 
 function buildCard(label, data, locationKey, itineraryData) {

@@ -24,19 +24,13 @@
 #kayak-sandbox .sandbox-title {
   font-size: 24px;
   font-weight: 700;
-  margin: 0;
+  margin: 0 0 24px;
 }
 
 #kayak-sandbox .sandbox-sub {
   margin: 4px 0 0;
   font-weight: 500;
   color: #33435a;
-}
-
-#kayak-sandbox .sandbox-meta {
-  margin: 4px 0 24px;
-  color: #5b6c86;
-  font-size: 14px;
 }
 
 #kayak-sandbox .itinerary {
