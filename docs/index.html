@@ -124,6 +124,80 @@
       </div>
     </section>
 
+    <section class="section section--alt" id="how-it-works" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Fast onboarding</span>
+          <h2 id="how-title">From search result to PNR in three steps.</h2>
+        </div>
+        <ol class="steps">
+          <li>
+            <div class="step-header">
+              <span class="step-number">1</span>
+              <h3>Expand a Kayak card</h3>
+            </div>
+            <p>The extension detects full itineraries, even multi-city and fare brand views.</p>
+          </li>
+          <li>
+            <div class="step-header">
+              <span class="step-number">2</span>
+              <h3>Tap the floating *I pill</h3>
+            </div>
+            <p>Segment numbering, booking classes, and layovers are resolved instantly.</p>
+          </li>
+          <li>
+            <div class="step-header">
+              <span class="step-number">3</span>
+              <h3>Paste into the GDS</h3>
+            </div>
+            <p>Sabre-format lines and availability commands land in your clipboard ready for ticketing.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section demo" id="demo" aria-labelledby="demo-title">
+      <div class="container" data-demo>
+        <div class="section-header">
+          <span class="eyebrow">Live sandbox</span>
+          <h2 id="demo-title">Click the *I pill to see the exact Sabre output.</h2>
+          <p>Three curated itineraries mirror the extension—generate the lines to reveal per-segment previews with one-click copy.</p>
+        </div>
+        <div class="demo-tabs" role="tablist" aria-label="Demo scenarios">
+          <button class="demo-tab is-active" type="button" role="tab" aria-selected="true" data-scenario-tab="simple">Simple roundtrip</button>
+          <button class="demo-tab" type="button" role="tab" aria-selected="false" data-scenario-tab="layover">Long layover</button>
+          <button class="demo-tab" type="button" role="tab" aria-selected="false" data-scenario-tab="multicity">Multi-city stress</button>
+        </div>
+        <div class="demo-content">
+          <article class="demo-card" aria-live="polite">
+<!-- BEGIN KAYAK_SANDBOX -->
+<link rel="stylesheet" href="./sandbox/kayak/kayak.css">
+<section id="kayak-sandbox" aria-label="Kayak-style sandbox">
+  <!-- Real itinerary cards mount here -->
+  <div id="kayak-root"></div>
+</section>
+<script type="module" src="./sandbox/kayak/kayak.js"></script>
+<!-- END KAYAK_SANDBOX -->
+          </article>
+          <aside class="demo-clipboard" aria-label="Clipboard simulator">
+            <div class="demo-clipboard__header">
+              <h3 class="demo-clipboard__title">Clipboard simulator</h3>
+              <span class="demo-clipboard__status" data-clipboard-status aria-live="polite"></span>
+            </div>
+            <p class="demo-clipboard__hint">Click any *I pill to preview what lands in the clipboard.</p>
+            <div
+              class="demo-clipboard__output"
+              data-clipboard-output
+              data-empty="true"
+              role="status"
+              aria-live="polite"
+            ></div>
+            <p class="demo-clipboard__note">All data is static and processed locally—no network calls.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="features" aria-labelledby="features-title">
       <div class="container">
         <div class="section-header">
@@ -196,80 +270,6 @@
             <h3>Simple, privacy-first interface</h3>
             <p>A single *I pill where you expect it. Click once, copy once&mdash;no tabs to babysit, with MV3-native privacy and zero PII collection baked in.</p>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--alt" id="how-it-works" aria-labelledby="how-title">
-      <div class="container">
-        <div class="section-header">
-          <span class="eyebrow">Fast onboarding</span>
-          <h2 id="how-title">From search result to PNR in three steps.</h2>
-        </div>
-        <ol class="steps">
-          <li>
-            <div class="step-header">
-              <span class="step-number">1</span>
-              <h3>Expand a Kayak card</h3>
-            </div>
-            <p>The extension detects full itineraries, even multi-city and fare brand views.</p>
-          </li>
-          <li>
-            <div class="step-header">
-              <span class="step-number">2</span>
-              <h3>Tap the floating *I pill</h3>
-            </div>
-            <p>Segment numbering, booking classes, and layovers are resolved instantly.</p>
-          </li>
-          <li>
-            <div class="step-header">
-              <span class="step-number">3</span>
-              <h3>Paste into the GDS</h3>
-            </div>
-            <p>Sabre-format lines and availability commands land in your clipboard ready for ticketing.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="section demo" id="demo" aria-labelledby="demo-title">
-      <div class="container" data-demo>
-        <div class="section-header">
-          <span class="eyebrow">Live sandbox</span>
-          <h2 id="demo-title">Click the *I pill to see the exact Sabre output.</h2>
-          <p>Three curated itineraries mirror the extension—generate the lines to reveal per-segment previews with one-click copy.</p>
-        </div>
-        <div class="demo-tabs" role="tablist" aria-label="Demo scenarios">
-          <button class="demo-tab is-active" type="button" role="tab" aria-selected="true" data-scenario-tab="simple">Simple roundtrip</button>
-          <button class="demo-tab" type="button" role="tab" aria-selected="false" data-scenario-tab="layover">Long layover</button>
-          <button class="demo-tab" type="button" role="tab" aria-selected="false" data-scenario-tab="multicity">Multi-city stress</button>
-        </div>
-        <div class="demo-content">
-          <article class="demo-card" aria-live="polite">
-<!-- BEGIN KAYAK_SANDBOX -->
-<link rel="stylesheet" href="./sandbox/kayak/kayak.css">
-<section id="kayak-sandbox" aria-label="Kayak-style sandbox">
-  <!-- Real itinerary cards mount here -->
-  <div id="kayak-root"></div>
-</section>
-<script type="module" src="./sandbox/kayak/kayak.js"></script>
-<!-- END KAYAK_SANDBOX -->
-          </article>
-          <aside class="demo-clipboard" aria-label="Clipboard simulator">
-            <div class="demo-clipboard__header">
-              <h3 class="demo-clipboard__title">Clipboard simulator</h3>
-              <span class="demo-clipboard__status" data-clipboard-status aria-live="polite"></span>
-            </div>
-            <p class="demo-clipboard__hint">Click any *I pill to preview what lands in the clipboard.</p>
-            <div
-              class="demo-clipboard__output"
-              data-clipboard-output
-              data-empty="true"
-              role="status"
-              aria-live="polite"
-            ></div>
-            <p class="demo-clipboard__note">All data is static and processed locally—no network calls.</p>
-          </aside>
         </div>
       </div>
     </section>
