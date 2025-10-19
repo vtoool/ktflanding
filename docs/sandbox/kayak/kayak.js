@@ -396,7 +396,30 @@ function buildLayover(segment) {
 
   const text = document.createElement('div');
   text.className = 'layover-text';
-  text.textContent = segment.text;
+  const content = document.createElement('span');
+  content.className = 'layover-text__content';
+  content.textContent = segment.text || '';
+  text.appendChild(content);
+
+  const badgeData = segment.badge;
+  let badgeLabel = null;
+  let badgeTone = segment.badgeTone || null;
+
+  if (typeof badgeData === 'string') {
+    badgeLabel = badgeData;
+  } else if (badgeData && typeof badgeData === 'object') {
+    badgeLabel = badgeData.label || null;
+    badgeTone = badgeTone || badgeData.tone || null;
+  }
+
+  if (badgeLabel) {
+    const badge = createChip(badgeLabel);
+    if (badgeTone) {
+      badge.classList.add(badgeTone);
+    }
+    text.appendChild(badge);
+  }
+
   layover.appendChild(text);
 
   return layover;

@@ -421,8 +421,15 @@
 }
 
 #kayak-sandbox .layover-text {
-  display: block;
-  white-space: pre-line;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  white-space: normal;
+}
+
+#kayak-sandbox .layover-text__content {
+  display: inline;
 }
 
 #kayak-sandbox .toast {
