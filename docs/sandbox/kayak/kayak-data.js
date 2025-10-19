@@ -1,6 +1,5 @@
 export const itinerary = {
   title: "Simple roundtrip",
-  meta: "Fri, Oct 04 · London Heathrow (LHR) — Sun, Oct 13 · London Heathrow (LHR)",
   logoUrl: "https://content.r9cdn.net/rimg/provider-logos/airlines/v/LH.png?crop=false&width=108&height=92&fallback=default2.png&_v=a1e3a69579474969d2b123789717863f",
   outbound: {
     headerDate: "Thu, Nov 6",
@@ -52,7 +51,6 @@ export const itinerary = {
 
 export const longLayoverItinerary = {
   title: "Long layover (Business)",
-  meta: "Fri, Aug 14 · Chicago O'Hare Intl (ORD) — Sun, Aug 16 · Hong Kong Intl (HKG)",
   logoUrl: "https://content.r9cdn.net/rimg/provider-logos/airlines/v/TK.png?crop=false&width=108&height=92&fallback=default1.png&_v=830308383d7798b210f9140f018cdbaf",
   clipboardText: [
     " 1 TK 6C 14AUG F ORDIST*SS1 810P 250P 15AUG J /DCTK /E",
