@@ -68,7 +68,7 @@ export const longLayoverItinerary = {
         arrive: { time: "2:50 pm", airport: "Istanbul", iata: "IST", date: "Sat, Aug 15" },
         duration: "10h 40m", overnight: true, amenities: { wifi: true, bag: true, seat: true, power: true }
       },
-      { layover: true, text: "10h 45m • Change planes in Istanbul (IST)\nLong layover" },
+      { layover: true, text: "10h 45m • Change planes in Istanbul (IST)" },
       {
         carrierName: "Turkish Airlines", flightNumber: "70",
         equipment: "Boeing 777-300ER",
