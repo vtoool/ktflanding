@@ -839,8 +839,8 @@ body.legal .site-header {
 }
 
 .airline-logo {
-  height: 24px;
-  max-height: 24px;
+  height: 32px;
+  max-height: 32px;
   width: auto;
   object-fit: contain;
   flex-shrink: 0;

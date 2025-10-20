@@ -195,8 +195,8 @@
 }
 
 #kayak-sandbox .airline-logo {
-  width: 44px;
-  height: 36px;
+  width: 60px;
+  height: 48px;
   object-fit: contain;
 }
 
@@ -522,7 +522,7 @@
 
 /* Badges smaller */
 #kayak-sandbox.compact .badges{ gap: 6px; }
-#kayak-sandbox.compact .airline-logo{ height: 14px; }
+#kayak-sandbox.compact .airline-logo{ height: 18px; }
 #kayak-sandbox.compact .chip{ font-size: 11px; padding: 2px 6px; }
 #kayak-sandbox.compact .chip.warn{ padding: 2px 6px; }
 
@@ -593,7 +593,7 @@
 
 /* Badges smaller */
 #kayak-sandbox.compactStack .badges{ gap: 6px; }
-#kayak-sandbox.compactStack .airline-logo{ height: 12px; }
+#kayak-sandbox.compactStack .airline-logo{ height: 16px; }
 #kayak-sandbox.compactStack .chip{ font-size: 11px; padding: 2px 6px; }
 #kayak-sandbox.compactStack .chip.warn{ padding: 2px 6px; }
 
