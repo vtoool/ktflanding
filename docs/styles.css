@@ -839,9 +839,13 @@ body.legal .site-header {
 }
 
 .airline-logo {
-  height: 18px;
+  height: 24px;
+  max-height: 24px;
   width: auto;
   object-fit: contain;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .chip {
